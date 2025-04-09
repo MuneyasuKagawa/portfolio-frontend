@@ -5,6 +5,12 @@ import { motion, useInView } from "framer-motion";
 import { FileText } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 export default function About() {
   const ref = useRef(null);
@@ -49,17 +55,28 @@ export default function About() {
               </p>
             </div>
             <div className="mt-8 flex justify-center">
-              <Button asChild>
-                <a
+              <TooltipProvider delayDuration={100}>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button className="bg-neutral-500 hover:cursor-default hover:bg-neutral-500">
+                      {/* <a
                   href="/resume_developer.pdf"
                   target="_blank"
-                  rel="noopener noreferrer"
                   download
+                  rel="noopener noreferrer"
                 >
                   <FileText className="mr-2 h-4 w-4" />
                   Download Resume
-                </a>
-              </Button>
+                </a> */}
+                      <FileText className="mr-2 h-4 w-4" />
+                      Download Resume
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent className="bg-black text-white dark:bg-white dark:text-black">
+                    <p>Coming soon!</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </motion.div>
 

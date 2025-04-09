@@ -91,7 +91,10 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="mb-1 font-medium">LinkedIn</h4>
-                  <Link href="https://x.com/m_kagawa_">
+                  <Link
+                    href="https://www.linkedin.com/in/muneyasu-mun-kagawa/"
+                    target="_blank"
+                  >
                     <p className="text-foreground/80">Muneyasu Kagawa</p>
                   </Link>
                 </div>
@@ -103,7 +106,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="mb-1 font-medium">X</h4>
-                  <Link href="https://x.com/m_kagawa_">
+                  <Link href="https://x.com/m_kagawa_" target="_blank">
                     <p className="text-foreground/80">@m_kagawa_</p>
                   </Link>
                 </div>
