@@ -18,6 +18,7 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.sample
 
 # vercel
 .vercel
@@ -25,3 +26,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+terraform.tfvars
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars

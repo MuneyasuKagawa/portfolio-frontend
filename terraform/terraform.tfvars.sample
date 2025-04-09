@@ -1,0 +1,5 @@
+aws_secret_key = "secret key"
+aws_access_key = "access key"
+route53_zone_id = "zone id"
+domain_name = "domain name"
+www_domain_name = "www domain name"
