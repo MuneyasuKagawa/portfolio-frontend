@@ -111,3 +111,30 @@ The site supports light/dark mode using:
 - next-themes provider in root layout
 - Tailwind dark: variants for styling
 - Theme toggle component for user preference
+
+## Project-Specific Patterns
+
+### Static Export Considerations
+- Build output goes to `/out` directory for S3 deployment
+- Images are unoptimized (`unoptimized: true` in next.config.mjs)
+- Dynamic routes work with `generateStaticParams` for build-time generation
+- No server-side features (API routes, middleware, ISR)
+
+### TypeScript Usage
+- Strict mode enabled with all checks
+- Path alias `@/*` maps to project root
+- Consistent interface definitions for component props
+- Type-safe project data structures in `/app/projects/[slug]/page.tsx`
+
+### Build Configuration
+- ESLint errors are ignored during build (`ignoreDuringBuilds: true`)
+- TypeScript errors are ignored during build (`ignoreBuildErrors: true`)
+- Note: These settings should be changed for production quality
+
+### Recent Additions
+- Project detail pages with case studies (`/projects/[slug]`)
+- Enhanced project cards with "View Details" links
+- Comprehensive project data structure supporting:
+  - Overview (problem, purpose, goals, solution)
+  - Features, challenges, and results
+  - Technical details and learning outcomes
