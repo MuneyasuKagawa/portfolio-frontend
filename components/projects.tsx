@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { motion, useInView } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useRef } from "react";
 import { FiGithub } from "react-icons/fi";
 
@@ -18,6 +19,7 @@ type Project = {
   tags: string[];
   liveUrl: string;
   githubUrl?: string;
+  slug: string;
 };
 const projects: Project[] = [
   {
@@ -28,6 +30,7 @@ const projects: Project[] = [
     imagePadding: "px-16",
     tags: ["C#.NET", "Angular", "NgRx", "SQL Server", "Jenkins", "Azure"],
     liveUrl: "https://mr.venrey.jp/",
+    slug: "automatic-update-system",
   },
   {
     title: "Mirai Translator Plus",
@@ -45,6 +48,7 @@ const projects: Project[] = [
       "AWS",
     ],
     liveUrl: "https://plus.miraitranslate.com/",
+    slug: "mirai-translator-plus",
   },
   {
     title: "Sumi Technology",
@@ -60,6 +64,7 @@ const projects: Project[] = [
       "Github Actions",
     ],
     liveUrl: "https://sumitechnology.jp/",
+    slug: "sumi-technology",
   },
 ];
 
@@ -142,7 +147,12 @@ function ProjectCard({
               ))}
             </div>
 
-            <div className="mt-auto flex justify-end gap-3">
+            <div className="mt-auto flex flex-wrap gap-2">
+              <Button size="sm" variant="outline" asChild>
+                <Link href={`/projects/${project.slug}`}>
+                  View Details
+                </Link>
+              </Button>
               {project.githubUrl && (
                 <Button size="sm" variant="outline" asChild>
                   <a
@@ -161,8 +171,8 @@ function ProjectCard({
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Link
-                  <ExternalLink className="ml-1 h-4 w-4" />
+                  <ExternalLink className="mr-1 h-4 w-4" />
+                  Live Site
                 </a>
               </Button>
             </div>

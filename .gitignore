@@ -34,3 +34,5 @@ terraform.tfvars
 *.tfstate
 *.tfstate.*
 terraform.tfvars
+
+.design
