@@ -10,7 +10,7 @@ import {
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "./ui/tooltip";
+} from "../ui/tooltip";
 
 export default function About() {
   const ref = useRef(null);
@@ -35,22 +35,22 @@ export default function About() {
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">About Me</h2>
             <div className="space-y-4 text-foreground/80">
               <p>
-                Hello! I'm Mun, a japanese passionate frontend engineer with 5+
+                Hello! I&apos;m Mun, a japanese passionate frontend engineer with 5+
                 years of experience creating responsive, user-friendly web
                 applications. I specialize in modern JavaScript frameworks like
                 React and Next.js.
               </p>
               <p>
-                While frontend is my primary focus, I'm also proficient in
-                backend development with Node.js, Express, and C#.NET. I've
+                While frontend is my primary focus, I&apos;m also proficient in
+                backend development with Node.js, Express, and C#.NET. I&apos;ve
                 built several full-stack applications that seamlessly integrate
                 robust server-side logic with intuitive user interfaces. My
                 experience with RESTful APIs and database design allows me to
                 tackle projects from end to end.
               </p>
               <p>
-                When I'm not coding, you can find me gaming, reading riding
-                horses, or experimenting with new web technologies. I'm always
+                When I&apos;m not coding, you can find me gaming, reading riding
+                horses, or experimenting with new web technologies. I&apos;m always
                 eager to learn and grow as a developer.
               </p>
             </div>

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,13 +14,13 @@ export default function Header() {
   const { scrollY } = useScroll();
   const navItemsRef = useRef<{ [key: string]: HTMLElement | null }>({});
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { name: "Home", href: "#home", id: "home" },
     { name: "About", href: "#about", id: "about" },
     { name: "Projects", href: "#projects", id: "projects" },
     { name: "Skills", href: "#skills", id: "skills" },
     { name: "Contact", href: "#contact", id: "contact" },
-  ];
+  ], []);
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
@@ -133,7 +133,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            Mun's<span className="text-primary">Portfolio</span>
+            Mun&apos;s<span className="text-primary">Portfolio</span>
           </motion.span>
         </Link>
 

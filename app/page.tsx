@@ -1,30 +1,44 @@
-import About from "@/components/about";
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
-import Hero from "@/components/hero";
-import Projects from "@/components/projects";
-import Skills from "@/components/skills";
+import Header from "@/components/header";
 import { PortfolioContentContainer } from "@/components/portfolio-content-container";
+
+// Developer components
+import DeveloperHero from "@/components/developer/hero";
+import DeveloperAbout from "@/components/developer/about";
+import DeveloperProjects from "@/components/developer/projects";
+import DeveloperSkills from "@/components/developer/skills";
+
+// Designer components
+import DesignerHero from "@/components/designer/hero";
+import DesignerAbout from "@/components/designer/about";
+import DesignerProjects from "@/components/designer/projects";
+import DesignerSkills from "@/components/designer/skills";
 
 export default function Home() {
   const developerContent = (
     <>
-      <Hero />
-      <About />
-      <Projects />
-      <Skills />
+      <DeveloperHero />
+      <DeveloperAbout />
+      <DeveloperProjects />
+      <DeveloperSkills />
       <Contact />
     </>
   );
 
   const designerContent = (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-center">Designer Portfolio Coming Soon</h1>
-    </div>
+    <>
+      <DesignerHero />
+      <DesignerAbout />
+      <DesignerProjects />
+      <DesignerSkills />
+      <Contact />
+    </>
   );
 
   return (
     <main className="min-h-screen bg-background text-foreground">
+      <Header />
       <PortfolioContentContainer
         developerContent={developerContent}
         designerContent={designerContent}

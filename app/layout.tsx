@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <Provider>
-          <ThemeProvider defaultTheme="system" storageKey="theme">
+          <ThemeProvider defaultTheme="light" storageKey="theme">
             <PortfolioModeToggle />
             {children}
           </ThemeProvider>

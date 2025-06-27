@@ -5,6 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Technology Stack
 
 This is a **Next.js 15** portfolio website built with:
+
 - **React 19** with TypeScript
 - **Tailwind CSS** with shadcn/ui components
 - **Framer Motion** for animations
@@ -40,18 +41,21 @@ npm run disable-cache
 ## Architecture Overview
 
 ### App Router Structure
+
 - Uses Next.js 15 App Router with TypeScript
 - Server components by default, client components marked with "use client"
 - Static export configuration for AWS S3 deployment
 - Root layout handles theme provider and global styles
 
 ### Component Architecture
+
 - **UI Components**: `/components/ui/` - shadcn/ui component library
 - **Feature Components**: `/components/` - custom portfolio components
 - **Theme System**: CSS variables with light/dark mode support
 - **Responsive Design**: Mobile-first approach with Tailwind breakpoints
 
 ### Key Directories
+
 - `/app/` - Next.js App Router pages and layouts
   - `/app/projects/[slug]/` - Dynamic routes for project detail pages
 - `/components/` - React components (Hero, About, Projects, Skills, Contact, Footer)
@@ -65,6 +69,7 @@ npm run disable-cache
 ## Deployment Infrastructure
 
 ### AWS Architecture
+
 - **S3 Bucket**: Static website hosting with public read access
 - **CloudFront**: CDN distribution with custom domain support
 - **Route53**: DNS management for custom domain
@@ -72,6 +77,7 @@ npm run disable-cache
 - **Terraform**: Infrastructure as Code with modular structure
 
 ### Deployment Process
+
 - `npm run deploy` builds the site and uploads to S3
 - CloudFront cache invalidation ensures fresh content
 - GitHub repository linked via terraform/modules/s3/main.tf
@@ -79,18 +85,21 @@ npm run disable-cache
 ## Development Patterns
 
 ### Component Development
+
 - Server components by default for better performance
 - Client components only when interactivity is needed
 - Consistent use of TypeScript interfaces for props
 - shadcn/ui components for consistent design system
 
 ### Styling Approach
+
 - Tailwind CSS with custom CSS variables for theming
 - Dark/light mode support via next-themes
 - Responsive design patterns using Tailwind breakpoints
 - Framer Motion for smooth animations and transitions
 
 ### Code Organization
+
 - Barrel exports from component directories
 - TypeScript strict mode enabled
 - ESLint and Prettier for code quality
@@ -100,13 +109,14 @@ npm run disable-cache
 
 - `next.config.mjs` - Next.js configuration with static export, unoptimized images, and experimental webpack features
 - `tailwind.config.ts` - Tailwind with shadcn/ui theme variables and tailwindcss-animate plugin
-- `tsconfig.json` - TypeScript configuration with strict mode and path aliases (@/*)
+- `tsconfig.json` - TypeScript configuration with strict mode and path aliases (@/\*)
 - `terraform/` - AWS infrastructure definitions (main.tf, variables.tf, providers.tf)
 - `.env` - Environment variables (CLOUDFRONT_DISTRIBUTION_ID for cache invalidation)
 
 ## Theme System
 
 The site supports light/dark mode using:
+
 - CSS custom properties defined in globals.css
 - next-themes provider in root layout
 - Tailwind dark: variants for styling
@@ -115,23 +125,27 @@ The site supports light/dark mode using:
 ## Project-Specific Patterns
 
 ### Static Export Considerations
+
 - Build output goes to `/out` directory for S3 deployment
 - Images are unoptimized (`unoptimized: true` in next.config.mjs)
 - Dynamic routes work with `generateStaticParams` for build-time generation
 - No server-side features (API routes, middleware, ISR)
 
 ### TypeScript Usage
+
 - Strict mode enabled with all checks
 - Path alias `@/*` maps to project root
 - Consistent interface definitions for component props
 - Type-safe project data structures in `/app/projects/[slug]/page.tsx`
 
 ### Build Configuration
+
 - ESLint errors are ignored during build (`ignoreDuringBuilds: true`)
 - TypeScript errors are ignored during build (`ignoreBuildErrors: true`)
 - Note: These settings should be changed for production quality
 
 ### Recent Additions
+
 - Project detail pages with case studies (`/projects/[slug]`)
 - Enhanced project cards with "View Details" links
 - Comprehensive project data structure supporting:

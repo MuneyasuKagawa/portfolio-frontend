@@ -3,27 +3,27 @@
 import { motion, useInView } from "framer-motion";
 import { Mail } from "lucide-react";
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [formStatus, setFormStatus] = useState<
-    "idle" | "submitting" | "success" | "error"
-  >("idle");
+  // const [formStatus, setFormStatus] = useState<
+  //   "idle" | "submitting" | "success" | "error"
+  // >("idle");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setFormStatus("submitting");
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setFormStatus("submitting");
 
-    // Simulate form submission
-    setTimeout(() => {
-      // Randomly succeed or fail for demo purposes
-      setFormStatus(Math.random() > 0.2 ? "success" : "error");
-    }, 1500);
-  };
+  //   // Simulate form submission
+  //   setTimeout(() => {
+  //     // Randomly succeed or fail for demo purposes
+  //     setFormStatus(Math.random() > 0.2 ? "success" : "error");
+  //   }, 1500);
+  // };
 
   return (
     <section id="contact" className="py-20">
@@ -37,7 +37,7 @@ export default function Contact() {
         >
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">Get In Touch</h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
-            I'd love to contribute my skills to help your vision reach its full
+            I&apos;d love to contribute my skills to help your vision reach its full
             potential.
           </p>
           <p className="mx-auto max-w-2xl text-foreground/80">

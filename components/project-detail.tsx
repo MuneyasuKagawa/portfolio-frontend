@@ -1,60 +1,65 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowLeft, ExternalLink, Calendar, Users, Wrench } from "lucide-react"
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { motion, useInView } from "framer-motion";
+import { ArrowLeft, Calendar, ExternalLink, Users, Wrench } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRef } from "react";
 
 interface ProjectDetailProps {
   project: {
-    title: string
-    subtitle?: string
-    description: string
-    image: string
-    imagePadding?: string
-    tags: string[]
-    duration?: string
-    role?: string
-    team?: string
-    tools?: string[]
-    liveUrl?: string
-    githubUrl?: string
+    title: string;
+    subtitle?: string;
+    description: string;
+    image: string;
+    imagePadding?: string;
+    tags: string[];
+    duration?: string;
+    role?: string;
+    team?: string;
+    tools?: string[];
+    liveUrl?: string;
+    githubUrl?: string;
     overview?: {
-      problem?: string
-      purpose?: string
-      goal?: string[]
-      target?: string[]
-      solution?: string
-    }
-    features?: string[]
-    challenges?: string[]
+      problem?: string;
+      purpose?: string;
+      goal?: string[];
+      target?: string[];
+      solution?: string;
+    };
+    features?: string[];
+    challenges?: Array<{
+      title: string;
+      description: string;
+      solution: string;
+    }>;
     results?: {
-      finalWork?: string
-      learnings?: string[]
-      nextSteps?: string[]
-    }
-  }
+      finalWork?: string;
+      learnings?: string[];
+      nextSteps?: string[];
+    };
+  };
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b">
+      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" asChild>
-            <Link href="/#projects" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
-              Back to Projects
-            </Link>
-          </Button>
+          <div className="flex items-center justify-between">
+            <Button variant="ghost" asChild>
+              <Link href="/#projects" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                Back to Projects
+              </Link>
+            </Button>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
@@ -65,15 +70,21 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center mb-12"
+            className="mb-12 text-center"
           >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4">{project.title}</h1>
+            <h1 className="mb-4 text-4xl font-bold md:text-6xl">
+              {project.title}
+            </h1>
             {project.subtitle && (
-              <p className="text-xl text-foreground/80 mb-6">{project.subtitle}</p>
+              <p className="mb-6 text-xl text-foreground/80">
+                {project.subtitle}
+              </p>
             )}
-            <p className="text-lg text-foreground/70 max-w-3xl mx-auto mb-8">{project.description}</p>
+            <p className="mx-auto mb-8 max-w-3xl text-lg text-foreground/70">
+              {project.description}
+            </p>
 
-            <div className="flex flex-wrap justify-center gap-2 mb-8">
+            <div className="mb-8 flex flex-wrap justify-center gap-2">
               {project.tags.map((tag) => (
                 <Badge key={tag} variant="secondary" className="text-sm">
                   {tag}
@@ -86,12 +97,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative aspect-video rounded-xl overflow-hidden shadow-2xl mb-12 bg-white"
+            className="relative mb-12 aspect-video overflow-hidden rounded-xl bg-white shadow-2xl"
           >
-            <Image 
-              src={project.image || "/placeholder.svg"} 
-              alt={project.title} 
-              fill 
+            <Image
+              src={project.image || "/placeholder.svg"}
+              alt={project.title}
+              fill
               className={`object-contain ${project.imagePadding || ""}`}
             />
           </motion.div>
@@ -101,7 +112,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="grid md:grid-cols-3 gap-6 mb-16"
+            className="mb-16 grid gap-6 md:grid-cols-3"
           >
             {project.duration && (
               <Card>
@@ -126,8 +137,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {project.role && <p className="text-foreground/80">{project.role}</p>}
-                  {project.team && <p className="text-sm text-foreground/60">{project.team}</p>}
+                  {project.role && (
+                    <p className="text-foreground/80">{project.role}</p>
+                  )}
+                  {project.team && (
+                    <p className="text-sm text-foreground/60">{project.team}</p>
+                  )}
                 </CardContent>
               </Card>
             )}
@@ -162,36 +177,42 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           content={
             <div className="space-y-8">
               {project.overview.problem && (
-                <Card className="p-6 border-l-4 border-red-500">
-                  <h4 className="text-lg font-semibold mb-3 text-red-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <Card className="border-l-4 border-red-500 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-600">
+                    <div className="h-2 w-2 rounded-full bg-red-500"></div>
                     Problem Statement
                   </h4>
-                  <p className="text-foreground/80 leading-relaxed">{project.overview.problem}</p>
+                  <p className="leading-relaxed text-foreground/80">
+                    {project.overview.problem}
+                  </p>
                 </Card>
               )}
 
               {project.overview.purpose && (
-                <Card className="p-6 border-l-4 border-blue-500">
-                  <h4 className="text-lg font-semibold mb-3 text-blue-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                <Card className="border-l-4 border-blue-500 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-blue-600">
+                    <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                     Purpose
                   </h4>
-                  <p className="text-foreground/80 leading-relaxed">{project.overview.purpose}</p>
+                  <p className="leading-relaxed text-foreground/80">
+                    {project.overview.purpose}
+                  </p>
                 </Card>
               )}
 
               {project.overview.goal && (
-                <Card className="p-6 border-l-4 border-green-500">
-                  <h4 className="text-lg font-semibold mb-3 text-green-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                <Card className="border-l-4 border-green-500 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-green-600">
+                    <div className="h-2 w-2 rounded-full bg-green-500"></div>
                     Goals
                   </h4>
                   <ul className="space-y-3">
                     {project.overview.goal.map((goal, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="h-2 w-2 rounded-full bg-green-500 mt-2 flex-shrink-0"></div>
-                        <span className="text-foreground/80 leading-relaxed">{goal}</span>
+                        <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
+                        <span className="leading-relaxed text-foreground/80">
+                          {goal}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -199,12 +220,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               )}
 
               {project.overview.solution && (
-                <Card className="p-6 border-l-4 border-purple-500">
-                  <h4 className="text-lg font-semibold mb-3 text-purple-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <Card className="border-l-4 border-purple-500 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-purple-600">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                     Solution
                   </h4>
-                  <p className="text-foreground/80 leading-relaxed">{project.overview.solution}</p>
+                  <p className="leading-relaxed text-foreground/80">
+                    {project.overview.solution}
+                  </p>
                 </Card>
               )}
             </div>
@@ -217,16 +240,18 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <ProjectSection
           title="Key Features"
           content={
-            <Card className="p-6 border-l-4 border-blue-500">
-              <h4 className="text-lg font-semibold mb-4 text-blue-600 flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+            <Card className="border-l-4 border-blue-500 p-6">
+              <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-600">
+                <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                 Features Implemented
               </h4>
               <ul className="space-y-4">
                 {project.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
-                    <div className="h-2 w-2 rounded-full bg-blue-500 mt-2 flex-shrink-0"></div>
-                    <span className="text-foreground/80 leading-relaxed">{feature}</span>
+                    <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
+                    <span className="leading-relaxed text-foreground/80">
+                      {feature}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -240,20 +265,27 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         <ProjectSection
           title="Challenges & Solutions"
           content={
-            <Card className="p-6 border-l-4 border-orange-500">
-              <h4 className="text-lg font-semibold mb-4 text-orange-600 flex items-center gap-2">
-                <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                Technical Challenges
-              </h4>
-              <ul className="space-y-4">
-                {project.challenges.map((challenge, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <div className="h-2 w-2 rounded-full bg-orange-500 mt-2 flex-shrink-0"></div>
-                    <span className="text-foreground/80 leading-relaxed">{challenge}</span>
-                  </li>
-                ))}
-              </ul>
-            </Card>
+            <div className="space-y-6">
+              {project.challenges.map((challenge, index) => (
+                <Card key={index} className="border-l-4 border-orange-500 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-orange-600">
+                    <div className="h-2 w-2 rounded-full bg-orange-500"></div>
+                    {challenge.title}
+                  </h4>
+                  <p className="mb-4 leading-relaxed text-foreground/80">
+                    {challenge.description}
+                  </p>
+                  <div className="rounded-lg bg-muted/50 p-4">
+                    <p className="mb-1 text-sm font-medium text-foreground/90">
+                      Solution:
+                    </p>
+                    <p className="leading-relaxed text-foreground/70">
+                      {challenge.solution}
+                    </p>
+                  </div>
+                </Card>
+              ))}
+            </div>
           }
         />
       )}
@@ -265,26 +297,30 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           content={
             <div className="space-y-8">
               {project.results.finalWork && (
-                <Card className="p-6 border-l-4 border-emerald-500">
-                  <h4 className="text-lg font-semibold mb-4 text-emerald-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                <Card className="border-l-4 border-emerald-500 p-6">
+                  <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-600">
+                    <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
                     Final Results
                   </h4>
-                  <p className="text-foreground/80 leading-relaxed">{project.results.finalWork}</p>
+                  <p className="leading-relaxed text-foreground/80">
+                    {project.results.finalWork}
+                  </p>
                 </Card>
               )}
 
               {project.results.learnings && (
-                <Card className="p-6 border-l-4 border-sky-500">
-                  <h4 className="text-lg font-semibold mb-4 text-sky-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-sky-500 rounded-full"></div>
+                <Card className="border-l-4 border-sky-500 p-6">
+                  <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-sky-600">
+                    <div className="h-2 w-2 rounded-full bg-sky-500"></div>
                     What I Learned
                   </h4>
                   <ul className="space-y-4">
                     {project.results.learnings.map((learning, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="h-2 w-2 rounded-full bg-sky-500 mt-2 flex-shrink-0"></div>
-                        <span className="text-foreground/80 leading-relaxed">{learning}</span>
+                        <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-sky-500"></div>
+                        <span className="leading-relaxed text-foreground/80">
+                          {learning}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -292,16 +328,18 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               )}
 
               {project.results.nextSteps && (
-                <Card className="p-6 border-l-4 border-purple-500">
-                  <h4 className="text-lg font-semibold mb-4 text-purple-600 flex items-center gap-2">
-                    <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                <Card className="border-l-4 border-purple-500 p-6">
+                  <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-purple-600">
+                    <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                     Next Steps
                   </h4>
                   <ul className="space-y-4">
                     {project.results.nextSteps.map((step, index) => (
                       <li key={index} className="flex items-start gap-3">
-                        <div className="h-2 w-2 rounded-full bg-purple-500 mt-2 flex-shrink-0"></div>
-                        <span className="text-foreground/80 leading-relaxed">{step}</span>
+                        <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500"></div>
+                        <span className="leading-relaxed text-foreground/80">
+                          {step}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -314,12 +352,16 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
 
       {/* Links */}
       {(project.liveUrl || project.githubUrl) && (
-        <section className="py-16 bg-muted/30">
+        <section className="bg-muted/30 py-16">
           <div className="container mx-auto px-4 text-center">
             <div className="flex justify-center gap-4">
               {project.liveUrl && (
                 <Button asChild size="lg">
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <ExternalLink className="mr-2 h-4 w-4" />
                     View Live Site
                   </a>
@@ -327,7 +369,11 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               )}
               {project.githubUrl && (
                 <Button asChild size="lg" variant="outline">
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <ExternalLink className="mr-2 h-4 w-4" />
                     View Code
                   </a>
@@ -350,12 +396,18 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
         </div>
       </section>
     </div>
-  )
+  );
 }
 
-function ProjectSection({ title, content }: { title: string; content: React.ReactNode }) {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: "-100px" })
+function ProjectSection({
+  title,
+  content,
+}: {
+  title: string;
+  content: React.ReactNode;
+}) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
     <section className="py-16 odd:bg-muted/30">
@@ -366,10 +418,12 @@ function ProjectSection({ title, content }: { title: string; content: React.Reac
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.5 }}
         >
-          <h3 className="text-2xl md:text-3xl font-bold mb-12 text-center">{title}</h3>
-          <div className="max-w-4xl mx-auto">{content}</div>
+          <h3 className="mb-12 text-center text-2xl font-bold md:text-3xl">
+            {title}
+          </h3>
+          <div className="mx-auto max-w-4xl">{content}</div>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

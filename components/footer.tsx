@@ -20,7 +20,7 @@ export default function Footer() {
             className="mb-6 md:mb-0"
           >
             <Link href="/" className="text-xl font-bold">
-              Mun's<span className="text-primary">Portfolio</span>
+              Mun&apos;s<span className="text-primary">Portfolio</span>
             </Link>
             <p className="mt-2 text-foreground/70">
               Building exceptional digital experiences.
