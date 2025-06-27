@@ -54,7 +54,12 @@ module "cloudfront" {
   custom_error_response = [
     {
       error_code = 403
-      response_code = 403
+      response_code = 200
+      response_page_path = "/index.html"
+    },
+    {
+      error_code = 404
+      response_code = 200
       response_page_path = "/index.html"
     }
   ]
@@ -118,17 +123,28 @@ resource "aws_cloudfront_function" "redirect_to_custom_domain" {
 function handler(event) {
   var request = event.request;
   var host = request.headers.host.value;
+  var uri = request.uri;
   
+  // Redirect to custom domain if needed
   if (host !== '${var.domain_name}' && host !== '${var.www_domain_name}') {
     return {
       statusCode: 301,
       statusDescription: 'Moved Permanently',
       headers: {
         'location': {
-          value: 'https://${var.domain_name}' + request.uri
+          value: 'https://${var.domain_name}' + uri
         }
       }
     };
+  }
+  
+  // Handle directory requests - append index.html if URI ends with /
+  if (uri.endsWith('/')) {
+    request.uri = uri + 'index.html';
+  }
+  // Handle extensionless requests - try to append /index.html
+  else if (!uri.includes('.') && !uri.endsWith('/')) {
+    request.uri = uri + '/index.html';
   }
   
   return request;

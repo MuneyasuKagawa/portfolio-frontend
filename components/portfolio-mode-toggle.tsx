@@ -1,15 +1,16 @@
 "use client";
 
-import { portfolioModeAtom } from "@/lib/atoms";
 import { motion } from "framer-motion";
-import { useAtom } from "jotai";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { usePortfolioMode } from "@/lib/use-portfolio-mode";
+import { useTranslation } from "@/lib/use-translation";
 
 export function PortfolioModeToggle() {
-  const [mode, setMode] = useAtom(portfolioModeAtom);
+  const { portfolioMode: mode, setPortfolioMode: setMode } = usePortfolioMode();
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   // Only show on home page
   if (pathname !== "/") {
@@ -168,7 +169,7 @@ export function PortfolioModeToggle() {
               }
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              Developer
+              {t("common.developer")}
             </motion.span>
           </motion.button>
 
@@ -202,7 +203,7 @@ export function PortfolioModeToggle() {
               }
               transition={{ duration: 1.5, repeat: Infinity }}
             >
-              Designer
+              {t("common.designer")}
             </motion.span>
           </motion.button>
         </div>

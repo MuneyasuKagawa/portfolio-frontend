@@ -10,6 +10,7 @@ import {
   Workflow,
 } from "lucide-react";
 import { useRef } from "react";
+import { useTranslation } from "@/lib/use-translation";
 
 type Skill = {
   name: string;
@@ -22,10 +23,13 @@ type Category = {
   skills: Skill[];
 };
 
-const skillCategories: Category[] = [
-  {
-    title: "Frontend",
-    icon: Code2,
+const useSkillCategories = () => {
+  const { t } = useTranslation();
+  
+  return [
+    {
+      title: t("skills.frontend"),
+      icon: Code2,
     skills: [
       { name: "HTML5", level: 95 },
       { name: "CSS3", level: 90 },
@@ -38,7 +42,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "UI/UX",
+    title: t("skills.styling"),
     icon: Palette,
     skills: [
       { name: "Tailwind CSS", level: 90 },
@@ -50,7 +54,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Backend",
+    title: t("skills.backend"),
     icon: Database,
     skills: [
       { name: "Node.js", level: 80 },
@@ -62,7 +66,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Tools",
+    title: t("skills.tools"),
     icon: GitBranch,
     skills: [
       { name: "Git", level: 90 },
@@ -74,7 +78,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Testing",
+    title: t("skills.testing"),
     icon: Workflow,
     skills: [
       { name: "Jest", level: 80 },
@@ -84,7 +88,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Others",
+    title: t("skills.others"),
     icon: Layers,
     skills: [
       { name: "AWS", level: 75 },
@@ -96,11 +100,14 @@ const skillCategories: Category[] = [
       { name: "Gemini", level: 75 },
     ],
   },
-];
+  ];
+};
 
 export default function Skills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
+  const skillCategories = useSkillCategories();
 
   return (
     <section id="skills" className="bg-muted/30 py-20">
@@ -112,11 +119,9 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">My Skills</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t("skills.title")}</h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
-            I&apos;ve worked with a variety of technologies and tools in the web
-            development ecosystem. Here&apos;s an overview of my technical skills and
-            expertise.
+            {t("skills.description")}
           </p>
         </motion.div>
 

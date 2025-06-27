@@ -10,6 +10,7 @@ import {
   Users,
 } from "lucide-react";
 import { useRef } from "react";
+import { useTranslation } from "@/lib/use-translation";
 
 type Skill = {
   name: string;
@@ -23,9 +24,9 @@ type Category = {
   color: string;
 };
 
-const skillCategories: Category[] = [
+const getSkillCategories = (t: (key: string) => string): Category[] => [
   {
-    title: "Design Tools",
+    title: t("designer_skills.design_tools"),
     icon: Palette,
     color: "from-purple-500 to-pink-500",
     skills: [
@@ -38,7 +39,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "UI/UX Design",
+    title: t("designer_skills.ui_ux_design"),
     icon: Monitor,
     color: "from-blue-500 to-cyan-500",
     skills: [
@@ -51,7 +52,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Research & Testing",
+    title: t("designer_skills.research_testing"),
     icon: Users,
     color: "from-green-500 to-emerald-500",
     skills: [
@@ -64,7 +65,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Development",
+    title: t("designer_skills.development"),
     icon: Layers,
     color: "from-indigo-500 to-purple-500",
     skills: [
@@ -77,7 +78,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Soft Skills",
+    title: t("designer_skills.soft_skills"),
     icon: Heart,
     color: "from-rose-500 to-pink-500",
     skills: [
@@ -90,7 +91,7 @@ const skillCategories: Category[] = [
     ],
   },
   {
-    title: "Innovation",
+    title: t("designer_skills.innovation"),
     icon: Lightbulb,
     color: "from-yellow-500 to-orange-500",
     skills: [
@@ -104,6 +105,8 @@ const skillCategories: Category[] = [
 export default function DesignerSkills() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
+  const skillCategories = getSkillCategories(t);
 
   return (
     <section id="skills" className="relative overflow-hidden bg-muted/30 py-20">
@@ -121,11 +124,9 @@ export default function DesignerSkills() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-light md:text-4xl">My Skills</h2>
+          <h2 className="mb-4 text-3xl font-light md:text-4xl">{t("designer_skills.title")}</h2>
           <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
-            I&apos;ve cultivated a diverse skill set spanning design,
-            development, and user research. Here&apos;s an overview of my
-            expertise across the design and development spectrum.
+            {t("designer_skills.description")}
           </p>
         </motion.div>
 

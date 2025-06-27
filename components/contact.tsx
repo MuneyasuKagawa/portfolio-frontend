@@ -4,12 +4,14 @@ import { motion, useInView } from "framer-motion";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
+import { useTranslation } from "@/lib/use-translation";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
   // const [formStatus, setFormStatus] = useState<
   //   "idle" | "submitting" | "success" | "error"
   // >("idle");
@@ -35,13 +37,12 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">Get In Touch</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t("contact.title")}</h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
-            I&apos;d love to contribute my skills to help your vision reach its full
-            potential.
+            {t("contact.description_line1")}
           </p>
           <p className="mx-auto max-w-2xl text-foreground/80">
-            Open to discussing how I can add value to your ongoing initiatives.
+            {t("contact.description_line2")}
           </p>
         </motion.div>
 
@@ -60,7 +61,7 @@ export default function Contact() {
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="mb-1 font-medium">Email</h4>
+                  <h4 className="mb-1 font-medium">{t("contact.email")}</h4>
                   <a
                     href="mailto:muneyasu.kagawa@gmail.com"
                     className="text-foreground/80 transition-colors hover:text-primary"
@@ -90,7 +91,7 @@ export default function Contact() {
                   <FiLinkedin className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="mb-1 font-medium">LinkedIn</h4>
+                  <h4 className="mb-1 font-medium">{t("contact.linkedin")}</h4>
                   <Link
                     href="https://www.linkedin.com/in/muneyasu-mun-kagawa/"
                     target="_blank"
@@ -105,7 +106,7 @@ export default function Contact() {
                   <FaXTwitter className="h-5 w-5" />
                 </div>
                 <div>
-                  <h4 className="mb-1 font-medium">X</h4>
+                  <h4 className="mb-1 font-medium">{t("contact.x")}</h4>
                   <Link href="https://x.com/m_kagawa_" target="_blank">
                     <p className="text-foreground/80">@m_kagawa_</p>
                   </Link>

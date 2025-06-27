@@ -11,10 +11,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { useTranslation } from "@/lib/use-translation";
 
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
 
   return (
     <section id="about" className="bg-muted/30 py-20">
@@ -32,26 +34,16 @@ export default function About() {
             animate={isInView ? { x: 0 } : { x: -50 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">About Me</h2>
+            <h2 className="mb-6 text-3xl font-bold md:text-4xl">{t("about.title")}</h2>
             <div className="space-y-4 text-foreground/80">
               <p>
-                Hello! I&apos;m Mun, a japanese passionate frontend engineer with 5+
-                years of experience creating responsive, user-friendly web
-                applications. I specialize in modern JavaScript frameworks like
-                React and Next.js.
+                {t("about.developer_intro")}
               </p>
               <p>
-                While frontend is my primary focus, I&apos;m also proficient in
-                backend development with Node.js, Express, and C#.NET. I&apos;ve
-                built several full-stack applications that seamlessly integrate
-                robust server-side logic with intuitive user interfaces. My
-                experience with RESTful APIs and database design allows me to
-                tackle projects from end to end.
+                {t("about.developer_fullstack")}
               </p>
               <p>
-                When I&apos;m not coding, you can find me gaming, reading riding
-                horses, or experimenting with new web technologies. I&apos;m always
-                eager to learn and grow as a developer.
+                {t("about.developer_personal")}
               </p>
             </div>
             <div className="mt-8 flex justify-center">
@@ -69,11 +61,11 @@ export default function About() {
                   Download Resume
                 </a> */}
                       <FileText className="mr-2 h-4 w-4" />
-                      Download Resume
+                      {t("common.download_resume")}
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent className="bg-black text-white dark:bg-white dark:text-black">
-                    <p>Coming soon!</p>
+                    <p>{t("common.coming_soon")}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

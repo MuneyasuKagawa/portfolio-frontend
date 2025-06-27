@@ -1,7 +1,7 @@
 import Contact from "@/components/contact";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
-import { PortfolioContentContainer } from "@/components/portfolio-content-container";
+import { PortfolioContentWrapper } from "@/components/portfolio-content-wrapper";
 
 // Developer components
 import DeveloperHero from "@/components/developer/hero";
@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Header />
-      <PortfolioContentContainer
+      <PortfolioContentWrapper
         developerContent={developerContent}
         designerContent={designerContent}
       />

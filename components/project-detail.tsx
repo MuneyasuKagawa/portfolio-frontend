@@ -1,6 +1,8 @@
 "use client";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageToggle } from "@/components/language-toggle";
+import { useTranslation } from "@/lib/use-translation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,6 +48,8 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
+  const { t } = useTranslation();
+  
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -55,10 +59,13 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
             <Button variant="ghost" asChild>
               <Link href="/#projects" className="flex items-center gap-2">
                 <ArrowLeft className="h-4 w-4" />
-                Back to Projects
+                {t("project_detail.back_to_projects")}
               </Link>
             </Button>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <LanguageToggle />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -119,7 +126,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Calendar className="h-5 w-5" />
-                    Duration
+                    {t("common.duration")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -133,7 +140,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Users className="h-5 w-5" />
-                    Team & Role
+                    {t("common.team_role")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -152,7 +159,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <CardHeader className="pb-3">
                   <CardTitle className="flex items-center gap-2 text-lg">
                     <Wrench className="h-5 w-5" />
-                    Technologies Used
+                    {t("common.technologies_used")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -173,14 +180,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Project Overview */}
       {project.overview && (
         <ProjectSection
-          title="Project Overview"
+          title={t("project_detail.project_overview")}
           content={
             <div className="space-y-8">
               {project.overview.problem && (
                 <Card className="border-l-4 border-red-500 p-6">
                   <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-600">
                     <div className="h-2 w-2 rounded-full bg-red-500"></div>
-                    Problem Statement
+                    {t("project_detail.problem_statement")}
                   </h4>
                   <p className="leading-relaxed text-foreground/80">
                     {project.overview.problem}
@@ -192,7 +199,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <Card className="border-l-4 border-blue-500 p-6">
                   <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-blue-600">
                     <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                    Purpose
+                    {t("project_detail.purpose")}
                   </h4>
                   <p className="leading-relaxed text-foreground/80">
                     {project.overview.purpose}
@@ -204,7 +211,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <Card className="border-l-4 border-green-500 p-6">
                   <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-green-600">
                     <div className="h-2 w-2 rounded-full bg-green-500"></div>
-                    Goals
+                    {t("project_detail.goals")}
                   </h4>
                   <ul className="space-y-3">
                     {project.overview.goal.map((goal, index) => (
@@ -223,7 +230,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <Card className="border-l-4 border-purple-500 p-6">
                   <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-purple-600">
                     <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    Solution
+                    {t("common.solution")}
                   </h4>
                   <p className="leading-relaxed text-foreground/80">
                     {project.overview.solution}
@@ -238,12 +245,12 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Features */}
       {project.features && (
         <ProjectSection
-          title="Key Features"
+          title={t("project_detail.key_features")}
           content={
             <Card className="border-l-4 border-blue-500 p-6">
               <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-blue-600">
                 <div className="h-2 w-2 rounded-full bg-blue-500"></div>
-                Features Implemented
+                {t("project_detail.features_implemented")}
               </h4>
               <ul className="space-y-4">
                 {project.features.map((feature, index) => (
@@ -263,7 +270,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Challenges */}
       {project.challenges && (
         <ProjectSection
-          title="Challenges & Solutions"
+          title={t("project_detail.challenges_solutions")}
           content={
             <div className="space-y-6">
               {project.challenges.map((challenge, index) => (
@@ -277,7 +284,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                   </p>
                   <div className="rounded-lg bg-muted/50 p-4">
                     <p className="mb-1 text-sm font-medium text-foreground/90">
-                      Solution:
+                      {t("common.solution")}:
                     </p>
                     <p className="leading-relaxed text-foreground/70">
                       {challenge.solution}
@@ -293,14 +300,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
       {/* Results */}
       {project.results && (
         <ProjectSection
-          title="Results & Learning"
+          title={t("project_detail.results_learning")}
           content={
             <div className="space-y-8">
               {project.results.finalWork && (
                 <Card className="border-l-4 border-emerald-500 p-6">
                   <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-600">
                     <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
-                    Final Results
+                    {t("project_detail.final_results")}
                   </h4>
                   <p className="leading-relaxed text-foreground/80">
                     {project.results.finalWork}
@@ -312,7 +319,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <Card className="border-l-4 border-sky-500 p-6">
                   <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-sky-600">
                     <div className="h-2 w-2 rounded-full bg-sky-500"></div>
-                    What I Learned
+                    {t("project_detail.what_learned")}
                   </h4>
                   <ul className="space-y-4">
                     {project.results.learnings.map((learning, index) => (
@@ -331,7 +338,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 <Card className="border-l-4 border-purple-500 p-6">
                   <h4 className="mb-4 flex items-center gap-2 text-lg font-semibold text-purple-600">
                     <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    Next Steps
+                    {t("project_detail.next_steps")}
                   </h4>
                   <ul className="space-y-4">
                     {project.results.nextSteps.map((step, index) => (
@@ -363,7 +370,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     rel="noopener noreferrer"
                   >
                     <ExternalLink className="mr-2 h-4 w-4" />
-                    View Live Site
+                    {t("project_detail.view_live_site")}
                   </a>
                 </Button>
               )}
@@ -375,7 +382,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     rel="noopener noreferrer"
                   >
                     <ExternalLink className="mr-2 h-4 w-4" />
-                    View Code
+                    {t("project_detail.view_code")}
                   </a>
                 </Button>
               )}
@@ -390,7 +397,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
           <Button asChild size="lg" variant="outline">
             <Link href="/#projects">
               <ArrowLeft className="mr-2 h-4 w-4" />
-              Back to All Projects
+              {t("project_detail.back_to_all_projects")}
             </Link>
           </Button>
         </div>

@@ -1,0 +1,111 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "portfolio_title": "Mun's Portfolio"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "developer_role": "Frontend Developer",
+    "designer_role": "UI/UX Designer",
+    "developer_description": "I create responsive web applications using modern technologies like React and Next.js. Passionate about creating intuitive user experiences through clean code.",
+    "designer_description_1": "I'm a UI/UX designer with 8+ years of coding experience across front- and back-end.",
+    "designer_description_2": "Over the last six months, I have studied design at school and guided several team projects, from wireframes to clickable prototypes.",
+    "designer_description_3": "I aim to bridge design and development, helping teams launch products that look great, feel great for users, and stay easy to maintain for engineers.",
+    "view_work": "View My Work",
+    "contact_me": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "developer_intro": "Hello! I'm Mun, a japanese passionate frontend engineer with 5+ years of experience creating responsive, user-friendly web applications. I specialize in modern JavaScript frameworks like React and Next.js.",
+    "developer_fullstack": "While frontend is my primary focus, I'm also proficient in backend development with Node.js, Express, and C#.NET. I've built several full-stack applications that seamlessly integrate robust server-side logic with intuitive user interfaces. My experience with RESTful APIs and database design allows me to tackle projects from end to end.",
+    "developer_personal": "When I'm not coding, you can find me gaming, reading riding horses, or experimenting with new web technologies. I'm always eager to learn and grow as a developer.",
+    "designer_intro": "Hello! I'm Mun, a passionate UI/UX designer with a focus on creating beautiful, functional, and user-centered digital experiences. I believe great design is about solving problems while creating emotional connections.",
+    "designer_process": "My design process is rooted in empathy and research. I start by understanding user needs and business goals, then craft solutions that are both aesthetically pleasing and highly functional. I'm experienced in the full design process from research and wireframing to high-fidelity prototypes.",
+    "designer_personal": "When I'm not designing, you can find me exploring art galleries, reading about psychology, or sketching ideas in my notebook. I'm always looking for inspiration in the world around me."
+  },
+  "projects": {
+    "title": "My Projects",
+    "developer_description": "Here are some of my recent projects. Each one was built to solve a specific problem and showcase different skills and technologies.",
+    "designer_description": "Here are some of my recent design projects. Each one represents a unique challenge and showcases my approach to user-centered design.",
+    "view_details": "View Details",
+    "view_code": "Code",
+    "product_page": "Product Page"
+  },
+  "skills": {
+    "title": "My Skills",
+    "description": "I've worked with a variety of technologies and tools in the web development ecosystem. Here's an overview of my technical skills and expertise.",
+    "frontend": "Frontend",
+    "styling": "Styling & Design",
+    "backend": "Backend", 
+    "tools": "Tools",
+    "testing": "Testing",
+    "others": "Others"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description_line1": "I'd love to contribute my skills to help your vision reach its full potential.",
+    "description_line2": "Open to discussing how I can add value to your ongoing initiatives.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "x": "X"
+  },
+  "common": {
+    "download_resume": "Download Resume",
+    "coming_soon": "Coming soon!",
+    "view_details": "View Details",
+    "code": "Code",
+    "product_page": "Product Page",
+    "toggle_language": "Toggle language",
+    "toggle_theme": "Toggle theme",
+    "developer": "Developer",
+    "designer": "Designer",
+    "duration": "Duration",
+    "team_role": "Team & Role",
+    "technologies_used": "Technologies Used",
+    "solution": "Solution"
+  },
+  "footer": {
+    "portfolio": "Portfolio",
+    "tagline": "Building exceptional digital experiences.",
+    "copyright": "© {year} Muneyasu Kagawa. All rights reserved.",
+    "linkedin_label": "LinkedIn",
+    "x_label": "X",
+    "email_label": "Email"
+  },
+  "designer_projects": {
+    "title": "My Projects",
+    "description": "Here are some of my recent projects. Each one was built to solve a specific problem and showcase different design and development skills."
+  },
+  "designer_skills": {
+    "title": "My Skills",
+    "description": "I've cultivated a diverse skill set spanning design, development, and user research. Here's an overview of my expertise across the design and development spectrum.",
+    "design_tools": "Design Tools",
+    "ui_ux_design": "UI/UX Design", 
+    "research_testing": "Research & Testing",
+    "development": "Development",
+    "soft_skills": "Soft Skills",
+    "innovation": "Innovation"
+  },
+  "project_detail": {
+    "back_to_projects": "Back to Projects",
+    "project_overview": "Project Overview",
+    "problem_statement": "Problem Statement",
+    "purpose": "Purpose",
+    "goals": "Goals",
+    "key_features": "Key Features",
+    "features_implemented": "Features Implemented",
+    "challenges_solutions": "Challenges & Solutions",
+    "technical_challenges": "Technical Challenges",
+    "results_learning": "Results & Learning",
+    "final_results": "Final Results",
+    "what_learned": "What I Learned",
+    "next_steps": "Next Steps",
+    "view_live_site": "View Live Site",
+    "view_code": "View Code",
+    "back_to_all_projects": "Back to All Projects"
+  }
+}

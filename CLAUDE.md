@@ -7,9 +7,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **Next.js 15** portfolio website built with:
 
 - **React 19** with TypeScript
-- **Tailwind CSS** with shadcn/ui components
+- **Tailwind CSS** with shadcn/ui components (40+ components)
 - **Framer Motion** for animations
+- **Jotai** for global state management with localStorage persistence
 - **next-themes** for dark/light mode
+- **Custom i18n system** with English/Japanese support
 - **AWS S3 + CloudFront** deployment via Terraform
 
 ## Development Commands
@@ -44,14 +46,35 @@ npm run disable-cache
 
 - Uses Next.js 15 App Router with TypeScript
 - Server components by default, client components marked with "use client"
-- Static export configuration for AWS S3 deployment
-- Root layout handles theme provider and global styles
+- Static export configuration for AWS S3 deployment (`output: "export"`)
+- Root layout handles theme provider, Jotai provider, and global styles
+- Dynamic imports with SSR disabled for client-only components
+
+### Portfolio Mode System
+
+The application features a unique **dual-mode portfolio** system:
+- **Developer Mode**: Showcases frontend/fullstack development projects
+- **Designer Mode**: Showcases UI/UX design work and case studies
+- State managed via Jotai with `portfolioModeAtom`
+- URL query parameter integration (`?want=developer|designer`)
+- Smooth transitions between modes using Framer Motion
+
+### Internationalization (i18n)
+
+Custom internationalization system supporting English and Japanese:
+- Translation files: `/locales/en.json` and `/locales/ja.json`
+- Custom hook: `useTranslation()` with dot notation key access
+- Language state managed via Jotai with `languageAtom`
+- Client-side language persistence in localStorage
 
 ### Component Architecture
 
-- **UI Components**: `/components/ui/` - shadcn/ui component library
+- **UI Components**: `/components/ui/` - shadcn/ui component library (40+ components including accordion, dialog, form, etc.)
 - **Feature Components**: `/components/` - custom portfolio components
-- **Theme System**: CSS variables with light/dark mode support
+- **Mode-Specific Components**: Separate `/developer/` and `/designer/` subdirectories
+- **State Management**: Jotai atoms in `/lib/atoms.ts` for portfolio mode, theme, and language
+- **Custom Hooks**: `/lib/use-portfolio-mode.ts` and `/lib/use-translation.ts`
+- **Theme System**: CSS variables with light/dark mode support via next-themes
 - **Responsive Design**: Mobile-first approach with Tailwind breakpoints
 
 ### Key Directories

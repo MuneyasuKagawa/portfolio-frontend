@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "@/lib/use-translation";
 
 // Particle component
 function FloatingParticle({
@@ -103,6 +104,7 @@ export default function Hero() {
     target: ref,
     offset: ["start start", "end start"],
   });
+  const { t } = useTranslation();
 
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
@@ -191,7 +193,7 @@ export default function Hero() {
             whileHover={{ scale: 1.05, rotate: [0, 1, -1, 0] }}
             transition={{ duration: 0.3 }}
           >
-            Hi, I&apos;m{" "}
+            {t("hero.greeting")}{" "}
             <span className="bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent">
               Mun
             </span>
@@ -203,7 +205,7 @@ export default function Hero() {
             transition={{ delay: 1, duration: 0.8 }}
           >
             {isInView && (
-              <TypewriterText text="Frontend Developer" delay={100} />
+              <TypewriterText text={t("hero.developer_role")} delay={100} />
             )}
           </motion.span>
         </motion.h1>
@@ -221,7 +223,7 @@ export default function Hero() {
             transition={{ duration: 3, repeat: Infinity }}
             className="bg-gradient-to-r from-foreground/80 via-primary to-foreground/80 bg-[length:200%_100%] bg-clip-text text-transparent"
           >
-            I build exceptional and accessible digital experiences for the web.
+            {t("hero.developer_description")}
           </motion.span>
         </motion.p>
 
@@ -261,7 +263,7 @@ export default function Hero() {
                   whileHover={{ x: "0%" }}
                   transition={{ duration: 0.3 }}
                 />
-                <span className="relative z-10">View My Work</span>
+                <span className="relative z-10">{t("hero.view_work")}</span>
               </a>
             </Button>
           </motion.div>
@@ -289,7 +291,7 @@ export default function Hero() {
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
-                <span className="relative z-10">Contact Me</span>
+                <span className="relative z-10">{t("hero.contact_me")}</span>
               </a>
             </Button>
           </motion.div>

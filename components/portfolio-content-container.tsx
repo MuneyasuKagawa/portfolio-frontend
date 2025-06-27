@@ -1,8 +1,7 @@
 "use client";
 
-import { useAtom } from "jotai";
 import { motion, AnimatePresence } from "framer-motion";
-import { portfolioModeAtom } from "@/lib/atoms";
+import { usePortfolioMode } from "@/lib/use-portfolio-mode";
 
 interface PortfolioContentContainerProps {
   developerContent: React.ReactNode;
@@ -13,7 +12,7 @@ export function PortfolioContentContainer({
   developerContent,
   designerContent,
 }: PortfolioContentContainerProps) {
-  const [mode] = useAtom(portfolioModeAtom);
+  const { portfolioMode: mode } = usePortfolioMode();
 
   return (
     <div className="relative w-full overflow-hidden">

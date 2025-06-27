@@ -11,12 +11,14 @@ import { useRef } from "react";
 import { FiGithub } from "react-icons/fi";
 
 import { designerProjects, type DesignerProject } from "@/lib/project-data";
+import { useTranslation } from "@/lib/use-translation";
 
 const projects = designerProjects;
 
 export default function DesignerProjects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
 
   return (
     <section id="projects" className="relative overflow-hidden py-20">
@@ -34,11 +36,9 @@ export default function DesignerProjects() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-light md:text-4xl">My Projects</h2>
+          <h2 className="mb-4 text-3xl font-light md:text-4xl">{t("designer_projects.title")}</h2>
           <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
-            Here are some of my recent projects. Each one was built to solve a
-            specific problem and showcase different design and development
-            skills.
+            {t("designer_projects.description")}
           </p>
         </motion.div>
 
@@ -66,6 +66,7 @@ function DesignerProjectCard({
   index: number;
   inView: boolean;
 }) {
+  const { t } = useTranslation();
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -189,7 +190,7 @@ function DesignerProjectCard({
                   asChild
                   className="border-primary/30 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
                 >
-                  <Link href={`/projects/${project.slug}`}>View Details</Link>
+                  <Link href={`/projects/${project.slug}`}>{t("common.view_details")}</Link>
                 </Button>
               </motion.div>
 
@@ -211,7 +212,7 @@ function DesignerProjectCard({
                       rel="noopener noreferrer"
                     >
                       <FiGithub className="mr-1 h-4 w-4" />
-                      Code
+                      {t("common.code")}
                     </a>
                   </Button>
                 </motion.div>

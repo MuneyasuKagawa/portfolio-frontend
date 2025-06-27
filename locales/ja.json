@@ -1,0 +1,111 @@
+{
+  "header": {
+    "home": "ホーム",
+    "about": "自己紹介",
+    "projects": "作品",
+    "skills": "スキル",
+    "contact": "お問い合わせ",
+    "portfolio_title": "ムンのポートフォリオ"
+  },
+  "hero": {
+    "greeting": "こんにちは、",
+    "developer_role": "フロントエンドエンジニア",
+    "designer_role": "UI/UXデザイナー",
+    "developer_description": "ReactやNext.jsなどのモダンな技術を使用してレスポンシブなWebアプリケーションを開発しています。きれいなコードを通じて直感的なユーザー体験を作ることに情熱を注いでいます。",
+    "designer_description_1": "私は8年以上のフロントエンドとバックエンドのコーディング経験を持つUI/UXデザイナーです。",
+    "designer_description_2": "過去6ヶ月間、学校でデザインを学び、ワイヤーフレームからクリック可能なプロトタイプまで、いくつかのチームプロジェクトを指導してきました。",
+    "designer_description_3": "私の目標は、デザインと開発の橋渡しをし、見た目が美しく、ユーザーにとって使いやすく、エンジニアにとってメンテナンスしやすい製品をチームが立ち上げることを支援することです。",
+    "view_work": "作品を見る",
+    "contact_me": "お問い合わせ"
+  },
+  "about": {
+    "title": "自己紹介",
+    "developer_intro": "こんにちは！私は宗と申します。レスポンシブでユーザーフレンドリーなWebアプリケーションを作成する5年以上の経験を持つ、情熱的な日本のフロントエンドエンジニアです。ReactやNext.jsなどのモダンなJavaScriptフレームワークを専門としています。",
+    "developer_fullstack": "フロントエンドが主な専門分野ですが、Node.js、Express、C#.NETを使ったバックエンド開発も得意です。堅牢なサーバーサイドロジックと直感的なユーザーインターフェースをシームレスに統合するフルスタックアプリケーションをいくつか構築してきました。RESTful APIとデータベース設計の経験により、プロジェクトをエンドツーエンドで手がけることができます。",
+    "developer_personal": "コーディングをしていないときは、ゲームをしたり、読書をしたり、乗馬をしたり、新しいWeb技術を試したりしています。開発者として常に学び続け、成長していくことに意欲的です。",
+    "designer_intro": "こんにちは！私は宗と申します。美しく機能的で、ユーザー中心のデジタル体験を作ることに焦点を当てた情熱的なUI/UXデザイナーです。優れたデザインとは、感情的なつながりを生み出しながら問題を解決することだと信じています。",
+    "designer_process": "私のデザインプロセスは共感と調査に根ざしています。ユーザーのニーズとビジネス目標を理解することから始めて、美的に美しく、高度に機能的なソリューションを作り上げます。調査とワイヤーフレームから高忠実度プロトタイプまで、完全なデザインプロセスの経験があります。",
+    "designer_personal": "デザインをしていないときは、美術館を探索したり、心理学について読んだり、ノートにアイデアをスケッチしたりしています。常に周りの世界からインスピレーションを探しています。"
+  },
+  "projects": {
+    "title": "作品一覧",
+    "developer_description": "こちらは私の最近のプロジェクトです。それぞれが特定の問題を解決するために構築され、さまざまなスキルと技術を紹介しています。",
+    "designer_description": "こちらは私の最近のデザインプロジェクトです。それぞれがユニークな挑戦を表し、私のユーザー中心設計へのアプローチを紹介しています。",
+    "view_details": "詳細を見る",
+    "view_code": "コード",
+    "product_page": "プロダクトページ"
+  },
+  "skills": {
+    "title": "スキル",
+    "description": "Web開発エコシステムでさまざまな技術とツールを使って作業してきました。以下は私の技術スキルと専門知識の概要です。",
+    "frontend": "フロントエンド",
+    "styling": "スタイリング・デザイン",
+    "backend": "バックエンド",
+    "tools": "ツール",
+    "testing": "テスト",
+    "others": "その他"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "description_line1": "あなたのビジョンが最大限の可能性を発揮できるよう、私のスキルで貢献したいと思います。",
+    "description_line2": "進行中の取り組みにどのように価値を加えることができるか、ぜひご相談ください。",
+    "email": "メール",
+    "linkedin": "LinkedIn",
+    "x": "X"
+  },
+  "common": {
+    "download_resume": "履歴書をダウンロード",
+    "coming_soon": "近日公開！",
+    "view_details": "詳細を見る",
+    "code": "コード",
+    "product_page": "プロダクトページ",
+    "toggle_language": "言語を切り替え",
+    "toggle_theme": "テーマを切り替え",
+    "developer": "開発者",
+    "designer": "デザイナー",
+    "duration": "期間",
+    "team_role": "チーム・役割",
+    "technologies_used": "使用技術",
+    "solution": "解決策"
+  },
+  "footer": {
+    "portfolio": "ポートフォリオ",
+    "tagline": "卓越したデジタル体験を構築しています。",
+    "copyright": "© {year} Muneyasu Kagawa. All rights reserved.",
+    "linkedin_label": "LinkedIn",
+    "x_label": "X",
+    "email_label": "メール"
+  },
+  "designer_projects": {
+    "title": "作品一覧",
+    "description": "こちらは私の最近のプロジェクトです。それぞれが特定の問題を解決するために構築され、さまざまなデザインと開発スキルを紹介しています。"
+  },
+  "designer_skills": {
+    "title": "スキル",
+    "description": "デザイン、開発、ユーザー調査にわたる多様なスキルセットを培ってきました。デザインと開発スペクトラム全体における私の専門知識の概要をご紹介します。",
+    "design_tools": "デザインツール",
+    "ui_ux_design": "UI/UXデザイン",
+    "research_testing": "調査・テスト",
+    "development": "開発",
+    "soft_skills": "ソフトスキル",
+    "innovation": "イノベーション"
+  },
+  "project_detail": {
+    "back_to_projects": "作品一覧に戻る",
+    "project_overview": "プロジェクト概要",
+    "problem_statement": "課題",
+    "purpose": "目的",
+    "goals": "目標",
+    "key_features": "主要機能",
+    "features_implemented": "実装された機能",
+    "challenges_solutions": "課題と解決策",
+    "technical_challenges": "技術的課題",
+    "results_learning": "結果と学び",
+    "final_results": "最終結果",
+    "what_learned": "学んだこと",
+    "next_steps": "次のステップ",
+    "view_live_site": "ライブサイトを見る",
+    "view_code": "コードを見る",
+    "back_to_all_projects": "全ての作品に戻る"
+  }
+}

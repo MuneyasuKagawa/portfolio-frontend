@@ -17,12 +17,14 @@ import { useRef, useState } from "react";
 import { FiGithub } from "react-icons/fi";
 
 import { developerProjects, type DeveloperProject } from "@/lib/project-data";
+import { useTranslation } from "@/lib/use-translation";
 
 const projects = developerProjects;
 
 export default function Projects() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
 
   return (
     <section id="projects" className="py-20">
@@ -34,10 +36,9 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">My Projects</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t("projects.title")}</h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
-            Here are some of my recent projects. Each one was built to solve a
-            specific problem and showcase different skills and technologies.
+            {t("projects.developer_description")}
           </p>
         </motion.div>
 
@@ -67,6 +68,7 @@ function ProjectCard({
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const { t } = useTranslation();
 
   const cardX = useMotionValue(0);
   const cardY = useMotionValue(0);
@@ -294,7 +296,7 @@ function ProjectCard({
                         rel="noopener noreferrer"
                       >
                         <FiGithub className="mr-1 h-4 w-4" />
-                        Code
+                        {t("common.code")}
                       </a>
                     </Button>
                   </motion.div>
@@ -315,7 +317,7 @@ function ProjectCard({
                       rel="noopener noreferrer"
                     >
                       <ExternalLink className="mr-1 h-4 w-4" />
-                      Product Page
+                      {t("common.product_page")}
                     </a>
                   </Button>
                 </motion.div>

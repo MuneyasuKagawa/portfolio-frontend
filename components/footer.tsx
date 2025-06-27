@@ -5,9 +5,11 @@ import { Mail } from "lucide-react";
 import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
+import { useTranslation } from "@/lib/use-translation";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-muted/50 py-12">
@@ -20,10 +22,10 @@ export default function Footer() {
             className="mb-6 md:mb-0"
           >
             <Link href="/" className="text-xl font-bold">
-              Mun&apos;s<span className="text-primary">Portfolio</span>
+              Mun&apos;s<span className="text-primary">{t("footer.portfolio")}</span>
             </Link>
             <p className="mt-2 text-foreground/70">
-              Building exceptional digital experiences.
+              {t("footer.tagline")}
             </p>
           </motion.div>
 
@@ -40,7 +42,7 @@ export default function Footer() {
               className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <FiLinkedin className="h-5 w-5" />
-              <span className="sr-only">LinkedIn</span>
+              <span className="sr-only">{t("footer.linkedin_label")}</span>
             </a>
             <a
               href="https://twitter.com"
@@ -49,14 +51,14 @@ export default function Footer() {
               className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <FaXTwitter className="h-5 w-5" />
-              <span className="sr-only">X</span>
+              <span className="sr-only">{t("footer.x_label")}</span>
             </a>
             <a
               href="mailto:muneyasu.kagawa@gmail.com"
               className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
             >
               <Mail className="h-5 w-5" />
-              <span className="sr-only">Email</span>
+              <span className="sr-only">{t("footer.email_label")}</span>
             </a>
           </motion.div>
         </div>
@@ -67,7 +69,7 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 border-t border-border pt-8 text-center text-sm text-foreground/60"
         >
-          © {currentYear} Muneyasu Kagawa. All rights reserved.
+          {t("footer.copyright").replace("{year}", currentYear.toString())}
         </motion.div>
       </div>
     </footer>

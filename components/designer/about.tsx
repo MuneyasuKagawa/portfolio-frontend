@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
+import { useTranslation } from "@/lib/use-translation";
 
 // Floating design elements
 function DesignElement({
@@ -43,6 +44,7 @@ function DesignElement({
 export default function DesignerAbout() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useTranslation();
 
   return (
     <section id="about" className="relative overflow-hidden bg-muted/30 py-20">
@@ -76,7 +78,7 @@ export default function DesignerAbout() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-              About Me
+{t("about.title")}
             </motion.h2>
             <div className="space-y-6 leading-relaxed text-foreground/75">
               <motion.p
@@ -86,10 +88,7 @@ export default function DesignerAbout() {
                 }
                 transition={{ duration: 0.6, delay: 0.5 }}
               >
-                Hello! I&apos;m Mun, a passionate UI/UX designer with 8+ years
-                of coding experience. I bridge the gap between design and
-                development, creating digital experiences that are both
-                beautiful and functional.
+                {t("about.designer_intro")}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -98,11 +97,7 @@ export default function DesignerAbout() {
                 }
                 transition={{ duration: 0.6, delay: 0.7 }}
               >
-                With my background in React, Next.js, Node.js, and C#.NET, I
-                understand the technical constraints and possibilities that
-                inform great design decisions. Figma is my daily workspace where
-                I craft pixel-perfect interfaces and validate ideas through user
-                research and testing.
+                {t("about.designer_process")}
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -111,12 +106,7 @@ export default function DesignerAbout() {
                 }
                 transition={{ duration: 0.6, delay: 0.9 }}
               >
-                I&apos;ve spent three months volunteering to redesign a public
-                website for better navigation and readability, and I find
-                inspiration in video games for creating engaging layouts,
-                animations, and micro-interactions. My goal is to help teams
-                launch products that users love and engineers can maintain with
-                ease.
+                {t("about.designer_personal")}
               </motion.p>
             </div>
             <motion.div
@@ -145,12 +135,12 @@ export default function DesignerAbout() {
                     >
                       <Button className="bg-neutral-500 hover:cursor-default hover:bg-neutral-500">
                         <FileText className="mr-2 h-4 w-4" />
-                        Download Resume
+                        {t("common.download_resume")}
                       </Button>
                     </motion.div>
                   </TooltipTrigger>
                   <TooltipContent className="bg-black text-white dark:bg-white dark:text-black">
-                    <p>Coming soon!</p>
+                    <p>{t("common.coming_soon")}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

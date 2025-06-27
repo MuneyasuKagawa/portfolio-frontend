@@ -1,11 +1,13 @@
 "use client";
 
 import { ThemeToggle } from "@/components/theme-toggle";
+import { LanguageToggle } from "@/components/language-toggle";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState, useMemo } from "react";
+import { useTranslation } from "@/lib/use-translation";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,14 +15,15 @@ export default function Header() {
   const [activeSection, setActiveSection] = useState("home");
   const { scrollY } = useScroll();
   const navItemsRef = useRef<{ [key: string]: HTMLElement | null }>({});
+  const { t } = useTranslation();
 
   const navItems = useMemo(() => [
-    { name: "Home", href: "#home", id: "home" },
-    { name: "About", href: "#about", id: "about" },
-    { name: "Projects", href: "#projects", id: "projects" },
-    { name: "Skills", href: "#skills", id: "skills" },
-    { name: "Contact", href: "#contact", id: "contact" },
-  ], []);
+    { name: t("header.home"), href: "#home", id: "home" },
+    { name: t("header.about"), href: "#about", id: "about" },
+    { name: t("header.projects"), href: "#projects", id: "projects" },
+    { name: t("header.skills"), href: "#skills", id: "skills" },
+    { name: t("header.contact"), href: "#contact", id: "contact" },
+  ], [t]);
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
@@ -133,7 +136,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            Mun&apos;s<span className="text-primary">Portfolio</span>
+{t("header.portfolio_title")}
           </motion.span>
         </Link>
 
@@ -174,11 +177,15 @@ export default function Header() {
             />
           </div>
 
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
         </nav>
 
         {/* Mobile Navigation Toggle */}
         <div className="flex items-center gap-2 md:hidden">
+          <LanguageToggle />
           <ThemeToggle />
           <Button
             variant="ghost"
