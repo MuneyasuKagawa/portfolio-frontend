@@ -91,7 +91,7 @@ portfolio-frontend/
 - **スムーズな遷移**: Framer Motionアニメーション
 - **設定の永続化**: localStorage に設定を保存
 
-### 国際化
+### 多言語化
 
 英語と日本語をサポートするカスタムi18n実装：
 
