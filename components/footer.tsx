@@ -22,11 +22,10 @@ export default function Footer() {
             className="mb-6 md:mb-0"
           >
             <Link href="/" className="text-xl font-bold">
-              Mun&apos;s<span className="text-primary">{t("footer.portfolio")}</span>
+              Mun&apos;s
+              <span className="text-primary">{t("footer.portfolio")}</span>
             </Link>
-            <p className="mt-2 text-foreground/70">
-              {t("footer.tagline")}
-            </p>
+            <p className="mt-2 text-foreground/70">{t("footer.tagline")}</p>
           </motion.div>
 
           <motion.div

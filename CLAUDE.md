@@ -53,6 +53,7 @@ npm run disable-cache
 ### Portfolio Mode System
 
 The application features a unique **dual-mode portfolio** system:
+
 - **Developer Mode**: Showcases frontend/fullstack development projects
 - **Designer Mode**: Showcases UI/UX design work and case studies
 - State managed via Jotai with `portfolioModeAtom`
@@ -62,6 +63,7 @@ The application features a unique **dual-mode portfolio** system:
 ### Internationalization (i18n)
 
 Custom internationalization system supporting English and Japanese:
+
 - Translation files: `/locales/en.json` and `/locales/ja.json`
 - Custom hook: `useTranslation()` with dot notation key access
 - Language state managed via Jotai with `languageAtom`

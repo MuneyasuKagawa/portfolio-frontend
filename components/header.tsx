@@ -17,13 +17,16 @@ export default function Header() {
   const navItemsRef = useRef<{ [key: string]: HTMLElement | null }>({});
   const { t } = useTranslation();
 
-  const navItems = useMemo(() => [
-    { name: t("header.home"), href: "#home", id: "home" },
-    { name: t("header.about"), href: "#about", id: "about" },
-    { name: t("header.projects"), href: "#projects", id: "projects" },
-    { name: t("header.skills"), href: "#skills", id: "skills" },
-    { name: t("header.contact"), href: "#contact", id: "contact" },
-  ], [t]);
+  const navItems = useMemo(
+    () => [
+      { name: t("header.home"), href: "#home", id: "home" },
+      { name: t("header.about"), href: "#about", id: "about" },
+      { name: t("header.projects"), href: "#projects", id: "projects" },
+      { name: t("header.skills"), href: "#skills", id: "skills" },
+      { name: t("header.contact"), href: "#contact", id: "contact" },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     return scrollY.onChange((latest) => {
@@ -136,7 +139,7 @@ export default function Header() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-{t("header.portfolio_title")}
+            {t("header.portfolio_title")}
           </motion.span>
         </Link>
 

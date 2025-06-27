@@ -49,7 +49,7 @@ interface ProjectDetailProps {
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
   const { t } = useTranslation();
-  
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}

@@ -37,7 +37,9 @@ export default function Contact() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t("contact.title")}</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            {t("contact.title")}
+          </h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
             {t("contact.description_line1")}
           </p>

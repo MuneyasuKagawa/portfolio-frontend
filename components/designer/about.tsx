@@ -78,7 +78,7 @@ export default function DesignerAbout() {
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
             >
-{t("about.title")}
+              {t("about.title")}
             </motion.h2>
             <div className="space-y-6 leading-relaxed text-foreground/75">
               <motion.p

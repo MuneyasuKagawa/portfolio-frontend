@@ -17,10 +17,13 @@ function PortfolioContentLoading() {
 
 // Dynamic import for client-side only rendering
 const PortfolioContentContainer = dynamic(
-  () => import("./portfolio-content-container").then(mod => ({ default: mod.PortfolioContentContainer })),
-  { 
+  () =>
+    import("./portfolio-content-container").then((mod) => ({
+      default: mod.PortfolioContentContainer,
+    })),
+  {
     ssr: false,
-    loading: () => <PortfolioContentLoading />
+    loading: () => <PortfolioContentLoading />,
   }
 );
 

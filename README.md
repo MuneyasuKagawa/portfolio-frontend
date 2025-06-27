@@ -9,11 +9,13 @@ A modern, responsive portfolio website showcasing both development and design sk
 ## ✨ Features
 
 ### Dual Portfolio Mode
+
 - **Developer Mode**: Showcases frontend/fullstack development projects and technical skills
 - **Designer Mode**: Highlights UI/UX design work and case studies
 - Smooth transitions between modes with Framer Motion animations
 
 ### Modern Tech Stack
+
 - **Framework**: Next.js 15 with App Router
 - **Styling**: Tailwind CSS with shadcn/ui components
 - **Animations**: Framer Motion for smooth interactions
@@ -22,6 +24,7 @@ A modern, responsive portfolio website showcasing both development and design sk
 - **Theme**: Dark/light mode support with next-themes
 
 ### Performance & Deployment
+
 - Static site generation for optimal performance
 - AWS S3 + CloudFront deployment
 - Infrastructure as Code with Terraform
@@ -80,6 +83,7 @@ portfolio-frontend/
 ## 🎨 Key Features Explained
 
 ### Portfolio Mode System
+
 The application features a unique dual-mode system allowing users to switch between developer and designer portfolios:
 
 - **State Management**: Uses Jotai with `portfolioModeAtom`
@@ -88,6 +92,7 @@ The application features a unique dual-mode system allowing users to switch betw
 - **Persistent Preference**: Mode preference saved in localStorage
 
 ### Internationalization
+
 Custom i18n implementation supporting English and Japanese:
 
 - **Translation Hook**: `useTranslation()` with dot notation key access
@@ -96,6 +101,7 @@ Custom i18n implementation supporting English and Japanese:
 - **Dynamic Content**: All UI text and content localized
 
 ### Component Architecture
+
 - **Server Components**: Default for optimal performance
 - **Client Components**: Used only when interactivity is required
 - **shadcn/ui Integration**: 40+ UI components for consistent design
@@ -104,6 +110,7 @@ Custom i18n implementation supporting English and Japanese:
 ## 🚀 Deployment
 
 ### AWS Infrastructure
+
 The site is deployed using AWS services:
 
 - **S3**: Static website hosting
@@ -114,12 +121,14 @@ The site is deployed using AWS services:
 ### Deployment Process
 
 1. **Configure AWS credentials**
+
    ```bash
    export AWS_ACCESS_KEY_ID="your-access-key"
    export AWS_SECRET_ACCESS_KEY="your-secret-key"
    ```
 
 2. **Set up Terraform**
+
    ```bash
    cd terraform
    cp terraform.tfvars.sample terraform.tfvars
@@ -137,12 +146,14 @@ The site is deployed using AWS services:
 ## 🛠️ Development
 
 ### Code Style
+
 - **TypeScript**: Strict mode enabled with comprehensive type checking
 - **ESLint**: Code linting with Next.js recommended rules
 - **Prettier**: Code formatting with Tailwind CSS class sorting
 - **Path Aliases**: `@/*` maps to project root for clean imports
 
 ### Theme System
+
 - **CSS Variables**: Custom properties for theming
 - **Dark/Light Mode**: Automatic system preference detection
 - **Theme Toggle**: User preference override
@@ -155,10 +166,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📧 Contact
 
 **Muneyasu Kagawa**
+
 - Website: [mun-k.com](https://mun-k.com)
 - Email: muneyasu.kagawa@gmail.com
 - LinkedIn: [muneyasu-kagawa](https://www.linkedin.com/in/muneyasu-kagawa/)
-- Twitter: [@m_kagawa_](https://twitter.com/m_kagawa_)
+- Twitter: [@m*kagawa*](https://twitter.com/m_kagawa_)
 
 ---
 

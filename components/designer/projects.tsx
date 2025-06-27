@@ -36,7 +36,9 @@ export default function DesignerProjects() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-light md:text-4xl">{t("designer_projects.title")}</h2>
+          <h2 className="mb-4 text-3xl font-light md:text-4xl">
+            {t("designer_projects.title")}
+          </h2>
           <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
             {t("designer_projects.description")}
           </p>
@@ -190,7 +192,9 @@ function DesignerProjectCard({
                   asChild
                   className="border-primary/30 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
                 >
-                  <Link href={`/projects/${project.slug}`}>{t("common.view_details")}</Link>
+                  <Link href={`/projects/${project.slug}`}>
+                    {t("common.view_details")}
+                  </Link>
                 </Button>
               </motion.div>
 

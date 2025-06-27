@@ -124,7 +124,9 @@ export default function DesignerSkills() {
           transition={{ duration: 0.8 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-light md:text-4xl">{t("designer_skills.title")}</h2>
+          <h2 className="mb-4 text-3xl font-light md:text-4xl">
+            {t("designer_skills.title")}
+          </h2>
           <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
             {t("designer_skills.description")}
           </p>

@@ -25,81 +25,81 @@ type Category = {
 
 const useSkillCategories = () => {
   const { t } = useTranslation();
-  
+
   return [
     {
       title: t("skills.frontend"),
       icon: Code2,
-    skills: [
-      { name: "HTML5", level: 95 },
-      { name: "CSS3", level: 90 },
-      { name: "JavaScript (ES6+)", level: 90 },
-      { name: "TypeScript", level: 85 },
-      { name: "React", level: 90 },
-      { name: "Next.js", level: 85 },
-      { name: "Angular", level: 80 },
-      { name: "Framer Motion", level: 75 },
-    ],
-  },
-  {
-    title: t("skills.styling"),
-    icon: Palette,
-    skills: [
-      { name: "Tailwind CSS", level: 90 },
-      { name: "shadcn/ui", level: 85 },
-      { name: "MUI", level: 75 },
-      { name: "Chakra-UI", level: 85 },
-      { name: "Figma", level: 90 },
-      { name: "Responsive Design", level: 90 },
-    ],
-  },
-  {
-    title: t("skills.backend"),
-    icon: Database,
-    skills: [
-      { name: "Node.js", level: 80 },
-      { name: "Express", level: 75 },
-      { name: "C#.NET", level: 85 },
-      { name: "ASP.NET Web APIs", level: 80 },
-      { name: "REST APIs", level: 85 },
-      { name: "SQL Server", level: 80 },
-    ],
-  },
-  {
-    title: t("skills.tools"),
-    icon: GitBranch,
-    skills: [
-      { name: "Git", level: 90 },
-      { name: "GitHub", level: 85 },
-      { name: "VS Code", level: 95 },
-      { name: "Docker", level: 80 },
-      { name: "ESLint/Prettier", level: 85 },
-      { name: "npm/yarn/pnpm", level: 85 },
-    ],
-  },
-  {
-    title: t("skills.testing"),
-    icon: Workflow,
-    skills: [
-      { name: "Jest", level: 80 },
-      { name: "React Testing Library", level: 75 },
-      { name: "Cypress", level: 70 },
-      { name: "Postman", level: 85 },
-    ],
-  },
-  {
-    title: t("skills.others"),
-    icon: Layers,
-    skills: [
-      { name: "AWS", level: 75 },
-      { name: "Azure", level: 70 },
-      { name: "Linux", level: 80 },
-      { name: "Github Actions", level: 85 },
-      { name: "ChatGPT", level: 85 },
-      { name: "Claude", level: 90 },
-      { name: "Gemini", level: 75 },
-    ],
-  },
+      skills: [
+        { name: "HTML5", level: 95 },
+        { name: "CSS3", level: 90 },
+        { name: "JavaScript (ES6+)", level: 90 },
+        { name: "TypeScript", level: 85 },
+        { name: "React", level: 90 },
+        { name: "Next.js", level: 85 },
+        { name: "Angular", level: 80 },
+        { name: "Framer Motion", level: 75 },
+      ],
+    },
+    {
+      title: t("skills.styling"),
+      icon: Palette,
+      skills: [
+        { name: "Tailwind CSS", level: 90 },
+        { name: "shadcn/ui", level: 85 },
+        { name: "MUI", level: 75 },
+        { name: "Chakra-UI", level: 85 },
+        { name: "Figma", level: 90 },
+        { name: "Responsive Design", level: 90 },
+      ],
+    },
+    {
+      title: t("skills.backend"),
+      icon: Database,
+      skills: [
+        { name: "Node.js", level: 80 },
+        { name: "Express", level: 75 },
+        { name: "C#.NET", level: 85 },
+        { name: "ASP.NET Web APIs", level: 80 },
+        { name: "REST APIs", level: 85 },
+        { name: "SQL Server", level: 80 },
+      ],
+    },
+    {
+      title: t("skills.tools"),
+      icon: GitBranch,
+      skills: [
+        { name: "Git", level: 90 },
+        { name: "GitHub", level: 85 },
+        { name: "VS Code", level: 95 },
+        { name: "Docker", level: 80 },
+        { name: "ESLint/Prettier", level: 85 },
+        { name: "npm/yarn/pnpm", level: 85 },
+      ],
+    },
+    {
+      title: t("skills.testing"),
+      icon: Workflow,
+      skills: [
+        { name: "Jest", level: 80 },
+        { name: "React Testing Library", level: 75 },
+        { name: "Cypress", level: 70 },
+        { name: "Postman", level: 85 },
+      ],
+    },
+    {
+      title: t("skills.others"),
+      icon: Layers,
+      skills: [
+        { name: "AWS", level: 75 },
+        { name: "Azure", level: 70 },
+        { name: "Linux", level: 80 },
+        { name: "Github Actions", level: 85 },
+        { name: "ChatGPT", level: 85 },
+        { name: "Claude", level: 90 },
+        { name: "Gemini", level: 75 },
+      ],
+    },
   ];
 };
 
@@ -119,7 +119,9 @@ export default function Skills() {
           transition={{ duration: 0.5 }}
           className="mb-16 text-center"
         >
-          <h2 className="mb-4 text-3xl font-bold md:text-4xl">{t("skills.title")}</h2>
+          <h2 className="mb-4 text-3xl font-bold md:text-4xl">
+            {t("skills.title")}
+          </h2>
           <p className="mx-auto max-w-2xl text-foreground/80">
             {t("skills.description")}
           </p>

@@ -34,17 +34,13 @@ export default function About() {
             animate={isInView ? { x: 0 } : { x: -50 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <h2 className="mb-6 text-3xl font-bold md:text-4xl">{t("about.title")}</h2>
+            <h2 className="mb-6 text-3xl font-bold md:text-4xl">
+              {t("about.title")}
+            </h2>
             <div className="space-y-4 text-foreground/80">
-              <p>
-                {t("about.developer_intro")}
-              </p>
-              <p>
-                {t("about.developer_fullstack")}
-              </p>
-              <p>
-                {t("about.developer_personal")}
-              </p>
+              <p>{t("about.developer_intro")}</p>
+              <p>{t("about.developer_fullstack")}</p>
+              <p>{t("about.developer_personal")}</p>
             </div>
             <div className="mt-8 flex justify-center">
               <TooltipProvider delayDuration={100}>
