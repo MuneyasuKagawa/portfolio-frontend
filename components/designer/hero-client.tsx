@@ -114,19 +114,9 @@ export default function DesignerHeroClient() {
         >
           <motion.p
             className="mb-4"
-            animate={{
-              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-            }}
-            transition={{ duration: 4, repeat: Infinity }}
-            style={{
-              background:
-                "linear-gradient(90deg, var(--foreground) 0%, var(--primary) 50%, var(--foreground) 100%)",
-              backgroundSize: "200% 100%",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              opacity: 0.8,
-            }}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 0.8 } : {}}
+            transition={{ delay: 2.8, duration: 1 }}
           >
             {t("hero.designer_description_1")}
           </motion.p>
