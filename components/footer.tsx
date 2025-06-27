@@ -69,7 +69,29 @@ export default function Footer() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mt-8 border-t border-border pt-8 text-center text-sm text-foreground/60"
         >
-          {t("footer.copyright").replace("{year}", currentYear.toString())}
+          <p className="mb-2">
+            {t("footer.copyright").replace("{year}", currentYear.toString())}
+          </p>
+          <p>
+            Built with{" "}
+            <a
+              href="https://nextjs.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              Next.js
+            </a>
+            {" • "}
+            <a
+              href="https://github.com/MuneyasuKagawa/portfolio-frontend"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+            >
+              View Source
+            </a>
+          </p>
         </motion.div>
       </div>
     </footer>
