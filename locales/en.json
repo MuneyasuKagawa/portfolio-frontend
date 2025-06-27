@@ -8,7 +8,9 @@
     "portfolio_title": "Mun's Portfolio"
   },
   "hero": {
+    "name": "Mun",
     "greeting": "Hi, I'm",
+    "greeting_end": "",
     "developer_role": "Frontend Developer",
     "designer_role": "UI/UX Designer",
     "developer_description": "I create responsive web applications using modern technologies like React and Next.js. Passionate about creating intuitive user experiences through clean code.",
@@ -20,7 +22,7 @@
   },
   "about": {
     "title": "About Me",
-    "developer_intro": "Hello! I'm Mun, a japanese passionate frontend engineer with 5+ years of experience creating responsive, user-friendly web applications. I specialize in modern JavaScript frameworks like React and Next.js.",
+    "developer_intro": "Hello! I'm Mun, a japanese passionate frontend engineer with 8+ years of experience creating responsive, user-friendly web applications. I specialize in modern JavaScript frameworks like React and Next.js.",
     "developer_fullstack": "While frontend is my primary focus, I'm also proficient in backend development with Node.js, Express, and C#.NET. I've built several full-stack applications that seamlessly integrate robust server-side logic with intuitive user interfaces. My experience with RESTful APIs and database design allows me to tackle projects from end to end.",
     "developer_personal": "When I'm not coding, you can find me gaming, reading riding horses, or experimenting with new web technologies. I'm always eager to learn and grow as a developer.",
     "designer_intro": "Hello! I'm Mun, a passionate UI/UX designer with a focus on creating beautiful, functional, and user-centered digital experiences. I believe great design is about solving problems while creating emotional connections.",
@@ -40,7 +42,7 @@
     "description": "I've worked with a variety of technologies and tools in the web development ecosystem. Here's an overview of my technical skills and expertise.",
     "frontend": "Frontend",
     "styling": "Styling & Design",
-    "backend": "Backend", 
+    "backend": "Backend",
     "tools": "Tools",
     "testing": "Testing",
     "others": "Others"
@@ -84,7 +86,7 @@
     "title": "My Skills",
     "description": "I've cultivated a diverse skill set spanning design, development, and user research. Here's an overview of my expertise across the design and development spectrum.",
     "design_tools": "Design Tools",
-    "ui_ux_design": "UI/UX Design", 
+    "ui_ux_design": "UI/UX Design",
     "research_testing": "Research & Testing",
     "development": "Development",
     "soft_skills": "Soft Skills",

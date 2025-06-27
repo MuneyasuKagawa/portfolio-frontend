@@ -1,16 +1,16 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
 import { usePortfolioMode } from "@/lib/use-portfolio-mode";
 import { useTranslation } from "@/lib/use-translation";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { useMemo, useState } from "react";
 
 export function PortfolioModeToggle() {
   const { portfolioMode: mode, setPortfolioMode: setMode } = usePortfolioMode();
   const [isHovered, setIsHovered] = useState(false);
   const pathname = usePathname();
-  const { t } = useTranslation();
+  const { t, language } = useTranslation();
 
   // Only show on home page
   if (pathname !== "/") {
@@ -21,8 +21,22 @@ export function PortfolioModeToggle() {
     setIsHovered(false);
   };
 
+  const xPosition = useMemo(() => {
+    if (mode === "developer") {
+      return 2;
+    }
+    return language === "ja" ? 125 : 119;
+  }, [mode, language]);
+
+  const buttonWidth = useMemo(() => {
+    if (mode === "developer") {
+      return language === "ja" ? 125 : 119;
+    }
+    return language === "ja" ? 112 : 107;
+  }, [mode, language]);
+
   return (
-    <div className="fixed left-1/2 top-4 z-[100] -translate-x-1/2">
+    <div className="fixed bottom-4 left-1/2 top-auto z-[100] -translate-x-1/2 md:bottom-auto md:top-4">
       <motion.div
         initial={{ y: -100, opacity: 0, scale: 0.8, rotateX: -90 }}
         animate={{ y: 0, opacity: 1, scale: 1, rotateX: 0 }}
@@ -34,11 +48,6 @@ export function PortfolioModeToggle() {
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
-        whileHover={{
-          scale: 1.05,
-          y: -2,
-          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.1)",
-        }}
         className="rounded-2xl border border-border/50 bg-background/90 p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:shadow-primary/20"
       >
         {/* Animated gradient background */}
@@ -55,44 +64,14 @@ export function PortfolioModeToggle() {
           transition={{ duration: 3, repeat: Infinity }}
         />
 
-        {/* Floating particles */}
-        {isHovered && (
-          <div className="pointer-events-none absolute inset-0">
-            {[...Array(6)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute h-1 w-1 rounded-full bg-primary/60"
-                initial={{
-                  x: `${50 + ((i * 15) % 100)}%`,
-                  y: `${50}%`,
-                  opacity: 0,
-                  scale: 0,
-                }}
-                animate={{
-                  x: `${50 + ((i * 15) % 100) + Math.sin(i) * 20}%`,
-                  y: [`${50}%`, `${30 + ((i * 10) % 40)}%`, `${50}%`],
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                  ease: "easeInOut",
-                }}
-              />
-            ))}
-          </div>
-        )}
-
         <div className="relative flex items-center">
           {/* Enhanced Background slider with multiple effects */}
           <motion.div
-            className="absolute h-12 overflow-hidden rounded-xl"
+            className="h-12 overflow-hidden rounded-xl"
             initial={false}
             animate={{
-              x: mode === "developer" ? 2 : 123,
-              width: mode === "developer" ? 119 : 107,
+              x: xPosition,
+              width: buttonWidth,
             }}
             transition={{
               type: "spring",
@@ -100,51 +79,43 @@ export function PortfolioModeToggle() {
               damping: 25,
               mass: 0.8,
             }}
-            whileHover={{ scale: 1.02 }}
+            style={{
+              position: "absolute",
+              zIndex: 0,
+            }}
           >
             {/* Primary gradient background */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-purple-500"
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+            <div
+              className="h-full w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-blue-500 to-purple-500"
+              style={{
+                backgroundSize: "200% 100%",
+                animation: "gradientShift 4s ease-in-out infinite",
               }}
-              style={{ backgroundSize: "200% 100%" }}
-              transition={{ duration: 4, repeat: Infinity }}
-            />
+            >
+              {/* Shimmer effect */}
+              <div
+                className="h-full w-full -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                style={{
+                  animation: "shimmer 1.5s linear infinite",
+                }}
+              />
 
-            {/* Shimmer effect */}
-            <motion.div
-              className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              animate={{ x: ["-100%", "100%"] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-                repeatType: "loop",
-                ease: "linear",
-              }}
-            />
-
-            {/* Pulse effect */}
-            <motion.div
-              className="absolute inset-0 rounded-xl bg-white/20"
-              animate={{
-                opacity: [0, 0.3, 0],
-                scale: [0.9, 1.1, 0.9],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+              {/* Pulse effect overlay */}
+              <div
+                className="h-full w-full rounded-xl bg-white/20"
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  animation: "pulseGlow 2s ease-in-out infinite",
+                }}
+              />
+            </div>
           </motion.div>
 
           {/* Developer button with enhanced effects */}
           <motion.button
             onClick={() => setMode("developer")}
-            whileHover={{
-              scale: 1.05,
-            }}
             whileTap={{
               scale: 0.95,
             }}
@@ -152,7 +123,7 @@ export function PortfolioModeToggle() {
             className={`relative z-10 rounded-xl px-7 py-3 text-sm font-bold transition-all duration-300 ${
               mode === "developer"
                 ? "text-white shadow-lg"
-                : "text-foreground/60 hover:scale-105 hover:text-foreground/90"
+                : "text-foreground/60 hover:text-foreground/90"
             }`}
           >
             <motion.span
@@ -176,9 +147,6 @@ export function PortfolioModeToggle() {
           {/* Designer button with enhanced effects */}
           <motion.button
             onClick={() => setMode("designer")}
-            whileHover={{
-              scale: 1.05,
-            }}
             whileTap={{
               scale: 0.95,
             }}
@@ -186,7 +154,7 @@ export function PortfolioModeToggle() {
             className={`relative z-10 rounded-xl px-[22px] py-3 text-sm font-bold transition-all duration-300 ${
               mode === "designer"
                 ? "text-white shadow-lg"
-                : "text-foreground/60 hover:scale-105 hover:text-foreground/90"
+                : "text-foreground/60 hover:text-foreground/90"
             }`}
           >
             <motion.span
@@ -220,6 +188,40 @@ export function PortfolioModeToggle() {
           transition={{ duration: 0.3 }}
         />
       </motion.div>
+
+      {/* CSS animations for effects */}
+      <style jsx>{`
+        @keyframes gradientShift {
+          0%,
+          100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes shimmer {
+          0% {
+            transform: translateX(-100%) skewX(-12deg);
+          }
+          100% {
+            transform: translateX(100%) skewX(-12deg);
+          }
+        }
+
+        @keyframes pulseGlow {
+          0%,
+          100% {
+            opacity: 0;
+            transform: scale(0.9);
+          }
+          50% {
+            opacity: 0.3;
+            transform: scale(1.1);
+          }
+        }
+      `}</style>
     </div>
   );
 }

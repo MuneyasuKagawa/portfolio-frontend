@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/use-translation";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useRef } from "react";
-import { useTranslation } from "@/lib/use-translation";
 
 // Simple static shapes for elegant background
 function StaticShape({ className = "" }) {
@@ -34,7 +34,6 @@ export default function DesignerHeroClient() {
       ref={ref}
       className="relative flex h-screen items-center justify-center overflow-hidden"
     >
-
       {/* Elegant Background Shapes */}
       <div className="absolute inset-0 z-0">
         {[...Array(8)].map((_, i) => (
@@ -89,7 +88,7 @@ export default function DesignerHeroClient() {
           >
             {t("hero.greeting")}{" "}
             <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text font-medium text-transparent">
-              Mun
+              {t("hero.name")}
             </span>
           </motion.span>
           <motion.span

@@ -1,10 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/use-translation";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "@/lib/use-translation";
 
 // Particle component
 function FloatingParticle({
@@ -115,7 +115,6 @@ export default function Hero() {
       ref={ref}
       className="relative flex h-screen items-center justify-center overflow-hidden"
     >
-
       {/* Animated Background Particles */}
       <div className="absolute inset-0 z-0">
         {[...Array(20)].map((_, i) => (
@@ -149,8 +148,8 @@ export default function Hero() {
       </div>
 
       {/* Parallax Background */}
-      <motion.div 
-        className="absolute inset-0 z-0" 
+      <motion.div
+        className="absolute inset-0 z-0"
         style={{ y, opacity }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -167,12 +166,17 @@ export default function Hero() {
               "linear-gradient(45deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%)",
             ],
           }}
-          transition={{ 
+          transition={{
             opacity: { duration: 0.8, ease: "easeOut" },
-            background: { duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.8 }
+            background: {
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.8,
+            },
           }}
         />
-        <motion.div 
+        <motion.div
           className="bg-grid-pattern absolute inset-0 opacity-[0.1] dark:opacity-[0.2]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 0.1 }}
@@ -195,7 +199,7 @@ export default function Hero() {
           >
             {t("hero.greeting")}{" "}
             <span className="bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent">
-              Mun
+              {t("hero.name")}
             </span>
           </motion.span>
           <motion.span
