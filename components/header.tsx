@@ -1,13 +1,13 @@
 "use client";
 
-import { ThemeToggle } from "@/components/theme-toggle";
 import { LanguageToggle } from "@/components/language-toggle";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "@/lib/use-translation";
 import { motion, useScroll } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { useEffect, useRef, useState, useMemo } from "react";
-import { useTranslation } from "@/lib/use-translation";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -181,8 +181,8 @@ export default function Header() {
           </div>
 
           <div className="flex items-center gap-2">
-            <LanguageToggle />
             <ThemeToggle />
+            <LanguageToggle />
           </div>
         </nav>
 

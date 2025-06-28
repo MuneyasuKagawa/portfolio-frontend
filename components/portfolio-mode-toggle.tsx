@@ -23,14 +23,14 @@ export function PortfolioModeToggle() {
 
   const xPosition = useMemo(() => {
     if (mode === "developer") {
-      return 2;
+      return 1;
     }
-    return language === "ja" ? 125 : 119;
+    return language === "ja" ? 125 : 125;
   }, [mode, language]);
 
   const buttonWidth = useMemo(() => {
     if (mode === "developer") {
-      return language === "ja" ? 125 : 119;
+      return language === "ja" ? 125 : 125;
     }
     return language === "ja" ? 112 : 107;
   }, [mode, language]);
