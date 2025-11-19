@@ -8,5 +8,7 @@ export const portfolioModeAtom = atomWithStorage<PortfolioMode>(
   "portfolioMode",
   "developer"
 );
+
 export const themeAtom = atomWithStorage<Theme>("theme", "light");
+
 export const languageAtom = atomWithStorage<Language>("language", "en");

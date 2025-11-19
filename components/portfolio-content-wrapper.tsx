@@ -15,14 +15,13 @@ function PortfolioContentLoading() {
   );
 }
 
-// Dynamic import for client-side only rendering
+// Dynamic import with SSR enabled
 const PortfolioContentContainer = dynamic(
   () =>
     import("./portfolio-content-container").then((mod) => ({
       default: mod.PortfolioContentContainer,
     })),
   {
-    ssr: false,
     loading: () => <PortfolioContentLoading />,
   }
 );

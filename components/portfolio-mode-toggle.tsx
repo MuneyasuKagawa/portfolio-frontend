@@ -4,23 +4,16 @@ import { usePortfolioMode } from "@/lib/use-portfolio-mode";
 import { useTranslation } from "@/lib/use-translation";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 export function PortfolioModeToggle() {
   const { portfolioMode: mode, setPortfolioMode: setMode } = usePortfolioMode();
   const [isHovered, setIsHovered] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { t, language } = useTranslation();
 
-  // Only show on home page
-  if (pathname !== "/") {
-    return null;
-  }
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
+  // Always call all hooks before any early returns
   const xPosition = useMemo(() => {
     if (mode === "developer") {
       return 1;
@@ -34,6 +27,19 @@ export function PortfolioModeToggle() {
     }
     return language === "ja" ? 112 : 107;
   }, [mode, language]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Early return after all hooks
+  if (!mounted || pathname !== "/") {
+    return null;
+  }
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   return (
     <div className="fixed bottom-4 left-1/2 top-auto z-[100] -translate-x-1/2 md:bottom-auto md:top-4">

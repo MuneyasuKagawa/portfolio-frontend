@@ -4,6 +4,7 @@ import { StructuredData } from "@/components/structured-data";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Provider } from "jotai";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import type React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -96,7 +97,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider>
           <ThemeProvider defaultTheme="light" storageKey="theme">
-            <PortfolioModeToggle />
+            <Suspense fallback={null}>
+              <PortfolioModeToggle />
+            </Suspense>
             {children}
           </ThemeProvider>
         </Provider>

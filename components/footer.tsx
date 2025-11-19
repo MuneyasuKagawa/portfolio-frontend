@@ -6,10 +6,15 @@ import Link from "next/link";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiLinkedin } from "react-icons/fi";
 import { useTranslation } from "@/lib/use-translation";
+import React from "react";
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = React.useState(2025);
   const { t } = useTranslation();
+
+  React.useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
 
   return (
     <footer className="bg-muted/50 py-12">
