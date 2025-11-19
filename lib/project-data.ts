@@ -78,6 +78,14 @@ export const developerProjects: DeveloperProject[] = [
     liveUrl: "https://yomogi-emon.com/",
     slug: "yomogi-emon",
   },
+  {
+    title: "Website for SME Consultants",
+    description: "A website designed for small and medium-sized enterprise (SME) consultants, providing essential tools and information to support their advisory services.",
+    image: "/aimx.webp",
+    tags: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Contentful"],
+    liveUrl: "https://aimx.co.jp/",
+    slug: "aimx",
+  }
 ];
 
 // Designer projects (with detail pages)
