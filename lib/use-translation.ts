@@ -1,7 +1,7 @@
 import { useAtom } from "jotai";
-import { languageAtom } from "./atoms";
 import enTranslations from "../locales/en.json";
 import jaTranslations from "../locales/ja.json";
+import { languageAtom } from "./atoms";
 
 const translations = {
   en: enTranslations,
@@ -13,7 +13,9 @@ export function useTranslation() {
 
   const t = (key: string): string => {
     const keys = key.split(".");
-    let value: unknown = translations[language];
+    // Force English for now
+    const currentLanguage = "en";
+    let value: unknown = translations[currentLanguage];
 
     for (const k of keys) {
       value = (value as Record<string, unknown>)?.[k];

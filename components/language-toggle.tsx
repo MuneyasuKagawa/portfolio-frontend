@@ -8,9 +8,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { languageAtom } from "@/lib/atoms";
+import { useTranslation } from "@/lib/use-translation";
 import { useAtom } from "jotai";
 import { Languages } from "lucide-react";
-import { useTranslation } from "@/lib/use-translation";
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -20,6 +20,9 @@ const languages = [
 export function LanguageToggle() {
   const [language, setLanguage] = useAtom(languageAtom);
   const { t } = useTranslation();
+
+  // Temporarily hidden for single language mode
+  return null;
 
   return (
     <DropdownMenu>
