@@ -37,7 +37,7 @@ export default function Home() {
   );
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="bg-background text-foreground min-h-screen">
       <Header />
       <PortfolioContentWrapper
         developerContent={developerContent}

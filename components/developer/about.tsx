@@ -37,7 +37,7 @@ export default function About() {
             <h2 className="mb-6 text-3xl font-bold md:text-4xl">
               {t("about.title")}
             </h2>
-            <div className="space-y-4 text-foreground/80">
+            <div className="text-foreground/80 space-y-4">
               <p>{t("about.developer_intro")}</p>
               <p>{t("about.developer_fullstack")}</p>
               <p>{t("about.developer_personal")}</p>
@@ -76,7 +76,7 @@ export default function About() {
           >
             <div className="relative mx-auto aspect-square w-full max-w-md">
               <div className="absolute inset-0 rotate-3 transform rounded-2xl bg-neutral-300"></div>
-              <div className="absolute inset-0 overflow-hidden rounded-2xl border border-primary/20 bg-background">
+              <div className="border-primary/20 bg-background absolute inset-0 overflow-hidden rounded-2xl border">
                 <Image
                   src="/profile.webp"
                   alt="Muneyasu Kagawa"

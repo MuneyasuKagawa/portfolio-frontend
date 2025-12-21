@@ -91,7 +91,7 @@ function TypewriterText({ text, delay = 0 }: { text: string; delay?: number }) {
       <motion.span
         animate={{ opacity: [1, 0, 1] }}
         transition={{ duration: 0.8, repeat: Infinity }}
-        className="ml-1 inline-block h-8 w-0.5 bg-primary align-middle"
+        className="bg-primary ml-1 inline-block h-8 w-0.5 align-middle"
       />
     </span>
   );
@@ -140,7 +140,7 @@ export default function Hero() {
             duration={5 + (i % 3) * 0.2}
             className={`h-4 w-4 ${
               i % 2 === 0
-                ? "bg-gradient-to-r from-primary/20 to-blue-500/20"
+                ? "from-primary/20 bg-gradient-to-r to-blue-500/20"
                 : "bg-gradient-to-r from-purple-500/20 to-pink-500/20"
             }`}
           />
@@ -185,7 +185,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Content */}
-      <div className="container relative z-10 flex flex-col items-center px-4 text-center">
+      <div className="relative z-10 container flex flex-col items-center px-4 text-center">
         <motion.h1
           className="mb-6 text-4xl font-bold md:text-6xl lg:text-7xl"
           initial={{ opacity: 0, y: 20, scale: 0.9 }}
@@ -198,7 +198,7 @@ export default function Hero() {
             transition={{ duration: 0.3 }}
           >
             {t("hero.greeting")}{" "}
-            <span className="bg-gradient-to-r from-primary via-blue-500 to-purple-500 bg-clip-text text-transparent">
+            <span className="from-primary bg-gradient-to-r via-blue-500 to-purple-500 bg-clip-text text-transparent">
               {t("hero.name")}
             </span>
           </motion.span>
@@ -215,7 +215,7 @@ export default function Hero() {
         </motion.h1>
 
         <motion.p
-          className="mb-8 max-w-2xl text-lg text-foreground/80 md:text-xl"
+          className="text-foreground/80 mb-8 max-w-2xl text-lg md:text-xl"
           initial={{ opacity: 0, y: 20, rotateX: 90 }}
           animate={isInView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
           transition={{ duration: 0.8, delay: 2, type: "spring" }}
@@ -225,7 +225,7 @@ export default function Hero() {
               backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
             }}
             transition={{ duration: 3, repeat: Infinity }}
-            className="bg-gradient-to-r from-foreground/80 via-primary to-foreground/80 bg-[length:200%_100%] bg-clip-text text-transparent"
+            className="from-foreground/80 via-primary to-foreground/80 bg-gradient-to-r bg-[length:200%_100%] bg-clip-text text-transparent"
           >
             {t("hero.developer_description")}
           </motion.span>
@@ -262,7 +262,7 @@ export default function Hero() {
                 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-purple-500"
+                  className="from-primary absolute inset-0 bg-gradient-to-r via-blue-500 to-purple-500"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "0%" }}
                   transition={{ duration: 0.3 }}
@@ -291,7 +291,7 @@ export default function Hero() {
                 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent"
+                  className="via-primary/10 absolute inset-0 bg-gradient-to-r from-transparent to-transparent"
                   animate={{ x: ["-100%", "100%"] }}
                   transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                 />
@@ -339,11 +339,11 @@ export default function Hero() {
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
         >
           <motion.div
-            className="flex h-12 w-8 justify-center rounded-full border-2 border-primary/50"
+            className="border-primary/50 flex h-12 w-8 justify-center rounded-full border-2"
             whileHover={{ scale: 1.2, borderColor: "rgb(var(--primary))" }}
           >
             <motion.div
-              className="mt-2 h-3 w-1 rounded-full bg-primary"
+              className="bg-primary mt-2 h-3 w-1 rounded-full"
               animate={{
                 opacity: [0.3, 1, 0.3],
                 y: [0, 8, 0],
@@ -359,7 +359,7 @@ export default function Hero() {
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.2 }}
           >
-            <ArrowDown className="h-4 w-4 text-primary/70" />
+            <ArrowDown className="text-primary/70 h-4 w-4" />
           </motion.div>
         </motion.div>
       </motion.div>

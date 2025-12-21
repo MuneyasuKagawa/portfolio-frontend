@@ -51,9 +51,9 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="bg-background min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
+      <header className="bg-background/80 sticky top-0 z-50 border-b backdrop-blur-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Button variant="ghost" asChild>
@@ -83,11 +83,11 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               {project.title}
             </h1>
             {project.subtitle && (
-              <p className="mb-6 text-xl text-foreground/80">
+              <p className="text-foreground/80 mb-6 text-xl">
                 {project.subtitle}
               </p>
             )}
-            <p className="mx-auto mb-8 max-w-3xl text-lg text-foreground/70">
+            <p className="text-foreground/70 mx-auto mb-8 max-w-3xl text-lg">
               {project.description}
             </p>
 
@@ -148,7 +148,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <p className="text-foreground/80">{project.role}</p>
                   )}
                   {project.team && (
-                    <p className="text-sm text-foreground/60">{project.team}</p>
+                    <p className="text-foreground/60 text-sm">{project.team}</p>
                   )}
                 </CardContent>
               </Card>
@@ -189,7 +189,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <div className="h-2 w-2 rounded-full bg-red-500"></div>
                     {t("project_detail.problem_statement")}
                   </h4>
-                  <p className="leading-relaxed text-foreground/80">
+                  <p className="text-foreground/80 leading-relaxed">
                     {project.overview.problem}
                   </p>
                 </Card>
@@ -201,7 +201,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <div className="h-2 w-2 rounded-full bg-blue-500"></div>
                     {t("project_detail.purpose")}
                   </h4>
-                  <p className="leading-relaxed text-foreground/80">
+                  <p className="text-foreground/80 leading-relaxed">
                     {project.overview.purpose}
                   </p>
                 </Card>
@@ -217,7 +217,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {project.overview.goal.map((goal, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-green-500"></div>
-                        <span className="leading-relaxed text-foreground/80">
+                        <span className="text-foreground/80 leading-relaxed">
                           {goal}
                         </span>
                       </li>
@@ -232,7 +232,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                     {t("common.solution")}
                   </h4>
-                  <p className="leading-relaxed text-foreground/80">
+                  <p className="text-foreground/80 leading-relaxed">
                     {project.overview.solution}
                   </p>
                 </Card>
@@ -256,7 +256,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                 {project.features.map((feature, index) => (
                   <li key={index} className="flex items-start gap-3">
                     <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-blue-500"></div>
-                    <span className="leading-relaxed text-foreground/80">
+                    <span className="text-foreground/80 leading-relaxed">
                       {feature}
                     </span>
                   </li>
@@ -279,14 +279,14 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <div className="h-2 w-2 rounded-full bg-orange-500"></div>
                     {challenge.title}
                   </h4>
-                  <p className="mb-4 leading-relaxed text-foreground/80">
+                  <p className="text-foreground/80 mb-4 leading-relaxed">
                     {challenge.description}
                   </p>
-                  <div className="rounded-lg bg-muted/50 p-4">
-                    <p className="mb-1 text-sm font-medium text-foreground/90">
+                  <div className="bg-muted/50 rounded-lg p-4">
+                    <p className="text-foreground/90 mb-1 text-sm font-medium">
                       {t("common.solution")}:
                     </p>
-                    <p className="leading-relaxed text-foreground/70">
+                    <p className="text-foreground/70 leading-relaxed">
                       {challenge.solution}
                     </p>
                   </div>
@@ -309,7 +309,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     <div className="h-2 w-2 rounded-full bg-emerald-500"></div>
                     {t("project_detail.final_results")}
                   </h4>
-                  <p className="leading-relaxed text-foreground/80">
+                  <p className="text-foreground/80 leading-relaxed">
                     {project.results.finalWork}
                   </p>
                 </Card>
@@ -325,7 +325,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {project.results.learnings.map((learning, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-sky-500"></div>
-                        <span className="leading-relaxed text-foreground/80">
+                        <span className="text-foreground/80 leading-relaxed">
                           {learning}
                         </span>
                       </li>
@@ -344,7 +344,7 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
                     {project.results.nextSteps.map((step, index) => (
                       <li key={index} className="flex items-start gap-3">
                         <div className="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-purple-500"></div>
-                        <span className="leading-relaxed text-foreground/80">
+                        <span className="text-foreground/80 leading-relaxed">
                           {step}
                         </span>
                       </li>
@@ -417,7 +417,7 @@ function ProjectSection({
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-16 odd:bg-muted/30">
+    <section className="odd:bg-muted/30 py-16">
       <div className="container mx-auto px-4">
         <motion.div
           ref={ref}

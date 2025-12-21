@@ -123,7 +123,7 @@ export default function Header() {
 
   return (
     <motion.header
-      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
         isScrolled
           ? "bg-background/80 shadow-sm backdrop-blur-md"
           : "bg-transparent"
@@ -156,7 +156,7 @@ export default function Header() {
               >
                 <Link
                   href={item.href}
-                  className={`px-1 py-2 text-foreground/80 transition-colors hover:text-primary ${
+                  className={`text-foreground/80 hover:text-primary px-1 py-2 transition-colors ${
                     activeSection === item.id ? "text-primary" : ""
                   }`}
                   onClick={(e) => handleClick(e, item.href)}
@@ -171,7 +171,7 @@ export default function Header() {
 
             {/* Animated Underline Indicator */}
             <motion.div
-              className="absolute bottom-0 h-0.5 bg-primary"
+              className="bg-primary absolute bottom-0 h-0.5"
               animate={{
                 width: activeItemDimensions.width,
                 left: activeItemDimensions.left,
@@ -214,9 +214,9 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
-                className={`px-4 py-3 transition-colors hover:bg-muted/50 ${
+                className={`hover:bg-muted/50 px-4 py-3 transition-colors ${
                   activeSection === item.id
-                    ? "border-l-2 border-primary pl-3 text-primary"
+                    ? "border-primary text-primary border-l-2 pl-3"
                     : "text-foreground/80 hover:text-primary"
                 }`}
                 onClick={(e) => handleClick(e, item.href)}

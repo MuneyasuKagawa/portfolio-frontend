@@ -30,7 +30,7 @@ export default function Footer() {
               Mun&apos;s
               <span className="text-primary">{t("footer.portfolio")}</span>
             </Link>
-            <p className="mt-2 text-foreground/70">{t("footer.tagline")}</p>
+            <p className="text-foreground/70 mt-2">{t("footer.tagline")}</p>
           </motion.div>
 
           <motion.div
@@ -43,7 +43,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/muneyasu-kagawa/"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
+              className="bg-background/80 hover:bg-primary/10 hover:text-primary rounded-full p-2 transition-colors"
             >
               <FiLinkedin className="h-5 w-5" />
               <span className="sr-only">{t("footer.linkedin_label")}</span>
@@ -52,14 +52,14 @@ export default function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
+              className="bg-background/80 hover:bg-primary/10 hover:text-primary rounded-full p-2 transition-colors"
             >
               <FaXTwitter className="h-5 w-5" />
               <span className="sr-only">{t("footer.x_label")}</span>
             </a>
             <a
               href="mailto:muneyasu.kagawa@gmail.com"
-              className="rounded-full bg-background/80 p-2 transition-colors hover:bg-primary/10 hover:text-primary"
+              className="bg-background/80 hover:bg-primary/10 hover:text-primary rounded-full p-2 transition-colors"
             >
               <Mail className="h-5 w-5" />
               <span className="sr-only">{t("footer.email_label")}</span>
@@ -71,7 +71,7 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-8 border-t border-border pt-8 text-center text-sm text-foreground/60"
+          className="border-border text-foreground/60 mt-8 border-t pt-8 text-center text-sm"
         >
           <p className="mb-2">
             {t("footer.copyright").replace("{year}", currentYear.toString())}

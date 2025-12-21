@@ -28,7 +28,7 @@ export default function DesignerProjects() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(147,51,234,0.1)_0%,transparent_50%)]" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -39,7 +39,7 @@ export default function DesignerProjects() {
           <h2 className="mb-4 text-3xl font-light md:text-4xl">
             {t("designer_projects.title")}
           </h2>
-          <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
+          <p className="text-foreground/70 mx-auto max-w-2xl leading-relaxed">
             {t("designer_projects.description")}
           </p>
         </motion.div>
@@ -80,7 +80,7 @@ function DesignerProjectCard({
       }}
       className="group relative"
     >
-      <Card className="flex h-full min-h-[450px] flex-col overflow-hidden border-0 bg-card/80 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10">
+      <Card className="bg-card/80 hover:shadow-primary/10 flex h-full min-h-[450px] flex-col overflow-hidden border-0 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-2xl">
         {/* Elegant gradient overlay */}
         <motion.div
           className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-[0.02]"
@@ -115,7 +115,7 @@ function DesignerProjectCard({
 
           {/* Subtle border highlight */}
           <motion.div
-            className="absolute inset-0 border-2 border-transparent group-hover:border-primary/20"
+            className="group-hover:border-primary/20 absolute inset-0 border-2 border-transparent"
             transition={{ duration: 0.3, ease: "easeOut" }}
           />
         </motion.div>
@@ -123,14 +123,14 @@ function DesignerProjectCard({
         <CardContent className="relative z-10 flex flex-1 flex-col justify-between p-6">
           <div>
             <motion.h3
-              className="duration-400 mb-3 text-xl font-medium transition-colors group-hover:text-primary"
+              className="group-hover:text-primary mb-3 text-xl font-medium transition-colors duration-400"
               whileHover={{ x: 2 }}
               transition={{ duration: 0.2 }}
             >
               {project.title}
             </motion.h3>
             <motion.p
-              className="duration-400 mb-4 leading-relaxed text-foreground/70 transition-colors group-hover:text-foreground/85"
+              className="text-foreground/70 group-hover:text-foreground/85 mb-4 leading-relaxed transition-colors duration-400"
               initial={{ opacity: 0.8 }}
               whileHover={{ opacity: 1 }}
               transition={{ duration: 0.3 }}
@@ -167,7 +167,7 @@ function DesignerProjectCard({
                 >
                   <Badge
                     variant="secondary"
-                    className="border border-transparent transition-all duration-300 hover:border-primary/20 hover:bg-primary/10 hover:text-primary"
+                    className="hover:border-primary/20 hover:bg-primary/10 hover:text-primary border border-transparent transition-all duration-300"
                   >
                     {tag}
                   </Badge>
@@ -190,7 +190,7 @@ function DesignerProjectCard({
                   size="sm"
                   variant="outline"
                   asChild
-                  className="border-primary/30 transition-all duration-300 hover:border-primary hover:bg-primary hover:text-primary-foreground"
+                  className="border-primary/30 hover:border-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300"
                 >
                   <Link href={`/projects/${project.slug}`}>
                     {t("common.view_details")}

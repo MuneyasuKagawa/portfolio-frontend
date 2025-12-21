@@ -41,12 +41,12 @@ export default function DesignerHeroClient() {
             key={i}
             className={`${
               i % 4 === 0
-                ? "left-10 top-20 h-32 w-32 rounded-full border border-primary/5 bg-gradient-to-br from-primary/5 to-transparent"
+                ? "border-primary/5 from-primary/5 top-20 left-10 h-32 w-32 rounded-full border bg-gradient-to-br to-transparent"
                 : i % 4 === 1
-                  ? "right-20 top-32 h-24 w-24 rounded-lg border border-purple-500/5 bg-gradient-to-tr from-purple-500/5 to-transparent"
+                  ? "top-32 right-20 h-24 w-24 rounded-lg border border-purple-500/5 bg-gradient-to-tr from-purple-500/5 to-transparent"
                   : i % 4 === 2
                     ? "bottom-20 left-1/4 h-20 w-20 rounded-full border border-blue-500/5 bg-gradient-to-bl from-blue-500/5 to-transparent"
-                    : "bottom-32 right-1/3 h-16 w-48 rounded-full border border-pink-500/5 bg-gradient-to-r from-pink-500/5 to-transparent"
+                    : "right-1/3 bottom-32 h-16 w-48 rounded-full border border-pink-500/5 bg-gradient-to-r from-pink-500/5 to-transparent"
             }`}
           />
         ))}
@@ -69,7 +69,7 @@ export default function DesignerHeroClient() {
       </motion.div>
 
       {/* Content */}
-      <div className="container relative z-10 flex flex-col items-center px-4 text-center">
+      <div className="relative z-10 container flex flex-col items-center px-4 text-center">
         <motion.h1
           className="mb-6 text-4xl font-light md:text-6xl lg:text-7xl"
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -87,7 +87,7 @@ export default function DesignerHeroClient() {
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
             {t("hero.greeting")}{" "}
-            <span className="bg-gradient-to-r from-primary via-purple-500 to-pink-500 bg-clip-text font-medium text-transparent">
+            <span className="from-primary bg-gradient-to-r via-purple-500 to-pink-500 bg-clip-text font-medium text-transparent">
               {t("hero.name")}
             </span>
           </motion.span>
@@ -102,7 +102,7 @@ export default function DesignerHeroClient() {
         </motion.h1>
 
         <motion.div
-          className="mb-8 max-w-3xl text-lg leading-relaxed text-foreground/70 md:text-xl"
+          className="text-foreground/70 mb-8 max-w-3xl text-lg leading-relaxed md:text-xl"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{
@@ -168,7 +168,7 @@ export default function DesignerHeroClient() {
                 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-primary/90 via-purple-500/90 to-pink-500/90"
+                  className="from-primary/90 absolute inset-0 bg-gradient-to-r via-purple-500/90 to-pink-500/90"
                   initial={{ x: "-100%" }}
                   whileHover={{ x: "0%" }}
                   transition={{ duration: 0.4, ease: "easeOut" }}
@@ -197,7 +197,7 @@ export default function DesignerHeroClient() {
                 }}
               >
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent"
+                  className="via-primary/5 absolute inset-0 bg-gradient-to-r from-transparent to-transparent"
                   animate={{ x: ["-200%", "200%"] }}
                   transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                 />
@@ -221,7 +221,7 @@ export default function DesignerHeroClient() {
           transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
         >
           <motion.div
-            className="flex h-12 w-6 justify-center rounded-full border border-primary/30"
+            className="border-primary/30 flex h-12 w-6 justify-center rounded-full border"
             whileHover={{
               scale: 1.1,
               borderColor: "rgb(var(--primary) / 0.5)",
@@ -229,7 +229,7 @@ export default function DesignerHeroClient() {
             transition={{ duration: 0.3 }}
           >
             <motion.div
-              className="mt-2 h-3 w-1 rounded-full bg-primary/60"
+              className="bg-primary/60 mt-2 h-3 w-1 rounded-full"
               animate={{
                 opacity: [0.3, 0.8, 0.3],
                 y: [0, 6, 0],
@@ -245,7 +245,7 @@ export default function DesignerHeroClient() {
             whileHover={{ scale: 1.1, y: 2 }}
             transition={{ duration: 0.3 }}
           >
-            <ArrowDown className="h-4 w-4 text-primary/50" />
+            <ArrowDown className="text-primary/50 h-4 w-4" />
           </motion.div>
         </motion.div>
       </motion.div>

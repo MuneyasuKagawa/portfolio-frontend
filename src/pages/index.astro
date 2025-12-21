@@ -1,0 +1,26 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const locale = "en";
+---
+
+<BaseLayout
+  title="Muneyasu Kusunoki | Developer & Designer"
+  description="Portfolio of Muneyasu Kusunoki - Full-stack Developer and UI/UX Designer"
+  locale={locale}
+>
+  <main class="container mx-auto px-4">
+    <section class="flex min-h-screen items-center justify-center">
+      <div class="text-center">
+        <h1
+          class="font-display text-foreground text-5xl font-bold tracking-tight md:text-7xl"
+        >
+          Hello, I'm Muneyasu
+        </h1>
+        <p class="text-muted mt-6 text-xl">
+          Full-stack Developer & UI/UX Designer
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -47,19 +47,19 @@ export default function DesignerAbout() {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="relative overflow-hidden bg-muted/30 py-20">
+    <section id="about" className="bg-muted/30 relative overflow-hidden py-20">
       {/* Subtle background design elements */}
-      <DesignElement delay={0} className="left-10 top-20 text-primary/5">
+      <DesignElement delay={0} className="text-primary/5 top-20 left-10">
         <Palette className="h-24 w-24" />
       </DesignElement>
-      <DesignElement delay={1} className="right-20 top-32 text-purple-500/5">
+      <DesignElement delay={1} className="top-32 right-20 text-purple-500/5">
         <Users className="h-32 w-32" />
       </DesignElement>
       <DesignElement delay={2} className="bottom-20 left-1/4 text-pink-500/5">
         <Lightbulb className="h-20 w-20" />
       </DesignElement>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4">
         <motion.div
           ref={ref}
           initial={{ opacity: 0 }}
@@ -80,7 +80,7 @@ export default function DesignerAbout() {
             >
               {t("about.title")}
             </motion.h2>
-            <div className="space-y-6 leading-relaxed text-foreground/75">
+            <div className="text-foreground/75 space-y-6 leading-relaxed">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={
@@ -156,7 +156,7 @@ export default function DesignerAbout() {
             <div className="relative mx-auto aspect-square w-full max-w-md">
               {/* Floating design accent elements */}
               <motion.div
-                className="absolute -left-4 -top-4 h-8 w-8 rounded-full border border-primary/30 bg-gradient-to-br from-primary/20 to-purple-500/20"
+                className="border-primary/30 from-primary/20 absolute -top-4 -left-4 h-8 w-8 rounded-full border bg-gradient-to-br to-purple-500/20"
                 animate={{
                   y: [0, -10, 0],
                   rotate: [0, 180, 360],
@@ -168,7 +168,7 @@ export default function DesignerAbout() {
                 }}
               />
               <motion.div
-                className="absolute -bottom-6 -right-6 h-12 w-12 rounded-lg border border-purple-500/30 bg-gradient-to-tr from-purple-500/20 to-pink-500/20"
+                className="absolute -right-6 -bottom-6 h-12 w-12 rounded-lg border border-purple-500/30 bg-gradient-to-tr from-purple-500/20 to-pink-500/20"
                 animate={{
                   y: [0, 10, 0],
                   rotate: [0, -180, -360],
@@ -183,12 +183,12 @@ export default function DesignerAbout() {
 
               {/* Main photo container with elegant hover effect */}
               <motion.div
-                className="absolute inset-0 rotate-2 transform rounded-2xl bg-gradient-to-br from-primary/10 to-purple-500/10 backdrop-blur-sm"
+                className="from-primary/10 absolute inset-0 rotate-2 transform rounded-2xl bg-gradient-to-br to-purple-500/10 backdrop-blur-sm"
                 whileHover={{ rotate: 1, scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               />
               <motion.div
-                className="absolute inset-0 overflow-hidden rounded-2xl border border-primary/20 bg-background shadow-xl"
+                className="border-primary/20 bg-background absolute inset-0 overflow-hidden rounded-2xl border shadow-xl"
                 whileHover={{
                   scale: 1.02,
                   boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)",
@@ -204,7 +204,7 @@ export default function DesignerAbout() {
                 />
                 {/* Subtle overlay on hover */}
                 <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent opacity-0"
+                  className="from-primary/10 absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-0"
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 />

@@ -4,10 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import clsx from "clsx";
-import {
-  motion,
-  useInView,
-} from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -36,7 +33,7 @@ export default function Projects() {
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             {t("projects.title")}
           </h2>
-          <p className="mx-auto max-w-2xl text-foreground/80">
+          <p className="text-foreground/80 mx-auto max-w-2xl">
             {t("projects.developer_description")}
           </p>
         </motion.div>
@@ -91,21 +88,14 @@ function ProjectCard({
 
           <CardContent className="relative z-10 flex flex-1 flex-col justify-between p-6">
             <div>
-              <h3 className="mb-2 text-xl font-bold">
-                {project.title}
-              </h3>
-              <p className="mb-4 text-foreground/70">
-                {project.description}
-              </p>
+              <h3 className="mb-2 text-xl font-bold">{project.title}</h3>
+              <p className="text-foreground/70 mb-4">{project.description}</p>
             </div>
 
             <div>
               <div className="mb-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                  >
+                  <Badge key={tag} variant="secondary">
                     {tag}
                   </Badge>
                 ))}
@@ -113,11 +103,7 @@ function ProjectCard({
 
               <div className="mt-auto flex flex-wrap gap-2">
                 {project.githubUrl && (
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    asChild
-                  >
+                  <Button size="sm" variant="outline" asChild>
                     <a
                       href={project.githubUrl}
                       target="_blank"
@@ -128,10 +114,7 @@ function ProjectCard({
                     </a>
                   </Button>
                 )}
-                <Button
-                  size="sm"
-                  asChild
-                >
+                <Button size="sm" asChild>
                   <a
                     href={project.liveUrl}
                     target="_blank"

@@ -40,10 +40,10 @@ export default function Contact() {
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             {t("contact.title")}
           </h2>
-          <p className="mx-auto max-w-2xl text-foreground/80">
+          <p className="text-foreground/80 mx-auto max-w-2xl">
             {t("contact.description_line1")}
           </p>
-          <p className="mx-auto max-w-2xl text-foreground/80">
+          <p className="text-foreground/80 mx-auto max-w-2xl">
             {t("contact.description_line2")}
           </p>
         </motion.div>
@@ -59,14 +59,14 @@ export default function Contact() {
               {/* <h3 className="text-2xl font-bold mb-6">Contact Information</h3> */}
 
               <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <div className="bg-primary/10 text-primary rounded-full p-3">
                   <Mail className="h-5 w-5" />
                 </div>
                 <div>
                   <h4 className="mb-1 font-medium">{t("contact.email")}</h4>
                   <a
                     href="mailto:muneyasu.kagawa@gmail.com"
-                    className="text-foreground/80 transition-colors hover:text-primary"
+                    className="text-foreground/80 hover:text-primary transition-colors"
                   >
                     muneyasu.kagawa@gmail.com
                   </a>
@@ -89,7 +89,7 @@ export default function Contact() {
               </div> */}
 
               <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <div className="bg-primary/10 text-primary rounded-full p-3">
                   <FiLinkedin className="h-5 w-5" />
                 </div>
                 <div>
@@ -104,7 +104,7 @@ export default function Contact() {
               </div>
 
               <div className="flex items-start gap-4">
-                <div className="rounded-full bg-primary/10 p-3 text-primary">
+                <div className="bg-primary/10 text-primary rounded-full p-3">
                   <FaXTwitter className="h-5 w-5" />
                 </div>
                 <div>

@@ -42,7 +42,7 @@ export function PortfolioModeToggle() {
   };
 
   return (
-    <div className="fixed bottom-4 left-1/2 top-auto z-[100] -translate-x-1/2 md:bottom-auto md:top-4">
+    <div className="fixed top-auto bottom-4 left-1/2 z-[100] -translate-x-1/2 md:top-4 md:bottom-auto">
       <motion.div
         initial={{ y: -100, opacity: 0, scale: 0.8, rotateX: -90 }}
         animate={{ y: 0, opacity: 1, scale: 1, rotateX: 0 }}
@@ -54,7 +54,7 @@ export function PortfolioModeToggle() {
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
-        className="rounded-2xl border border-border/50 bg-background/90 p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-300 hover:shadow-primary/20"
+        className="border-border/50 bg-background/90 hover:shadow-primary/20 rounded-2xl border p-1.5 shadow-2xl backdrop-blur-xl transition-all duration-300"
       >
         {/* Animated gradient background */}
         <motion.div
@@ -92,7 +92,7 @@ export function PortfolioModeToggle() {
           >
             {/* Primary gradient background */}
             <div
-              className="h-full w-full overflow-hidden rounded-xl bg-gradient-to-r from-primary via-blue-500 to-purple-500"
+              className="from-primary h-full w-full overflow-hidden rounded-xl bg-gradient-to-r via-blue-500 to-purple-500"
               style={{
                 backgroundSize: "200% 100%",
                 animation: "gradientShift 4s ease-in-out infinite",

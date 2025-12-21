@@ -109,14 +109,14 @@ export default function DesignerSkills() {
   const skillCategories = getSkillCategories(t);
 
   return (
-    <section id="skills" className="relative overflow-hidden bg-muted/30 py-20">
+    <section id="skills" className="bg-muted/30 relative overflow-hidden py-20">
       {/* Elegant background elements */}
       <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute left-1/4 top-1/4 h-64 w-64 rounded-full bg-gradient-to-r from-primary to-purple-500 blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-gradient-to-r from-pink-500 to-blue-500 blur-3xl" />
+        <div className="from-primary absolute top-1/4 left-1/4 h-64 w-64 rounded-full bg-gradient-to-r to-purple-500 blur-3xl" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-gradient-to-r from-pink-500 to-blue-500 blur-3xl" />
       </div>
 
-      <div className="container relative z-10 mx-auto px-4">
+      <div className="relative z-10 container mx-auto px-4">
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -127,7 +127,7 @@ export default function DesignerSkills() {
           <h2 className="mb-4 text-3xl font-light md:text-4xl">
             {t("designer_skills.title")}
           </h2>
-          <p className="mx-auto max-w-2xl leading-relaxed text-foreground/70">
+          <p className="text-foreground/70 mx-auto max-w-2xl leading-relaxed">
             {t("designer_skills.description")}
           </p>
         </motion.div>
@@ -176,7 +176,7 @@ function DesignerSkillCard({
         scale: 1.02,
         transition: { duration: 0.3 },
       }}
-      className="relative overflow-hidden rounded-2xl border border-border/50 bg-card/80 p-6 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10"
+      className="border-border/50 bg-card/80 hover:shadow-primary/10 relative overflow-hidden rounded-2xl border p-6 shadow-lg backdrop-blur-sm transition-all duration-500 hover:shadow-2xl"
     >
       {/* Elegant gradient background */}
       <motion.div
@@ -265,13 +265,13 @@ function DesignerSkillProgressBar({
     >
       <div className="mb-2 flex items-center justify-between">
         <motion.span
-          className="text-sm font-medium text-foreground/80 transition-colors group-hover:text-foreground"
+          className="text-foreground/80 group-hover:text-foreground text-sm font-medium transition-colors"
           whileHover={{ scale: 1.02 }}
         >
           {skill.name}
         </motion.span>
         <motion.span
-          className="text-xs font-medium text-foreground/60"
+          className="text-foreground/60 text-xs font-medium"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 1 + categoryIndex * 0.1 + index * 0.05 }}
@@ -280,7 +280,7 @@ function DesignerSkillProgressBar({
         </motion.span>
       </div>
 
-      <div className="relative h-2 overflow-hidden rounded-full bg-muted/50">
+      <div className="bg-muted/50 relative h-2 overflow-hidden rounded-full">
         {/* Progress bar with elegant gradient */}
         <motion.div
           className={`h-full bg-gradient-to-r ${color} ${getSkillOpacity(skill.level)} relative overflow-hidden rounded-full`}

@@ -2,7 +2,8 @@
 
 ## Phase 1: Project Setup
 
-- [ ] 1. Initialize Astro project
+- [x] 1. Initialize Astro project
+
   - Create new Astro project with TypeScript
   - Configure astro.config.mjs with i18n and static output
   - Set up project structure as defined in design.md
@@ -10,7 +11,8 @@
   - _Requirements: All_
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer specializing in project setup | Task: Initialize new Astro project with TypeScript, configure i18n (en/ja), static output, and create the folder structure defined in design.md | Restrictions: Do not install React or any UI framework, use Astro native components only, follow exact folder structure from design.md | Success: Project builds successfully, i18n routing works (/ja/ prefix), folder structure matches design.md | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion with all created files, then mark as [x]_
 
-- [ ] 2. Set up Tailwind CSS v4
+- [x] 2. Set up Tailwind CSS v4
+
   - File: src/styles/global.css, tailwind.config.mjs
   - Install and configure Tailwind CSS with Vite plugin
   - Define CSS variables for theming (light/dark)
@@ -19,7 +21,7 @@
   - _Requirements: NFR-Performance_
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: CSS Developer specializing in Tailwind CSS | Task: Set up Tailwind CSS v4 with Vite plugin, create global.css with CSS variables for light/dark themes, configure tailwind.config.mjs with custom colors and fonts from design.md | Restrictions: No `<style>` tags allowed, use @import 'tailwindcss' syntax, follow exact color tokens from design.md | Success: Tailwind classes work, dark mode toggles via .dark class, fonts load correctly | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
-- [ ] 3. Install and configure dependencies
+- [x] 3. Install and configure dependencies
   - File: package.json
   - Install GSAP, Three.js, and required Astro integrations
   - Configure TypeScript strict mode
@@ -31,6 +33,7 @@
 ## Phase 2: Core Infrastructure
 
 - [ ] 4. Create BaseLayout component
+
   - File: src/layouts/BaseLayout.astro
   - Implement base HTML structure with View Transitions
   - Add meta tags, SEO configuration, and structured data
@@ -40,15 +43,17 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer specializing in layouts | Task: Create BaseLayout.astro with View Transitions (ClientRouter), meta tags from current layout.tsx, SEO structured data, theme initialization script for dark mode | Restrictions: Use Astro native syntax only, no React, include suppressHydrationWarning equivalent | Success: Layout renders with correct meta tags, View Transitions enabled, theme persists on reload | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 5. Implement i18n utility functions
+
   - File: src/i18n/utils.ts, src/i18n/en.json, src/i18n/ja.json
   - Create useTranslation helper function
   - Create getLocaleFromUrl helper
   - Migrate and brush up translation files
   - _Leverage: Current locales/en.json, locales/ja.json_
   - _Requirements: 2_
-  - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: i18n Specialist | Task: Create i18n utility functions (useTranslation, getLocaleFromUrl) in TypeScript, migrate translations from current locales/*.json, brush up Japanese text for more natural expressions | Restrictions: Type-safe implementation, return key as fallback for missing translations | Success: Translation helper works with dot notation keys, Japanese text sounds natural, TypeScript types are correct | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
+  - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: i18n Specialist | Task: Create i18n utility functions (useTranslation, getLocaleFromUrl) in TypeScript, migrate translations from current locales/\*.json, brush up Japanese text for more natural expressions | Restrictions: Type-safe implementation, return key as fallback for missing translations | Success: Translation helper works with dot notation keys, Japanese text sounds natural, TypeScript types are correct | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 6. Create ThemeToggle component
+
   - File: src/components/common/ThemeToggle.astro
   - Implement light/dark theme switching
   - Add localStorage persistence
@@ -68,6 +73,7 @@
 ## Phase 3: GSAP and Three.js Setup
 
 - [ ] 8. Set up GSAP initialization
+
   - File: src/scripts/gsap/init.ts
   - Register GSAP plugins (ScrollTrigger)
   - Add prefers-reduced-motion check
@@ -77,6 +83,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Animation Developer specializing in GSAP | Task: Create GSAP initialization module, register ScrollTrigger plugin, implement prefers-reduced-motion check, export configured gsap and ScrollTrigger | Restrictions: Check reduced motion before any animation, make exports tree-shakeable | Success: GSAP initializes correctly, ScrollTrigger registered, reduced motion disables animations | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 9. Create Three.js hero scene
+
   - File: src/scripts/three/hero-scene.ts
   - Implement TorusKnot geometry with wireframe material
   - Add mouse tracking interaction
@@ -86,6 +93,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: WebGL Developer specializing in Three.js | Task: Create hero-scene.ts with TorusKnot geometry, wireframe material (primary color), mouse tracking, resize handler, proper cleanup function for memory management | Restrictions: Use alpha: true for transparent background, implement cleanup to prevent memory leaks | Success: 3D object renders, follows mouse, resizes correctly, no memory leaks on cleanup | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 10. Create GSAP hero animations
+
   - File: src/scripts/gsap/hero-animations.ts
   - Implement text reveal animation
   - Add staggered subtitle animation
@@ -106,6 +114,7 @@
 ## Phase 4: Common Components
 
 - [ ] 12. Create Header component
+
   - File: src/components/common/Header.astro
   - Implement navigation with logo
   - Include ThemeToggle and LanguageToggle
@@ -115,14 +124,16 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Frontend Developer | Task: Create Header.astro with logo, navigation links (About, Projects, Skills, Contact), ThemeToggle, LanguageToggle, responsive hamburger menu for mobile | Restrictions: Tailwind classes only, use semantic HTML (nav, ul, li), proper a11y | Success: Header renders correctly, navigation works, mobile menu toggles, theme/language switches work | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 13. Create Footer component
+
   - File: src/components/common/Footer.astro
   - Implement footer with social links
   - Add copyright and credits
   - _Leverage: Current components/footer.tsx_
   - _Requirements: 7_
-  - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Frontend Developer | Task: Create Footer.astro with social links (GitHub, Twitter, LinkedIn), copyright with current year, credits section | Restrictions: Tailwind classes only, use target="_blank" rel="noopener" for external links | Success: Footer renders with all links, copyright year is dynamic | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
+  - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Frontend Developer | Task: Create Footer.astro with social links (GitHub, Twitter, LinkedIn), copyright with current year, credits section | Restrictions: Tailwind classes only, use target="\_blank" rel="noopener" for external links | Success: Footer renders with all links, copyright year is dynamic | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 14. Create UI components (Button, Card, Badge)
+
   - File: src/components/ui/Button.astro, Card.astro, Badge.astro
   - Implement reusable UI primitives
   - Support variants and sizes
@@ -142,6 +153,7 @@
 ## Phase 5: Section Components
 
 - [ ] 16. Create Hero section
+
   - File: src/components/sections/Hero.astro
   - Implement full-screen hero with 3D canvas
   - Add animated text with i18n
@@ -151,6 +163,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Full-stack Developer | Task: Create Hero.astro with full-screen layout, canvas element for Three.js, hero text with i18n, subtitle, scroll indicator, inline script to initialize Three.js scene and GSAP animations | Restrictions: Use Intersection Observer for lazy Three.js init, Tailwind classes only | Success: Hero displays full-screen, 3D animates, text animates on load, scroll indicator visible | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 17. Create About section
+
   - File: src/components/sections/About.astro
   - Implement about section with profile info
   - Add professional summary (Developer + Designer unified)
@@ -159,6 +172,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Frontend Developer | Task: Create About.astro combining Developer and Designer about content into unified professional summary, include profile image, bio text with i18n | Restrictions: Tailwind classes only, add section class for GSAP scroll animation | Success: About section displays unified content, responds to scroll animation trigger | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 18. Create Projects section
+
   - File: src/components/sections/Projects.astro
   - Display project cards grid
   - Include both development and design projects
@@ -168,6 +182,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Frontend Developer | Task: Create Projects.astro with responsive grid of ProjectCard components, fetch projects from data, section title with i18n, add projects-grid class for GSAP stagger animation | Restrictions: Tailwind classes only, show both development and design projects in unified grid | Success: Projects display in grid, stagger animation works, links to detail pages | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 19. Create Skills section
+
   - File: src/components/sections/Skills.astro
   - Display skills with categories (Frontend, Backend, Design, Tools)
   - Integrate GSAP reveal animations
@@ -186,6 +201,7 @@
 ## Phase 6: Pages
 
 - [ ] 21. Create index page (English)
+
   - File: src/pages/index.astro
   - Compose all sections into home page
   - Initialize scroll animations
@@ -194,6 +210,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer | Task: Create index.astro composing BaseLayout with Header, Hero, About, Projects, Skills, Contact, Footer sections, inline script to initialize GSAP scroll animations after DOM load | Restrictions: Pass locale="en" to components, use Astro.currentLocale | Success: Home page renders all sections, scroll animations work, SEO meta tags present | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 22. Create index page (Japanese)
+
   - File: src/pages/ja/index.astro
   - Mirror English index with Japanese locale
   - _Leverage: index.astro structure_
@@ -201,7 +218,8 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer | Task: Create ja/index.astro mirroring English index structure, pass locale="ja" to all components, update meta tags for Japanese | Restrictions: Exact same structure as index.astro, only locale differs | Success: Japanese page renders with Japanese content, URL is /ja/ | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 23. Set up Content Collections for projects
-  - File: src/content/config.ts, src/content/projects/en/*.md, src/content/projects/ja/*.md
+
+  - File: src/content/config.ts, src/content/projects/en/_.md, src/content/projects/ja/_.md
   - Define project schema with Zod
   - Create project content files for both languages
   - _Leverage: Current project data, design.md Project model_
@@ -209,6 +227,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer specializing in Content Collections | Task: Define content collection schema in config.ts with Zod for Project type from design.md, create 3-4 project markdown files in en/ and ja/ folders with frontmatter and case study content | Restrictions: Use exact Project interface from design.md, include all required fields | Success: Content collection loads without errors, projects accessible via getCollection | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 24. Create project detail page (English)
+
   - File: src/pages/projects/[slug].astro
   - Implement dynamic route with getStaticPaths
   - Display case study content (problem, solution, results)
@@ -226,6 +245,7 @@
 ## Phase 7: Data and Assets
 
 - [ ] 26. Create skills data
+
   - File: src/data/skills.ts
   - Define skills array with categories
   - Combine Developer and Designer skills
@@ -234,6 +254,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Data Engineer | Task: Create skills.ts exporting typed skills array combining Developer skills (React, TypeScript, Next.js, etc.) and Designer skills (Figma, UI/UX, etc.) with category, icon, level properties | Restrictions: Use Skill interface from design.md, include icon names for lucide-react | Success: Skills data exports correctly, TypeScript types are correct | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 27. Create social links data
+
   - File: src/data/social-links.ts
   - Define social links array
   - _Leverage: Current footer social links_
@@ -250,7 +271,8 @@
 ## Phase 8: Integration and Testing
 
 - [ ] 29. Set up Playwright for E2E testing
-  - File: playwright.config.ts, tests/e2e/*.spec.ts
+
+  - File: playwright.config.ts, tests/e2e/\*.spec.ts
   - Install and configure Playwright
   - Set up test scripts in package.json
   - _Leverage: Astro Playwright integration_
@@ -258,6 +280,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: QA Engineer specializing in E2E testing | Task: Install @playwright/test, create playwright.config.ts with baseURL for dev server, configure projects for chromium/firefox/webkit, add test scripts to package.json (test:e2e, test:e2e:ui) | Restrictions: Use Astro's recommended Playwright setup, configure webServer to auto-start dev server | Success: Playwright installed, config created, npx playwright test runs without config errors | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
 - [ ] 30. Write E2E tests for core user journeys
+
   - File: tests/e2e/home.spec.ts, tests/e2e/navigation.spec.ts, tests/e2e/i18n.spec.ts
   - Test home page rendering and sections
   - Test navigation and page transitions
@@ -268,6 +291,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: QA Engineer | Task: Write E2E tests: (1) home.spec.ts - verify all sections render, animations trigger on scroll; (2) navigation.spec.ts - test header nav, project detail links, back navigation; (3) i18n.spec.ts - test /ja/ switching, content changes; (4) theme.spec.ts - test toggle, localStorage persistence | Restrictions: Use Playwright best practices (locators, assertions), test both locales | Success: All tests pass, cover critical user flows, run in under 60 seconds | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion with test count, then mark as [x]_
 
 - [ ] 31. Integrate all components and manual test
+
   - Verify all pages render correctly
   - Test i18n switching
   - Test theme switching
@@ -277,6 +301,7 @@
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: QA Engineer | Task: Run dev server, test all pages (/, /ja/, /projects/*, /ja/projects/*), verify i18n switching, theme toggle, GSAP animations, Three.js scene, responsive layout on mobile/tablet/desktop | Restrictions: Document any issues found, do not modify components in this task | Success: All pages render, no console errors, all features work | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion with test results, then mark as [x]_
 
 - [ ] 32. Build and optimize
+
   - File: astro.config.mjs
   - Run production build
   - Verify static output

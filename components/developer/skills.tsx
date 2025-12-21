@@ -122,7 +122,7 @@ export default function Skills() {
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">
             {t("skills.title")}
           </h2>
-          <p className="mx-auto max-w-2xl text-foreground/80">
+          <p className="text-foreground/80 mx-auto max-w-2xl">
             {t("skills.description")}
           </p>
         </motion.div>
@@ -172,7 +172,7 @@ function SkillCard({
         scale: 1.02,
         transition: { duration: 0.2 },
       }}
-      className="relative overflow-hidden rounded-xl border bg-card p-6 transition-shadow hover:shadow-2xl hover:shadow-primary/20"
+      className="bg-card hover:shadow-primary/20 relative overflow-hidden rounded-xl border p-6 transition-shadow hover:shadow-2xl"
     >
       {/* Animated gradient background */}
       <motion.div
@@ -193,7 +193,7 @@ function SkillCard({
         transition={{ duration: 0.2 }}
       >
         <motion.div
-          className="relative rounded-lg bg-primary/10 p-3 text-primary"
+          className="bg-primary/10 text-primary relative rounded-lg p-3"
           whileHover={{
             scale: 1.1,
             rotate: [0, -5, 5, 0],
@@ -203,7 +203,7 @@ function SkillCard({
         >
           <Icon className="h-6 w-6" />
           <motion.div
-            className="absolute inset-0 rounded-lg bg-primary/20"
+            className="bg-primary/20 absolute inset-0 rounded-lg"
             initial={{ scale: 0, opacity: 0 }}
             whileHover={{ scale: 1.2, opacity: 0.3 }}
             transition={{ duration: 0.3 }}
@@ -273,13 +273,13 @@ function SkillProgressBar({
     >
       <div className="mb-2 flex items-center justify-between">
         <motion.span
-          className="text-sm font-medium text-foreground/80 transition-colors group-hover:text-foreground"
+          className="text-foreground/80 group-hover:text-foreground text-sm font-medium transition-colors"
           whileHover={{ scale: 1.05 }}
         >
           {skill.name}
         </motion.span>
         <motion.span
-          className="text-xs font-bold text-foreground/60"
+          className="text-foreground/60 text-xs font-bold"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ delay: 1 + categoryIndex * 0.1 + index * 0.1 }}
@@ -288,7 +288,7 @@ function SkillProgressBar({
         </motion.span>
       </div>
 
-      <div className="relative h-2 overflow-hidden rounded-full bg-muted/50">
+      <div className="bg-muted/50 relative h-2 overflow-hidden rounded-full">
         {/* Background glow */}
         <motion.div
           className={`absolute inset-0 rounded-full blur-sm ${getGlowColor(skill.level)} opacity-0 group-hover:opacity-50`}
