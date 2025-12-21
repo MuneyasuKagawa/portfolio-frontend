@@ -32,7 +32,7 @@
 
 ## Phase 2: Core Infrastructure
 
-- [ ] 4. Create BaseLayout component
+- [x] 4. Create BaseLayout component
 
   - File: src/layouts/BaseLayout.astro
   - Implement base HTML structure with View Transitions

@@ -1,15 +1,78 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 
 interface Props {
   title: string;
   description: string;
-  locale?: string;
+  locale?: "en" | "ja";
+  image?: string;
 }
 
-const { title, description, locale = "en" } = Astro.props;
+const { title, description, locale = "en", image = "/icon.png" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const alternateURL =
+  locale === "en"
+    ? new URL("/ja" + Astro.url.pathname, Astro.site)
+    : new URL(Astro.url.pathname.replace("/ja", ""), Astro.site);
+
+const siteName = "Mun's Portfolio";
+const author = "Muneyasu Kagawa";
+const twitterHandle = "@m_kagawa_";
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: author,
+  alternateName: "Mun",
+  url: "https://mun-k.com",
+  image: "https://mun-k.com/icon.png",
+  description:
+    "Frontend Developer and UI/UX Designer with 8+ years of experience",
+  jobTitle: ["Frontend Developer", "UI/UX Designer"],
+  email: "muneyasu.kagawa@gmail.com",
+  sameAs: [
+    "https://www.linkedin.com/in/muneyasu-kagawa/",
+    "https://twitter.com/m_kagawa_",
+    "https://github.com/MuneyasuKagawa",
+  ],
+  worksFor: {
+    "@type": "Organization",
+    name: "Freelance",
+  },
+  knowsAbout: [
+    "React",
+    "Next.js",
+    "TypeScript",
+    "JavaScript",
+    "UI/UX Design",
+    "Frontend Development",
+    "Web Development",
+  ],
+  nationality: "Japanese",
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "JP",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: "https://mun-k.com",
+  description:
+    "Muneyasu Kagawa's portfolio showcasing frontend development projects and UI/UX design work",
+  author: {
+    "@type": "Person",
+    name: author,
+  },
+  publisher: {
+    "@type": "Person",
+    name: author,
+  },
+  inLanguage: [locale === "en" ? "en-US" : "ja-JP"],
+};
 ---
 
 <!doctype html>
@@ -19,16 +82,76 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
+    <meta
+      name="keywords"
+      content="Muneyasu Kagawa, Frontend Developer, UI/UX Designer, React, Next.js, TypeScript, Portfolio, Web Development, Japanese Developer"
+    />
+    <meta name="author" content={author} />
+    <meta name="creator" content={author} />
+    <meta name="publisher" content={author} />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="googlebot"
+      content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+    />
+
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      rel="alternate"
+      hreflang={locale === "en" ? "ja" : "en"}
+      href={alternateURL}
+    />
+    <link rel="alternate" hreflang="x-default" href={Astro.site} />
+
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/icon.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={locale === "en" ? "en_US" : "ja_JP"} />
+    <meta
+      property="og:locale:alternate"
+      content={locale === "en" ? "ja_JP" : "en_US"}
+    />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={twitterHandle} />
+    <meta name="twitter:creator" content={twitterHandle} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(image, Astro.site)} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+
     <title>{title}</title>
-    <ViewTransitions />
+
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(personSchema)}
+    />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(websiteSchema)}
+    />
+
+    <ClientRouter />
+
     <script is:inline>
       const getTheme = () => {
         if (typeof localStorage !== "undefined") {
