@@ -1,0 +1,22 @@
+{
+  "filePath": ".spec-workflow/specs/astro-portfolio-redesign/design.md",
+  "currentVersion": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "filename": "snapshot-001.json",
+      "timestamp": "2025-12-21T01:03:48.719Z",
+      "trigger": "initial",
+      "approvalId": "approval_1766279028716_if213lf4k",
+      "approvalTitle": "Design Document for Astro Portfolio Redesign"
+    },
+    {
+      "version": 2,
+      "filename": "snapshot-002.json",
+      "timestamp": "2025-12-21T01:05:15.067Z",
+      "trigger": "approved",
+      "approvalId": "approval_1766279028716_if213lf4k",
+      "approvalTitle": "Design Document for Astro Portfolio Redesign"
+    }
+  ]
+}

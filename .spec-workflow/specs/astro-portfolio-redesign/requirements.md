@@ -1,155 +1,139 @@
-# Astro Portfolio Redesign - Requirements
+# Requirements Document
 
-## 概要
+## Introduction
 
-現在のNext.js製ポートフォリオサイトをAstroで完全に書き直し、デザインを大幅にリニューアルする。
+現在のNext.js製ポートフォリオサイトをAstroで完全に書き直し、デザインを大幅にリニューアルする。クリエイティブ・アーティスティックなデザイン方向性で、GSAP + Three.js を活用したインタラクティブな体験を提供する。
 
-## 背景
+**主な変更点:**
+- Next.js 15 → Astro への移行
+- Developer/Designerデュアルモードの統合
+- GSAPによるアニメーション強化
+- Three.jsによる3Dビジュアル要素の導入
+- Reactは使用せず、Astroネイティブコンポーネントのみ
 
-- 現在のサイトはNext.js 15 + React 19で構築されている
-- Developer/Designerのデュアルモード切り替え機能がある
-- 英語/日本語の国際化対応済み
-- shadcn/ui + Tailwind CSS + Framer Motionを使用
+## Alignment with Product Vision
 
-## 目標
+ポートフォリオサイトとして、訪問者（採用担当者、クライアント、同業者）に対して印象的な第一印象を与え、技術力とデザイン力の両方をアピールする。Astroの採用により、パフォーマンスを最大化しつつ、GSAPとThree.jsによるリッチなインタラクションを実現する。
 
-1. **技術スタックの刷新**: Next.js → Astro への移行
-2. **デザインリニューアル**: クリエイティブ・アーティスティックな新デザイン
-3. **アニメーション強化**: GSAPとThree.jsによるインタラクティブな体験
-4. **パフォーマンス向上**: Astroのアイランドアーキテクチャによる最適化
+## Requirements
 
-## 機能要件
+### Requirement 1: ポートフォリオモードの統合
 
-### FR-001: ポートフォリオモードの統合
-- **説明**: 現在のDeveloper/Designerモードを1つのポートフォリオに統合
-- **詳細**:
-  - 開発スキルとデザインスキルの両方を1つのサイトで表現
-  - モード切り替えUIは廃止
-  - セクション単位でDeveloper/Designerの要素を適切に配置
+**User Story:** As a 採用担当者, I want 開発スキルとデザインスキルの両方を1つのサイトで確認したい, so that 候補者の総合的な能力を把握できる
 
-### FR-002: 国際化（i18n）
-- **説明**: 英語/日本語の2言語対応を維持
-- **詳細**:
-  - Astro組み込みのi18n機能を使用
-  - 日本語テキストのブラッシュアップ（より自然な表現に）
-  - 言語切り替えUIの改善
-  - URLベースのロケール管理（`/en/`, `/ja/`）
+#### Acceptance Criteria
 
-### FR-003: 3Dビジュアル要素
-- **説明**: Three.jsを使用した3D要素の導入
-- **詳細**:
-  - ヒーローセクションに3Dオブジェクト
-  - インタラクティブなマウス追従効果
-  - パフォーマンスを考慮したロード戦略
+1. WHEN ユーザーがサイトにアクセスする THEN システム SHALL Developer/Designerの両方のスキルを統合したポートフォリオを表示する
+2. IF モード切り替えUIが存在する THEN システム SHALL それを廃止し、統合されたビューを提供する
+3. WHEN ユーザーがプロジェクトセクションを見る THEN システム SHALL 開発プロジェクトとデザインプロジェクトの両方を表示する
 
-### FR-004: GSAPアニメーション
-- **説明**: GSAPによる高度なアニメーション実装
-- **詳細**:
-  - ScrollTriggerによるスクロール連動アニメーション
-  - ページ遷移アニメーション（View Transitions API連携）
-  - マイクロインタラクション
-  - テキストアニメーション（SplitTextなど）
+### Requirement 2: 国際化（i18n）
 
-### FR-005: プロジェクト詳細ページ
-- **説明**: 各プロジェクトの詳細ページ
-- **詳細**:
-  - ケーススタディ形式
-  - 画像ギャラリー
-  - 技術スタック表示
-  - 課題・解決策・成果の構造
+**User Story:** As a 海外の採用担当者, I want サイトを英語で閲覧したい, so that コンテンツを理解できる
 
-### FR-006: スキルセクション
-- **説明**: 技術スキルの視覚的な表示
-- **詳細**:
-  - Developer スキル（Frontend, Backend, Tools）
-  - Designer スキル（UI/UX, Graphic, Tools）
-  - インタラクティブな表示方法
+#### Acceptance Criteria
 
-### FR-007: コンタクトセクション
-- **説明**: お問い合わせ機能
-- **詳細**:
-  - SNSリンク
-  - メールリンク
-  - コンタクトフォーム（オプション）
+1. WHEN ユーザーがサイトにアクセスする THEN システム SHALL デフォルトで英語を表示する
+2. WHEN ユーザーが言語切り替えUIをクリックする THEN システム SHALL 日本語に切り替える
+3. IF URLが `/ja/` で始まる THEN システム SHALL 日本語でコンテンツを表示する
+4. WHEN 言語を切り替える THEN システム SHALL URLを更新し、選択を永続化する
 
-### FR-008: ダークモード
-- **説明**: ライト/ダークテーマ対応
-- **詳細**:
-  - システム設定連動
-  - 手動切り替え
-  - テーマ永続化
+### Requirement 3: 3Dビジュアル要素
 
-## 非機能要件
+**User Story:** As a 訪問者, I want 視覚的に印象的なサイトを見たい, so that このサイトを記憶に残せる
 
-### NFR-001: パフォーマンス
+#### Acceptance Criteria
+
+1. WHEN ユーザーがヒーローセクションを表示する THEN システム SHALL Three.jsによる3Dオブジェクトを表示する
+2. WHEN ユーザーがマウスを動かす THEN システム SHALL 3Dオブジェクトがマウスに追従する
+3. IF デバイスの性能が低い THEN システム SHALL 3D要素を簡略化または非表示にする
+4. WHEN 3D要素がビューポート外にある THEN システム SHALL レンダリングを停止してパフォーマンスを最適化する
+
+### Requirement 4: GSAPアニメーション
+
+**User Story:** As a 訪問者, I want スムーズで洗練されたアニメーションを体験したい, so that サイトの品質を感じられる
+
+#### Acceptance Criteria
+
+1. WHEN ページをロードする THEN システム SHALL ヒーローテキストをGSAPでアニメーション表示する
+2. WHEN ユーザーがスクロールする THEN システム SHALL ScrollTriggerでセクションをアニメーション表示する
+3. WHEN ユーザーがページ遷移する THEN システム SHALL View Transitions APIでスムーズに遷移する
+4. IF ユーザーが `prefers-reduced-motion` を設定している THEN システム SHALL アニメーションを最小限にする
+
+### Requirement 5: プロジェクト詳細ページ
+
+**User Story:** As a 採用担当者, I want プロジェクトの詳細を確認したい, so that 技術力と問題解決能力を評価できる
+
+#### Acceptance Criteria
+
+1. WHEN ユーザーがプロジェクトカードをクリックする THEN システム SHALL 詳細ページに遷移する
+2. WHEN 詳細ページを表示する THEN システム SHALL 概要、課題、解決策、成果を表示する
+3. WHEN 詳細ページを表示する THEN システム SHALL 使用技術スタックを表示する
+4. WHEN 詳細ページを表示する THEN システム SHALL 画像ギャラリーを表示する
+
+### Requirement 6: スキルセクション
+
+**User Story:** As a 採用担当者, I want 候補者のスキルセットを一覧で確認したい, so that チームとのマッチングを判断できる
+
+#### Acceptance Criteria
+
+1. WHEN スキルセクションを表示する THEN システム SHALL 開発スキルとデザインスキルの両方を表示する
+2. WHEN スキルアイテムが表示される THEN システム SHALL GSAPでスタガーアニメーションを適用する
+3. WHEN ユーザーがスキルアイテムにホバーする THEN システム SHALL インタラクティブなフィードバックを表示する
+
+### Requirement 7: コンタクトセクション
+
+**User Story:** As a 潜在的なクライアント, I want 簡単に連絡を取りたい, so that 仕事の依頼ができる
+
+#### Acceptance Criteria
+
+1. WHEN コンタクトセクションを表示する THEN システム SHALL SNSリンク（GitHub、Twitter、LinkedIn）を表示する
+2. WHEN コンタクトセクションを表示する THEN システム SHALL メールリンクを表示する
+3. WHEN ユーザーがリンクをクリックする THEN システム SHALL 新しいタブで開く
+
+### Requirement 8: ダークモード
+
+**User Story:** As a 訪問者, I want ダークモードで閲覧したい, so that 目の疲れを軽減できる
+
+#### Acceptance Criteria
+
+1. WHEN ユーザーがサイトにアクセスする THEN システム SHALL システム設定に基づいてテーマを設定する
+2. WHEN ユーザーがテーマ切り替えUIをクリックする THEN システム SHALL テーマを切り替える
+3. WHEN テーマを切り替える THEN システム SHALL 選択をlocalStorageに永続化する
+
+## Non-Functional Requirements
+
+### Code Architecture and Modularity
+
+- **Single Responsibility Principle**: 各Astroコンポーネントは単一の責務を持つ
+- **Modular Design**: コンポーネント、スクリプト、スタイルを明確に分離
+- **Dependency Management**: Three.jsとGSAPは遅延ロードで必要時のみ読み込む
+- **Clear Interfaces**: TypeScriptで型安全なインターフェースを定義
+
+### Performance
+
 - Lighthouse Performance スコア 90以上
-- Core Web Vitals 基準クリア
-- 3D要素の遅延ロード
+- Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1) 基準クリア
+- 3D要素の遅延ロード（Intersection Observer使用）
+- 画像の最適化（WebP/AVIF、srcset）
+- フォントの最適化（preconnect、font-display: swap）
 
-### NFR-002: アクセシビリティ
+### Security
+
+- Content Security Policy (CSP) の適切な設定
+- 外部リソースの整合性チェック（SRI）
+- XSS対策（ユーザー入力のサニタイズ）
+
+### Reliability
+
+- 静的サイト生成による高可用性
+- CDN（CloudFront）によるグローバル配信
+- 3Dレンダリングエラー時のフォールバック表示
+
+### Usability
+
 - WAI-ARIA準拠
 - キーボードナビゲーション対応
 - スクリーンリーダー対応
-- prefers-reduced-motion 対応
-
-### NFR-003: SEO
-- メタタグ最適化
-- 構造化データ（JSON-LD）
-- サイトマップ生成
-- OGP画像対応
-
-### NFR-004: デプロイ
-- 静的サイト生成（SSG）
-- AWS S3 + CloudFrontへのデプロイ継続
-- または Vercel/Netlify への移行検討
-
-## 技術スタック
-
-### フレームワーク
-- **Astro** (v5.x): メインフレームワーク
-- **Reactは使用しない**: Astroコンポーネントのみ
-
-### スタイリング
-- **Tailwind CSS**: ユーティリティファースト
-- **CSS Variables**: テーマ管理
-
-### アニメーション
-- **GSAP**: 高度なアニメーション
-  - ScrollTrigger: スクロール連動
-  - SplitText: テキストアニメーション
-- **View Transitions API**: ページ遷移
-
-### 3D
-- **Three.js**: 3Dグラフィックス
-- **vanilla-three**: Astroとの統合
-
-### その他
-- **TypeScript**: 型安全性
-- **Prettier**: コードフォーマット
-- **ESLint**: リンティング
-
-## 制約事項
-
-1. **Reactは使用しない**: Astroネイティブコンポーネントのみ
-2. **静的サイト生成**: SSR/SSGは静的出力のみ
-3. **既存のAWSインフラ活用**: デプロイ先は変更可能だが既存も選択肢
-
-## 成功基準
-
-1. 全ページがAstroで正常に動作
-2. GSAPアニメーションがスムーズに動作
-3. Three.js 3D要素が正常に表示
-4. 両言語で全コンテンツが表示可能
-5. Lighthouse各スコア90以上
-6. モバイル対応完了
-
-## ステークホルダー
-
-- **プロジェクトオーナー**: Muneyasu Kagawa
-- **対象ユーザー**: 採用担当者、クライアント、同業者
-
-## 参考リンク
-
-- [Astro Documentation](https://docs.astro.build/)
-- [GSAP Documentation](https://gsap.com/docs/v3/)
-- [Three.js Documentation](https://threejs.org/docs/)
+- `prefers-reduced-motion` 対応
+- モバイルファーストデザイン

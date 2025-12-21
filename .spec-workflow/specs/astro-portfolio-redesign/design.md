@@ -1,33 +1,88 @@
-# Astro Portfolio Redesign - Design Document
+# Design Document
 
-## 設計方針
+## Overview
 
-### アーキテクチャ概要
+現在のNext.jsポートフォリオサイトをAstroで完全に書き直し、クリエイティブ・アーティスティックなデザインを実現する。GSAP + Three.js によるインタラクティブな体験と、Astroのアイランドアーキテクチャによる高パフォーマンスを両立する。
+
+## Steering Document Alignment
+
+### Technical Standards (tech.md)
+- Astro 5.x を使用（最新の安定版）
+- TypeScript strict モード
+- Tailwind CSS v4（`<style>`タグ不使用、ユーティリティクラスのみ）
+- ESLint + Prettier によるコード品質管理
+
+### Project Structure (structure.md)
+- Astro 標準のプロジェクト構造に従う
+- コンポーネントは機能別にディレクトリ分け
+- スクリプトは `src/scripts/` に集約
+
+## Code Reuse Analysis
+
+### Existing Components to Leverage
+- **翻訳データ**: `locales/en.json`, `locales/ja.json` の内容を移行（日本語はブラッシュアップ）
+- **プロジェクトデータ**: 現在のプロジェクト情報を Content Collections に移行
+- **スキルデータ**: Developer/Designer スキルデータを統合
+- **画像アセット**: `public/` 内の画像をそのまま利用
+
+### Integration Points
+- **AWS S3 + CloudFront**: 既存のデプロイインフラを継続利用
+- **Google Fonts**: Inter, Space Grotesk フォントを継続使用
+
+## Architecture
+
+Astroのアイランドアーキテクチャを採用し、インタラクティブな部分のみにJavaScriptを使用。
+
+```mermaid
+graph TD
+    A[BaseLayout.astro] --> B[Header.astro]
+    A --> C[Main Content]
+    A --> D[Footer.astro]
+
+    C --> E[Hero.astro]
+    C --> F[About.astro]
+    C --> G[Projects.astro]
+    C --> H[Skills.astro]
+    C --> I[Contact.astro]
+
+    E --> J[three-scene.ts]
+    E --> K[gsap-hero.ts]
+
+    G --> L[gsap-scroll.ts]
+    H --> L
+```
+
+### Modular Design Principles
+- **Single File Responsibility**: 各Astroコンポーネントは1つのセクションまたは機能を担当
+- **Component Isolation**: UIコンポーネントは再利用可能な形で分離
+- **Service Layer Separation**: データ取得は `src/data/` に、スクリプトは `src/scripts/` に分離
+- **Utility Modularity**: i18n、テーマ管理などはユーティリティとして分離
+
+## Project Structure
 
 ```
 src/
-├── components/           # Astroコンポーネント
-│   ├── common/          # 共通コンポーネント
+├── components/
+│   ├── common/
 │   │   ├── Header.astro
 │   │   ├── Footer.astro
 │   │   ├── ThemeToggle.astro
 │   │   └── LanguageToggle.astro
-│   ├── sections/        # ページセクション
+│   ├── sections/
 │   │   ├── Hero.astro
 │   │   ├── About.astro
 │   │   ├── Projects.astro
 │   │   ├── Skills.astro
 │   │   └── Contact.astro
-│   ├── three/           # Three.js関連（クライアントスクリプト）
-│   │   └── HeroScene.ts
-│   └── ui/              # UIコンポーネント
+│   └── ui/
 │       ├── Button.astro
 │       ├── Card.astro
-│       └── Badge.astro
+│       ├── Badge.astro
+│       └── ProjectCard.astro
 ├── layouts/
 │   └── BaseLayout.astro
 ├── pages/
-│   ├── index.astro      # デフォルト（en）
+│   ├── index.astro
 │   ├── ja/
 │   │   ├── index.astro
 │   │   └── projects/
@@ -35,154 +90,215 @@ src/
 │   └── projects/
 │       └── [slug].astro
 ├── i18n/
-│   ├── ui.ts            # 翻訳ヘルパー
+│   ├── utils.ts
 │   ├── en.json
 │   └── ja.json
 ├── scripts/
-│   ├── gsap-init.ts     # GSAP初期化
-│   ├── scroll-animations.ts
-│   └── three-scene.ts
+│   ├── gsap/
+│   │   ├── init.ts
+│   │   ├── hero-animations.ts
+│   │   └── scroll-animations.ts
+│   └── three/
+│       └── hero-scene.ts
 ├── styles/
 │   └── global.css
 ├── content/
-│   └── projects/        # Content Collections
-│       ├── project-1.md
-│       └── project-2.md
+│   └── projects/
+│       ├── en/
+│       │   ├── project-1.md
+│       │   └── project-2.md
+│       └── ja/
+│           ├── project-1.md
+│           └── project-2.md
 └── data/
-    └── projects.ts      # プロジェクトデータ
+    ├── skills.ts
+    └── social-links.ts
 ```
 
-## Styling方針
+## Components and Interfaces
 
-### 使用技術
-- **Tailwind CSS**: ユーティリティクラスのみ使用
-- **`<style>` タグは使用禁止**: 全てTailwindクラスで実装
-- **CSS Variables**: カスタムプロパティでテーマ管理
+### BaseLayout.astro
+- **Purpose:** 全ページ共通のレイアウト、メタタグ、View Transitions設定
+- **Interfaces:** `Props { title: string; description: string; locale: string }`
+- **Dependencies:** astro:transitions, global.css
+- **Reuses:** なし（ベースレイアウト）
 
-### Design Tokens
+### Hero.astro
+- **Purpose:** フルスクリーンのヒーローセクション、3D要素とアニメーション
+- **Interfaces:** `Props { locale: string }`
+- **Dependencies:** Three.js, GSAP, i18n
+- **Reuses:** i18n/utils.ts
 
-```css
-/* colors */
---color-primary: #6366f1;      /* Indigo */
---color-secondary: #ec4899;    /* Pink */
---color-accent: #14b8a6;       /* Teal */
+### Projects.astro
+- **Purpose:** プロジェクト一覧の表示（開発・デザイン統合）
+- **Interfaces:** `Props { locale: string }`
+- **Dependencies:** Content Collections, GSAP ScrollTrigger
+- **Reuses:** ui/ProjectCard.astro, gsap/scroll-animations.ts
 
-/* Light theme */
---color-background: #fafafa;
---color-foreground: #0a0a0a;
---color-muted: #737373;
---color-card: #ffffff;
---color-border: #e5e5e5;
+### ThemeToggle.astro
+- **Purpose:** ライト/ダークテーマの切り替え
+- **Interfaces:** なし（スタンドアロン）
+- **Dependencies:** なし
+- **Reuses:** なし
 
-/* Dark theme */
---color-background-dark: #0a0a0a;
---color-foreground-dark: #fafafa;
---color-muted-dark: #a3a3a3;
---color-card-dark: #171717;
---color-border-dark: #262626;
+### LanguageToggle.astro
+- **Purpose:** 言語切り替えUI
+- **Interfaces:** `Props { currentLocale: string }`
+- **Dependencies:** astro:i18n
+- **Reuses:** i18n/utils.ts
 
-/* spacing */
---space-section: 6rem;         /* セクション間隔 */
---space-container: 1.5rem;     /* コンテナパディング */
+## Data Models
 
-/* typography */
---font-display: 'Space Grotesk', sans-serif;
---font-body: 'Inter', sans-serif;
---font-mono: 'JetBrains Mono', monospace;
-
-/* animation */
---duration-fast: 150ms;
---duration-normal: 300ms;
---duration-slow: 500ms;
---ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+### Project (Content Collection)
+```typescript
+interface Project {
+  title: string;
+  description: string;
+  category: 'development' | 'design';
+  tags: string[];
+  image: string;
+  link?: string;
+  github?: string;
+  featured: boolean;
+  // Case Study
+  overview?: {
+    problem: string;
+    solution: string;
+    results: string[];
+  };
+  techStack?: string[];
+}
 ```
 
-### Tailwind拡張設定
+### Skill
+```typescript
+interface Skill {
+  name: string;
+  category: 'frontend' | 'backend' | 'design' | 'tools';
+  icon: string;
+  level: 'beginner' | 'intermediate' | 'advanced' | 'expert';
+}
+```
 
+### SocialLink
+```typescript
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
+```
+
+## Styling Strategy
+
+### Tailwind CSS Configuration
 ```typescript
 // tailwind.config.mjs
 export default {
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
         accent: 'var(--color-accent)',
+        background: 'var(--color-background)',
+        foreground: 'var(--color-foreground)',
+        muted: 'var(--color-muted)',
+        card: 'var(--color-card)',
+        border: 'var(--color-border)',
       },
       fontFamily: {
         display: ['Space Grotesk', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
-      animation: {
-        'fade-in': 'fadeIn 0.5s ease-out',
-        'slide-up': 'slideUp 0.5s ease-out',
-      },
     },
   },
+  plugins: [],
 };
 ```
 
-## コンポーネント設計
+### CSS Variables (global.css)
+```css
+@import 'tailwindcss';
 
-### 1. Hero Section
+:root {
+  --color-primary: #6366f1;
+  --color-secondary: #ec4899;
+  --color-accent: #14b8a6;
+  --color-background: #fafafa;
+  --color-foreground: #0a0a0a;
+  --color-muted: #737373;
+  --color-card: #ffffff;
+  --color-border: #e5e5e5;
+}
 
-**視覚的特徴:**
-- フルスクリーン表示
-- Three.js 3Dオブジェクト（抽象的なジオメトリ）
-- グラデーション背景
-- 大きなタイポグラフィ
-- GSAPテキストアニメーション
-
-**構成:**
-```astro
-<!-- Hero.astro -->
-<section class="relative h-screen flex items-center justify-center overflow-hidden">
-  <!-- 3D Canvas (Three.js) -->
-  <canvas id="hero-canvas" class="absolute inset-0 -z-10"></canvas>
-
-  <!-- Content -->
-  <div class="container mx-auto px-6 text-center">
-    <h1 class="font-display text-6xl md:text-8xl font-bold">
-      <span class="hero-text">Muneyasu Kagawa</span>
-    </h1>
-    <p class="hero-subtitle text-xl md:text-2xl text-muted mt-6">
-      Frontend Developer & UI/UX Designer
-    </p>
-  </div>
-
-  <!-- Scroll indicator -->
-  <div class="absolute bottom-8 left-1/2 -translate-x-1/2">
-    <div class="scroll-indicator w-6 h-10 border-2 border-foreground/30 rounded-full">
-      <div class="w-1 h-2 bg-foreground/50 rounded-full mx-auto mt-2"></div>
-    </div>
-  </div>
-</section>
-
-<script>
-  import { initHeroScene } from '../scripts/three-scene';
-  import { animateHeroText } from '../scripts/gsap-init';
-
-  initHeroScene();
-  animateHeroText();
-</script>
+.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-muted: #a3a3a3;
+  --color-card: #171717;
+  --color-border: #262626;
+}
 ```
 
-### 2. Three.js Scene設計
+## Animation Strategy
 
+### GSAP Initialization
 ```typescript
-// scripts/three-scene.ts
+// scripts/gsap/init.ts
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+// Reduced motion check
+const prefersReducedMotion =
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+export { gsap, ScrollTrigger, prefersReducedMotion };
+```
+
+### Hero Animation
+```typescript
+// scripts/gsap/hero-animations.ts
+import { gsap, prefersReducedMotion } from './init';
+
+export function animateHero() {
+  if (prefersReducedMotion) {
+    gsap.set('.hero-text, .hero-subtitle', { opacity: 1 });
+    return;
+  }
+
+  const tl = gsap.timeline();
+  tl.from('.hero-text', {
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    ease: 'power4.out',
+  })
+  .from('.hero-subtitle', {
+    y: 50,
+    opacity: 0,
+    duration: 0.8,
+    ease: 'power3.out',
+  }, '-=0.5');
+}
+```
+
+### Three.js Scene
+```typescript
+// scripts/three/hero-scene.ts
 import * as THREE from 'three';
 
-export function initHeroScene() {
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement;
-  if (!canvas) return;
-
+export function initHeroScene(canvas: HTMLCanvasElement) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
 
-  // Geometry: Abstract shapes (Torus, Icosahedron, etc.)
+  // TorusKnot geometry with wireframe
   const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
   const material = new THREE.MeshStandardMaterial({
     color: 0x6366f1,
@@ -201,136 +317,63 @@ export function initHeroScene() {
 
   camera.position.z = 5;
 
-  // Mouse interaction
+  // Mouse tracking
   let mouseX = 0, mouseY = 0;
-  document.addEventListener('mousemove', (e) => {
+  const onMouseMove = (e: MouseEvent) => {
     mouseX = (e.clientX / window.innerWidth) * 2 - 1;
     mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-  });
+  };
+  document.addEventListener('mousemove', onMouseMove);
 
   // Animation loop
-  function animate() {
+  const animate = () => {
     requestAnimationFrame(animate);
     mesh.rotation.x += 0.005;
     mesh.rotation.y += 0.005;
     mesh.position.x = mouseX * 0.5;
     mesh.position.y = mouseY * 0.5;
     renderer.render(scene, camera);
-  }
+  };
   animate();
 
-  // Resize handler
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-  });
+  // Cleanup function
+  return () => {
+    document.removeEventListener('mousemove', onMouseMove);
+    renderer.dispose();
+  };
 }
 ```
 
-### 3. GSAP Animation設計
+## i18n Strategy
 
-```typescript
-// scripts/gsap-init.ts
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
-
-export function animateHeroText() {
-  const heroText = document.querySelector('.hero-text');
-  const heroSubtitle = document.querySelector('.hero-subtitle');
-
-  const tl = gsap.timeline();
-
-  tl.from(heroText, {
-    y: 100,
-    opacity: 0,
-    duration: 1,
-    ease: 'power4.out',
-  })
-  .from(heroSubtitle, {
-    y: 50,
-    opacity: 0,
-    duration: 0.8,
-    ease: 'power3.out',
-  }, '-=0.5');
-}
-
-export function initScrollAnimations() {
-  // Section fade-in
-  gsap.utils.toArray('.section').forEach((section: Element) => {
-    gsap.from(section, {
-      opacity: 0,
-      y: 100,
-      duration: 1,
-      scrollTrigger: {
-        trigger: section,
-        start: 'top 80%',
-        end: 'top 20%',
-        toggleActions: 'play none none reverse',
-      },
-    });
-  });
-
-  // Project cards stagger
-  gsap.from('.project-card', {
-    opacity: 0,
-    y: 50,
-    stagger: 0.2,
-    duration: 0.8,
-    scrollTrigger: {
-      trigger: '.projects-grid',
-      start: 'top 70%',
+### Configuration (astro.config.mjs)
+```javascript
+export default defineConfig({
+  site: 'https://mun-k.com',
+  output: 'static',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ja'],
+    routing: {
+      prefixDefaultLocale: false,
     },
-  });
-
-  // Skills reveal
-  gsap.from('.skill-item', {
-    scale: 0,
-    opacity: 0,
-    stagger: 0.1,
-    duration: 0.5,
-    ease: 'back.out(1.7)',
-    scrollTrigger: {
-      trigger: '.skills-section',
-      start: 'top 60%',
-    },
-  });
-}
+  },
+});
 ```
 
-### 4. View Transitions
-
-```astro
-<!-- BaseLayout.astro -->
----
-import { ClientRouter } from 'astro:transitions';
----
-<html lang={Astro.currentLocale || 'en'}>
-  <head>
-    <ClientRouter />
-    <!-- ... -->
-  </head>
-  <body>
-    <slot />
-  </body>
-</html>
-```
-
-### 5. i18n設計
-
+### Translation Helper
 ```typescript
-// i18n/ui.ts
+// i18n/utils.ts
 import en from './en.json';
 import ja from './ja.json';
 
-const translations = { en, ja };
+const translations = { en, ja } as const;
+type Locale = keyof typeof translations;
 
-export function useTranslation(locale: string) {
+export function useTranslation(locale: Locale) {
   const t = (key: string): string => {
     const keys = key.split('.');
-    let value: unknown = translations[locale as keyof typeof translations];
+    let value: unknown = translations[locale];
 
     for (const k of keys) {
       if (typeof value === 'object' && value !== null) {
@@ -343,144 +386,119 @@ export function useTranslation(locale: string) {
 
   return { t };
 }
+
+export function getLocaleFromUrl(url: URL): Locale {
+  const [, locale] = url.pathname.split('/');
+  return locale === 'ja' ? 'ja' : 'en';
+}
 ```
 
+## Error Handling
+
+### Error Scenarios
+1. **Three.js initialization failure**
+   - **Handling:** Catch error, show static fallback image
+   - **User Impact:** 3D animation not shown, but content accessible
+
+2. **Content Collection load failure**
+   - **Handling:** Return empty array, log error
+   - **User Impact:** Projects section shows "No projects available"
+
+3. **Translation key not found**
+   - **Handling:** Return key as fallback
+   - **User Impact:** Shows untranslated key (for debugging)
+
+## Testing Strategy
+
+### Unit Testing
+- i18n utility functions
+- Data transformation functions
+- GSAP animation configurations (mock DOM)
+
+### Integration Testing
+- Page rendering with different locales
+- Theme switching persistence
+- Navigation between pages
+
+### End-to-End Testing (Playwright)
+
+Playwrightを使用したE2Eテストを実装。
+
+#### Configuration
+```typescript
+// playwright.config.ts
+import { defineConfig, devices } from '@playwright/test';
+
+export default defineConfig({
+  testDir: './tests/e2e',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 1 : undefined,
+  reporter: 'html',
+  use: {
+    baseURL: 'http://localhost:4321',
+    trace: 'on-first-retry',
+  },
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+    { name: 'mobile', use: { ...devices['iPhone 13'] } },
+  ],
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://localhost:4321',
+    reuseExistingServer: !process.env.CI,
+  },
+});
+```
+
+#### Test Structure
+```
+tests/
+└── e2e/
+    ├── home.spec.ts        # ホームページ全セクション表示テスト
+    ├── navigation.spec.ts  # ナビゲーション、ページ遷移テスト
+    ├── i18n.spec.ts        # 言語切り替えテスト
+    ├── theme.spec.ts       # テーマ切り替え、永続化テスト
+    └── a11y.spec.ts        # アクセシビリティテスト
+```
+
+#### Test Scenarios
+1. **home.spec.ts**
+   - 全セクション（Hero, About, Projects, Skills, Contact）の表示確認
+   - スクロールアニメーションのトリガー確認
+   - 3Dシーンの読み込み確認
+
+2. **navigation.spec.ts**
+   - ヘッダーナビゲーションリンクの動作
+   - プロジェクト詳細ページへの遷移
+   - 戻るボタンの動作
+   - View Transitionsの確認
+
+3. **i18n.spec.ts**
+   - 言語切り替えUIの動作
+   - URLの変更（/ja/ プレフィックス）
+   - コンテンツの言語変更確認
+
+4. **theme.spec.ts**
+   - テーマトグルボタンの動作
+   - localStorage への永続化
+   - システム設定の反映
+
+#### npm Scripts
 ```json
-// i18n/ja.json
 {
-  "hero": {
-    "title": "Muneyasu Kagawa",
-    "subtitle": "フロントエンドエンジニア & UI/UXデザイナー",
-    "cta": "プロジェクトを見る"
-  },
-  "about": {
-    "title": "About",
-    "description": "東京を拠点に活動するフロントエンドエンジニア。ユーザー体験を重視した、美しく機能的なWebアプリケーションの開発を得意としています。"
-  },
-  "projects": {
-    "title": "Projects",
-    "viewDetails": "詳細を見る"
-  },
-  "skills": {
-    "title": "Skills",
-    "development": "開発",
-    "design": "デザイン"
-  },
-  "contact": {
-    "title": "Contact",
-    "description": "お仕事のご依頼やご質問はお気軽にどうぞ"
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
   }
 }
 ```
 
-## レスポンシブ設計
-
-### ブレークポイント
-
-| Name | Min Width | 用途 |
-|------|-----------|------|
-| sm   | 640px     | モバイル横向き |
-| md   | 768px     | タブレット |
-| lg   | 1024px    | デスクトップ |
-| xl   | 1280px    | 大画面 |
-| 2xl  | 1536px    | ワイドスクリーン |
-
-### モバイルファースト
-
-- 基本スタイルはモバイル向け
-- `md:` `lg:` で大画面対応を追加
-- 3D要素はデバイス性能に応じて簡略化
-
-## アクセシビリティ
-
-### prefers-reduced-motion対応
-
-```typescript
-// scripts/gsap-init.ts
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-if (prefersReducedMotion) {
-  gsap.globalTimeline.timeScale(0);
-  // または簡素なフェードのみに
-}
-```
-
-### フォーカス管理
-
-```css
-/* Tailwind utility */
-.focus-visible:ring-2
-.focus-visible:ring-primary
-.focus-visible:ring-offset-2
-```
-
-## パフォーマンス最適化
-
-### 1. Three.js遅延ロード
-
-```astro
-<script>
-  // Intersection Observer で可視時のみ初期化
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        import('../scripts/three-scene').then(({ initHeroScene }) => {
-          initHeroScene();
-        });
-        observer.disconnect();
-      }
-    });
-  });
-
-  observer.observe(document.getElementById('hero-canvas')!);
-</script>
-```
-
-### 2. 画像最適化
-
-- Astro Image コンポーネント使用
-- WebP/AVIF フォーマット
-- srcset によるレスポンシブ画像
-
-### 3. フォント最適化
-
-```astro
-<!-- BaseLayout.astro -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-```
-
-## ダークモード実装
-
-```astro
-<!-- ThemeToggle.astro -->
-<button
-  id="theme-toggle"
-  class="p-2 rounded-full hover:bg-foreground/10 transition-colors"
-  aria-label="Toggle theme"
->
-  <svg class="dark:hidden w-5 h-5" ...><!-- Sun icon --></svg>
-  <svg class="hidden dark:block w-5 h-5" ...><!-- Moon icon --></svg>
-</button>
-
-<script>
-  const toggle = document.getElementById('theme-toggle');
-  const html = document.documentElement;
-
-  // Initialize from localStorage or system preference
-  const theme = localStorage.getItem('theme') ||
-    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  html.classList.toggle('dark', theme === 'dark');
-
-  toggle?.addEventListener('click', () => {
-    const isDark = html.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-  });
-</script>
-```
-
-## ビルド設定
+## Build Configuration
 
 ```javascript
 // astro.config.mjs
@@ -490,6 +508,9 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://mun-k.com',
   output: 'static',
+  build: {
+    assets: '_assets',
+  },
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'ja'],

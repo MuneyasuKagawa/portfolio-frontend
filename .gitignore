@@ -1,38 +1,87 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
-/node_modules
+# ===================
+# Dependencies
+# ===================
+node_modules/
 
-# next.js
-/.next/
-/out/
+# ===================
+# Build outputs
+# ===================
+# Next.js
+.next/
+out/
 
-# production
-/build
+# Astro
+dist/
+.astro/
 
-# debug
+# General
+build/
+
+# ===================
+# Debug logs
+# ===================
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
+*.log
 
-# env files
-.env*
+# ===================
+# Environment files
+# ===================
+.env
+.env.local
+.env.*.local
 !.env.sample
+!.env.example
 
-# vercel
-.vercel
+# ===================
+# IDE / Editor
+# ===================
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# typescript
+# ===================
+# TypeScript
+# ===================
 *.tsbuildinfo
 next-env.d.ts
 
-terraform.tfvars
+# ===================
+# Testing
+# ===================
+/coverage/
+/playwright-report/
+/test-results/
+playwright/.cache/
 
+# ===================
 # Terraform
+# ===================
 .terraform/
 *.tfstate
 *.tfstate.*
 terraform.tfvars
+*.tfplan
 
-.design
+# ===================
+# Vercel
+# ===================
+.vercel
+
+# ===================
+# Project specific
+# ===================
+.design/
+
+# ===================
+# Misc
+# ===================
+*.pem
+.cache/
