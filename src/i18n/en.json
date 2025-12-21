@@ -1,0 +1,73 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "skills": "Skills",
+    "contact": "Contact",
+    "portfolio_title": "Mun's Portfolio"
+  },
+  "hero": {
+    "name": "Mun",
+    "greeting": "Hi, I'm",
+    "role": "Frontend Developer & UI/UX Designer",
+    "description": "I create responsive web applications and intuitive user experiences. With 8+ years of coding experience and a passion for design, I bridge the gap between development and design.",
+    "view_work": "View My Work",
+    "contact_me": "Contact Me"
+  },
+  "about": {
+    "title": "About Me",
+    "intro": "Hello! I'm Mun, a Frontend Developer and UI/UX Designer based in Japan with 8+ years of experience. I specialize in modern JavaScript frameworks like React and Next.js, while also crafting beautiful, user-centered digital experiences.",
+    "development": "On the development side, I build responsive, performant web applications. I'm proficient in TypeScript, Node.js, and various backend technologies, allowing me to tackle projects from end to end.",
+    "design": "As a designer, I focus on creating intuitive interfaces through user research, wireframing, and prototyping. I believe great design solves problems while creating emotional connections.",
+    "personal": "When I'm not coding or designing, you can find me gaming, reading, riding horses, or exploring new technologies. I'm always eager to learn and grow."
+  },
+  "projects": {
+    "title": "My Projects",
+    "description": "Here are some of my recent projects. Each one showcases different skills across development and design.",
+    "view_details": "View Details",
+    "view_code": "View Code",
+    "view_live": "View Live"
+  },
+  "skills": {
+    "title": "My Skills",
+    "description": "I've cultivated a diverse skill set spanning frontend development, backend technologies, and design. Here's an overview of my technical expertise.",
+    "frontend": "Frontend",
+    "backend": "Backend",
+    "design": "Design",
+    "tools": "Tools"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "description": "I'd love to help bring your vision to life. Whether you need a developer, designer, or both, let's discuss how I can add value to your project.",
+    "email": "Email",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "twitter": "X (Twitter)"
+  },
+  "footer": {
+    "portfolio": "Mun's Portfolio",
+    "tagline": "Building exceptional digital experiences.",
+    "copyright": "© {year} Muneyasu Kagawa. All rights reserved."
+  },
+  "common": {
+    "download_resume": "Download Resume",
+    "coming_soon": "Coming soon!",
+    "view_details": "View Details",
+    "toggle_language": "Toggle language",
+    "toggle_theme": "Toggle theme",
+    "back_to_top": "Back to top"
+  },
+  "project_detail": {
+    "back_to_projects": "Back to Projects",
+    "overview": "Overview",
+    "problem": "Problem",
+    "solution": "Solution",
+    "features": "Features",
+    "challenges": "Challenges",
+    "results": "Results",
+    "tech_stack": "Tech Stack",
+    "view_live_site": "View Live Site",
+    "view_code": "View Code"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "header": {
+    "home": "ホーム",
+    "about": "私について",
+    "projects": "実績",
+    "skills": "スキル",
+    "contact": "お問い合わせ",
+    "portfolio_title": "Mun's Portfolio"
+  },
+  "hero": {
+    "name": "Mun",
+    "greeting": "こんにちは、",
+    "role": "フロントエンドエンジニア & UI/UXデザイナー",
+    "description": "使いやすく美しいWebアプリを開発しています。8年以上の開発経験とデザインへの情熱を活かし、開発とデザインをつなぐ存在を目指しています。",
+    "view_work": "実績を見る",
+    "contact_me": "お問い合わせ"
+  },
+  "about": {
+    "title": "私について",
+    "intro": "はじめまして、香川と申します。ReactやNext.jsを得意とするフロントエンドエンジニア兼UI/UXデザイナーとして、8年以上の経験があります。",
+    "development": "開発面では、パフォーマンスを意識したレスポンシブなWebアプリを構築しています。TypeScriptやNode.jsにも精通しており、フルスタックでの開発も可能です。",
+    "design": "デザイン面では、ユーザーリサーチやプロトタイピングを通じて、使いやすいインターフェースを追求しています。優れたデザインとは、問題解決であり、ユーザーとの繋がりを生み出すものだと考えています。",
+    "personal": "趣味はゲーム、読書、乗馬など。新しい技術に触れることも好きで、常に学び続ける姿勢を大切にしています。"
+  },
+  "projects": {
+    "title": "実績",
+    "description": "これまでに手がけたプロジェクトをご紹介します。開発とデザインの両面から取り組んだ作品です。",
+    "view_details": "詳しく見る",
+    "view_code": "コードを見る",
+    "view_live": "サイトを見る"
+  },
+  "skills": {
+    "title": "スキル",
+    "description": "フロントエンド・バックエンド開発からデザインまで、幅広いスキルを身につけてきました。",
+    "frontend": "フロントエンド",
+    "backend": "バックエンド",
+    "design": "デザイン",
+    "tools": "ツール"
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "description": "お仕事のご依頼・ご相談など、お気軽にご連絡ください。開発とデザインの両面からプロジェクトに貢献いたします。",
+    "email": "メール",
+    "linkedin": "LinkedIn",
+    "github": "GitHub",
+    "twitter": "X (Twitter)"
+  },
+  "footer": {
+    "portfolio": "Mun's Portfolio",
+    "tagline": "心に響くデジタル体験を",
+    "copyright": "© {year} Muneyasu Kagawa. All rights reserved."
+  },
+  "common": {
+    "download_resume": "履歴書をダウンロード",
+    "coming_soon": "準備中",
+    "view_details": "詳しく見る",
+    "toggle_language": "言語を切り替え",
+    "toggle_theme": "テーマを切り替え",
+    "back_to_top": "トップへ戻る"
+  },
+  "project_detail": {
+    "back_to_projects": "実績一覧へ戻る",
+    "overview": "概要",
+    "problem": "課題",
+    "solution": "解決策",
+    "features": "機能",
+    "challenges": "技術的な課題",
+    "results": "成果",
+    "tech_stack": "使用技術",
+    "view_live_site": "サイトを見る",
+    "view_code": "コードを見る"
+  }
+}

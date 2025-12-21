@@ -42,7 +42,7 @@
   - _Requirements: 8, NFR-SEO_
   - _Prompt: Implement the task for spec astro-portfolio-redesign, first run spec-workflow-guide to get the workflow guide then implement the task: Role: Astro Developer specializing in layouts | Task: Create BaseLayout.astro with View Transitions (ClientRouter), meta tags from current layout.tsx, SEO structured data, theme initialization script for dark mode | Restrictions: Use Astro native syntax only, no React, include suppressHydrationWarning equivalent | Success: Layout renders with correct meta tags, View Transitions enabled, theme persists on reload | Instructions: Mark this task as [-] in tasks.md before starting, use log-implementation tool after completion, then mark as [x]_
 
-- [ ] 5. Implement i18n utility functions
+- [x] 5. Implement i18n utility functions
 
   - File: src/i18n/utils.ts, src/i18n/en.json, src/i18n/ja.json
   - Create useTranslation helper function
