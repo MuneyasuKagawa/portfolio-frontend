@@ -9,7 +9,10 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "disable-cache": "node scripts/clear-cache.js",
-    "deploy": "npm run build && aws s3 sync out/ s3://portfolio-frontend-mk && npm run disable-cache"
+    "deploy": "npm run build && aws s3 sync out/ s3://portfolio-frontend-mk && npm run disable-cache",
+    "spec:d": "npx -y @pimzino/spec-workflow-mcp --dashboard --port=2345",
+    "spec:s": "npx -y @pimzino/spec-workflow-mcp ${pwd} --port=2345",
+    "spec": "concurrently -c blue,green \"npm run spec:d\" \"sleep 3 && npm run spec:s\""
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",
@@ -70,6 +73,7 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "eslint": "9.22.0",
