@@ -133,7 +133,7 @@ const websiteSchema = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -151,24 +151,8 @@ const websiteSchema = {
     />
 
     <ClientRouter />
-
-    <script is:inline>
-      const getTheme = () => {
-        if (typeof localStorage !== "undefined") {
-          const stored = localStorage.getItem("theme");
-          if (stored) return stored;
-        }
-        return window.matchMedia("(prefers-color-scheme: dark)").matches
-          ? "dark"
-          : "light";
-      };
-      const theme = getTheme();
-      document.documentElement.classList.toggle("dark", theme === "dark");
-    </script>
   </head>
-  <body
-    class="bg-background font-body text-foreground min-h-screen antialiased"
-  >
+  <body class="min-h-screen antialiased">
     <slot />
   </body>
 </html>

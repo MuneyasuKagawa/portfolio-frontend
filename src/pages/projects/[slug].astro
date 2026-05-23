@@ -1,0 +1,412 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+
+  return projects.map((project: CollectionEntry<"projects">) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props as Props;
+const { Content } = await render(project);
+
+const { title, description, category, tags, image, link, overview, techStack } =
+  project.data;
+---
+
+<BaseLayout title={`${title} | Mun's Portfolio`} description={description}>
+  <div class="layout-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="back-link">← 戻る</a>
+        <h1 class="project-title">{title}</h1>
+        <span class="project-category">
+          {category === "development" ? "Development" : "Design"}
+        </span>
+      </div>
+
+      <div class="sidebar-meta">
+        {
+          techStack && techStack.length > 0 && (
+            <div class="meta-section">
+              <h3 class="meta-title">Tech Stack</h3>
+              <ul class="tech-list">
+                {techStack.map((tech: string) => (
+                  <li class="tech-item">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          )
+        }
+
+        {
+          tags && tags.length > 0 && (
+            <div class="meta-section">
+              <h3 class="meta-title">Tags</h3>
+              <div class="tags">
+                {tags.map((tag: string) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        {
+          link && (
+            <div class="meta-section">
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="external-link"
+              >
+                → サイトを見る
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </aside>
+
+    <main class="main-content">
+      {
+        image && (
+          <div class="project-image">
+            <img src={image} alt={title} loading="lazy" />
+          </div>
+        )
+      }
+
+      <div class="project-description">
+        <p>{description}</p>
+      </div>
+
+      {
+        overview && (
+          <section class="overview-section">
+            <div class="overview-grid">
+              <div class="overview-item">
+                <h3 class="overview-title">課題</h3>
+                <p class="overview-text">{overview.problem}</p>
+              </div>
+              <div class="overview-item">
+                <h3 class="overview-title">解決策</h3>
+                <p class="overview-text">{overview.solution}</p>
+              </div>
+              {overview.results && overview.results.length > 0 && (
+                <div class="overview-item">
+                  <h3 class="overview-title">成果</h3>
+                  <ul class="results-list">
+                    {overview.results.map((result: string) => (
+                      <li>{result}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </section>
+        )
+      }
+
+      <article class="prose">
+        <Content />
+      </article>
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .back-link {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    display: inline-block;
+    margin-bottom: 2rem;
+    transition:
+      color 0.3s ease,
+      padding-left 0.3s ease;
+  }
+
+  .back-link:hover {
+    color: var(--color-foreground);
+    padding-left: 5px;
+  }
+
+  .project-title {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+  }
+
+  .project-category {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .sidebar-meta {
+    margin-top: 3rem;
+  }
+
+  .meta-section {
+    margin-bottom: 2rem;
+  }
+
+  .meta-title {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .tech-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .tech-item {
+    font-size: 0.875rem;
+    color: var(--color-subtle);
+    padding: 0.25rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    padding: 0.25rem 0.5rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .external-link {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    transition:
+      color 0.3s ease,
+      padding-left 0.3s ease;
+  }
+
+  .external-link:hover {
+    color: var(--color-foreground);
+    padding-left: 5px;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 3rem;
+    background-color: #ffffff;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .project-image img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .project-description {
+    font-size: 1.25rem;
+    color: var(--color-subtle);
+    line-height: 1.8;
+    margin-bottom: 3rem;
+    max-width: 700px;
+  }
+
+  .overview-section {
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .overview-grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .overview-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .overview-item {
+    padding: 1.5rem;
+    background-color: var(--color-card);
+  }
+
+  .overview-title {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+  }
+
+  .overview-text {
+    font-size: 0.9375rem;
+    color: var(--color-subtle);
+    line-height: 1.7;
+  }
+
+  .results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .results-list li {
+    font-size: 0.9375rem;
+    color: var(--color-subtle);
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .results-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-muted);
+  }
+
+  .prose {
+    max-width: 700px;
+    color: var(--color-subtle);
+    line-height: 1.8;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-foreground);
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose :global(strong) {
+    color: var(--color-foreground);
+  }
+
+  .prose :global(a) {
+    color: var(--color-foreground);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--color-muted);
+  }
+
+  .prose :global(code) {
+    font-family: monospace;
+    background-color: var(--color-card);
+    padding: 0.125rem 0.375rem;
+    font-size: 0.875em;
+  }
+
+  .prose :global(pre) {
+    background-color: var(--color-card);
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    padding: 0;
+  }
+</style>
+
+<script>
+  import { animate } from "animejs";
+
+  function initAnimations() {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) {
+      (sidebar as HTMLElement).style.opacity = "0";
+      animate(sidebar, {
+        translateX: [-30, 0],
+        opacity: [0, 1],
+        easing: "easeOutExpo",
+        duration: 1500,
+        delay: 200,
+      });
+    }
+
+    const mainContent = document.querySelector(".main-content");
+    if (mainContent) {
+      (mainContent as HTMLElement).style.opacity = "0";
+      animate(mainContent, {
+        opacity: [0, 1],
+        translateY: [30, 0],
+        easing: "easeOutCubic",
+        duration: 800,
+        delay: 400,
+      });
+    }
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReducedMotion) {
+    initAnimations();
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    if (!prefersReducedMotion) {
+      initAnimations();
+    }
+  });
+</script>

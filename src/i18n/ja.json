@@ -27,7 +27,15 @@
     "description": "これまでに手がけたプロジェクトをご紹介します。開発とデザインの両面から取り組んだ作品です。",
     "view_details": "詳しく見る",
     "view_code": "コードを見る",
-    "view_live": "サイトを見る"
+    "view_live": "サイトを見る",
+    "backToProjects": "実績一覧へ戻る",
+    "overview": "概要",
+    "problem": "課題",
+    "solution": "解決策",
+    "results": "成果",
+    "techStack": "使用技術",
+    "development": "開発",
+    "design": "デザイン"
   },
   "skills": {
     "title": "スキル",

@@ -1,0 +1,62 @@
+---
+import Card from "./Card.astro";
+import Badge from "./Badge.astro";
+import { type Locale } from "../../i18n/utils";
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  category: "development" | "design";
+  tags: string[];
+  slug: string;
+  locale?: Locale;
+  featured?: boolean;
+}
+
+const {
+  title,
+  description,
+  image,
+  category,
+  tags,
+  slug,
+  locale = "en",
+  featured = false,
+} = Astro.props;
+
+const href = locale === "ja" ? `/ja/projects/${slug}` : `/projects/${slug}`;
+const categoryLabel = category === "development" ? "Dev" : "Design";
+---
+
+<Card href={href} class={`project-card ${featured ? "md:col-span-2" : ""}`}>
+  <div class="aspect-video overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      class="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+      loading="lazy"
+    />
+  </div>
+  <div class="p-5">
+    <div class="mb-2 flex items-center gap-2">
+      <Badge variant={category === "development" ? "primary" : "secondary"}>
+        {categoryLabel}
+      </Badge>
+      {featured && <Badge variant="outline">Featured</Badge>}
+    </div>
+    <h3 class="text-foreground mb-2 text-lg font-semibold">{title}</h3>
+    <p class="text-muted-foreground mb-4 line-clamp-2 text-sm">{description}</p>
+    <div class="flex flex-wrap gap-2">
+      {
+        tags
+          .slice(0, 4)
+          .map((tag) => (
+            <span class="text-muted-foreground bg-muted rounded px-2 py-1 text-xs">
+              {tag}
+            </span>
+          ))
+      }
+    </div>
+  </div>
+</Card>

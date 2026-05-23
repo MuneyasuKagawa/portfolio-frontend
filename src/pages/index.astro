@@ -1,26 +1,1356 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { projects } from "@/data/projects";
+import { skills, type Skill } from "@/data/skills";
+import { socialLinks } from "@/data/social-links";
 
-const locale = "en";
+const siteConfig = {
+  name: "KAGAWA<br>MUNEYASU",
+  role: "Frontend Developer / UI Designer",
+  bio: "モダンなWeb技術を使用して、\n美しく機能的なデジタル体験を創造しています。",
+  email: "muneyasu.kagawa@gmail.com",
+};
+
+const featuredProjects = projects.filter((p) => p.featured);
+
+const categoryLabels: Record<string, string> = {
+  frontend: "Frontend",
+  backend: "Backend",
+  design: "Design",
+  tools: "Tools",
+};
+
+const groupedSkills = skills.reduce(
+  (acc, skill) => {
+    if (!acc[skill.category]) {
+      acc[skill.category] = [];
+    }
+    acc[skill.category].push(skill);
+    return acc;
+  },
+  {} as Record<string, Skill[]>
+);
 ---
 
 <BaseLayout
-  title="Muneyasu Kusunoki | Developer & Designer"
-  description="Portfolio of Muneyasu Kusunoki - Full-stack Developer and UI/UX Designer"
-  locale={locale}
+  title="Muneyasu Kagawa | Developer & Designer"
+  description="Muneyasu Kagawaのポートフォリオ - React、TypeScript、モダンWeb技術を専門とするフロントエンド開発者・UI/UXデザイナー"
+  locale="ja"
 >
-  <main class="container mx-auto px-4">
-    <section class="flex min-h-screen items-center justify-center">
-      <div class="text-center">
-        <h1
-          class="font-display text-foreground text-5xl font-bold tracking-tight md:text-7xl"
-        >
-          Hello, I'm Muneyasu
-        </h1>
-        <p class="text-muted mt-6 text-xl">
-          Full-stack Developer & UI/UX Designer
+  <div class="layout-wrapper">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="site-role">{siteConfig.role}</span>
+        <h1 class="site-title" set:html={siteConfig.name} />
+        <p class="site-bio" set:html={siteConfig.bio.replace(/\n/g, "<br>")} />
+      </div>
+
+      <div class="sidebar-footer">
+        <nav>
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#works">→ Works</a></li>
+            <li class="nav-item"><a href="#about">→ About</a></li>
+            <li class="nav-item"><a href="#skills">→ Skills</a></li>
+            <li class="nav-item"><a href="#contact">→ Contact</a></li>
+          </ul>
+        </nav>
+
+        <ul class="nav-list mt-8">
+          {
+            socialLinks.map((link) => (
+              <li class="nav-item">
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  → {link.name}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <p class="copyright">
+          &copy; {new Date().getFullYear()} Muneyasu Kagawa
         </p>
       </div>
-    </section>
-  </main>
+    </aside>
+
+    <main class="main-content">
+      <section id="works" class="section">
+        <div class="section-header">
+          <h2 class="section-title">Works</h2>
+          <div class="filter-controls">
+            <label class="filter-checkbox">
+              <input
+                type="checkbox"
+                id="filter-development"
+                checked
+                data-category="development"
+              />
+              <span class="filter-label">Development</span>
+            </label>
+            <label class="filter-checkbox">
+              <input
+                type="checkbox"
+                id="filter-design"
+                checked
+                data-category="design"
+              />
+              <span class="filter-label">Design</span>
+            </label>
+          </div>
+        </div>
+        <ul class="work-list">
+          {
+            featuredProjects.map((project, index) => (
+              <li
+                class="work-item"
+                data-index={index}
+                data-category={project.category}
+              >
+                <button
+                  type="button"
+                  class="work-link"
+                  aria-label={`${project.titleJa || project.title}の詳細を見る`}
+                  data-project={JSON.stringify({
+                    image: project.image,
+                    title: project.titleJa || project.title,
+                    category:
+                      project.category === "development"
+                        ? "Development"
+                        : "Design",
+                    description: project.descriptionJa || project.description,
+                    link: project.link || "",
+                    techStack: project.techStack || [],
+                    overview: project.overview
+                      ? {
+                          problem:
+                            project.overview.problemJa ||
+                            project.overview.problem,
+                          solution:
+                            project.overview.solutionJa ||
+                            project.overview.solution,
+                          results:
+                            project.overview.resultsJa ||
+                            project.overview.results,
+                        }
+                      : null,
+                  })}
+                >
+                  <div class="work-image-container">
+                    <img
+                      src={project.image}
+                      alt={project.titleJa || project.title}
+                      class={`work-img ${project.imagePadding || ""}`}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div class="work-info">
+                    <span class="work-title">
+                      {project.titleJa || project.title}
+                    </span>
+                    <span class="work-cat">
+                      {project.category === "development"
+                        ? "Development"
+                        : "Design"}
+                    </span>
+                  </div>
+                </button>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section id="about" class="section">
+        <h2 class="section-title">About</h2>
+        <div class="about-content">
+          <div class="about-image">
+            <img
+              src="/profile.webp"
+              alt="Muneyasu Kagawa"
+              class="profile-img"
+              loading="lazy"
+              onerror="this.style.display='none'"
+            />
+          </div>
+          <div class="about-text">
+            <p class="text-subtle mb-6">
+              8年以上のフロントエンド開発経験を持つ日本のエンジニアです。ReactやNext.jsなどのモダンなJavaScriptフレームワークを専門としています。
+            </p>
+            <p class="text-muted mb-6">
+              フロントエンドが主な専門分野ですが、Node.js、Express、C#.NETを使ったバックエンド開発も得意です。RESTful
+              APIとデータベース設計の経験により、プロジェクトをエンドツーエンドで手がけることができます。
+            </p>
+            <p class="text-muted">
+              また、UI/UXデザインにも強い関心を持ち、ユーザー中心のデザインアプローチで美しく機能的なインターフェースを設計しています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" class="section">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid">
+          {
+            Object.entries(groupedSkills).map(([category, items]) => (
+              <div class="skill-category">
+                <h3 class="skill-category-title">
+                  {categoryLabels[category] || category}
+                </h3>
+                <ul class="skill-list">
+                  {items.map((skill) => (
+                    <li class="skill-item">
+                      <div class="skill-header">
+                        <span class="skill-name">{skill.name}</span>
+                        <span class="skill-level">{skill.level}%</span>
+                      </div>
+                      <div class="skill-bar">
+                        <div
+                          class="skill-bar-fill"
+                          data-level={skill.level}
+                          style={`width: 0%`}
+                        />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-content">
+          <p class="text-subtle mb-8">
+            プロジェクトのご相談やお問い合わせはお気軽にどうぞ。
+          </p>
+          <a href={`mailto:${siteConfig.email}`} class="contact-email">
+            {siteConfig.email}
+          </a>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <button
+    type="button"
+    id="theme-toggle"
+    class="theme-toggle"
+    aria-label="テーマを切り替え"
+  >
+    <span class="theme-icon dark-icon">☀</span>
+    <span class="theme-icon light-icon">☾</span>
+  </button>
+
+  <div class="theme-transition-overlay" id="theme-overlay">
+    <div class="theme-clone" id="theme-clone"></div>
+  </div>
+
+  <div class="modal-overlay" id="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="閉じる">×</button
+      >
+      <div class="modal-image-wrapper">
+        <img src="" alt="" class="modal-img" id="modal-img" />
+      </div>
+      <div class="modal-details" id="modal-details">
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="modal-title"></h2>
+            <p class="modal-meta" id="modal-category"></p>
+          </div>
+          <a
+            href=""
+            target="_blank"
+            rel="noopener noreferrer"
+            class="modal-link"
+            id="modal-link"
+          >
+            → サイトを見る
+          </a>
+        </div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-overview" id="modal-overview">
+          <div class="overview-item">
+            <h4 class="overview-label">課題</h4>
+            <p class="overview-text" id="modal-problem"></p>
+          </div>
+          <div class="overview-item">
+            <h4 class="overview-label">解決策</h4>
+            <p class="overview-text" id="modal-solution"></p>
+          </div>
+          <div class="overview-item" id="modal-results-container">
+            <h4 class="overview-label">成果</h4>
+            <ul class="results-list" id="modal-results"></ul>
+          </div>
+        </div>
+        <div class="modal-tech" id="modal-tech">
+          <h4 class="tech-label">Tech Stack</h4>
+          <div class="tech-tags" id="modal-tech-tags"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+  .site-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+    margin: 0 0 1rem 0;
+    line-height: 1.1;
+  }
+
+  .site-role {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 2rem;
+    display: block;
+  }
+
+  .site-bio {
+    font-size: 1rem;
+    color: var(--color-subtle);
+    max-width: 400px;
+    line-height: 1.8;
+  }
+
+  .nav-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
+
+  .nav-item a {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    transition:
+      color 0.3s ease,
+      padding-left 0.3s ease;
+  }
+
+  .nav-item a:hover {
+    color: var(--color-foreground);
+    padding-left: 5px;
+  }
+
+  .copyright {
+    font-size: 0.75rem;
+    color: #444;
+    margin-top: 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-header .section-title {
+    margin-bottom: 0;
+  }
+
+  .filter-controls {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+
+  .filter-checkbox input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-foreground);
+    cursor: pointer;
+  }
+
+  .filter-label {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    transition: color 0.3s ease;
+  }
+
+  .filter-checkbox:hover .filter-label {
+    color: var(--color-foreground);
+  }
+
+  .filter-checkbox input[type="checkbox"]:checked + .filter-label {
+    color: var(--color-subtle);
+  }
+
+  .work-item.hidden {
+    display: none;
+  }
+
+  .work-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .work-item {
+    margin-bottom: 4rem;
+  }
+
+  .work-link {
+    display: block;
+    outline: none;
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+    font: inherit;
+  }
+
+  .work-image-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background-color: #ffffff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .work-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transition:
+      transform 0.5s cubic-bezier(0.2, 1, 0.3, 1),
+      filter 0.5s ease;
+  }
+
+  .work-link:hover .work-img,
+  .work-link:focus .work-img {
+    transform: scale(1.03);
+  }
+
+  .work-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+  }
+
+  .work-title {
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  .work-cat {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  .about-content {
+    display: grid;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-content {
+      grid-template-columns: 200px 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .about-image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background-color: #222;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%);
+    transition: filter 0.5s ease;
+  }
+
+  .profile-img:hover {
+    filter: grayscale(0%);
+  }
+
+  .about-text {
+    max-width: 600px;
+  }
+
+  .text-subtle {
+    color: var(--color-subtle);
+  }
+
+  .text-muted {
+    color: var(--color-muted);
+  }
+
+  .skills-grid {
+    display: grid;
+    gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .skills-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .skill-category-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    color: var(--color-subtle);
+  }
+
+  .skill-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .skill-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .skill-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-name {
+    font-size: 0.875rem;
+    color: var(--color-subtle);
+  }
+
+  .skill-level {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .skill-bar {
+    height: 2px;
+    background-color: var(--color-border);
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background-color: var(--color-foreground);
+    transition: width 1s ease-out;
+  }
+
+  .contact-content {
+    max-width: 500px;
+  }
+
+  .contact-email {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-foreground);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    transition: border-color 0.3s ease;
+  }
+
+  .contact-email:hover {
+    border-color: var(--color-foreground);
+  }
+
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+
+  .mb-8 {
+    margin-bottom: 2rem;
+  }
+
+  .mt-8 {
+    margin-top: 2rem;
+  }
+
+  .theme-toggle {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+
+  .theme-icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .dark-icon {
+    display: inline;
+  }
+
+  .light-icon {
+    display: none;
+  }
+
+  [data-theme="light"] .dark-icon {
+    display: none;
+  }
+
+  [data-theme="light"] .light-icon {
+    display: inline;
+  }
+
+  .theme-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+  }
+
+  .theme-clone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    clip-path: circle(0px at 50% 50%);
+    transition: clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .theme-clone.light,
+  .theme-clone.dark {
+    pointer-events: auto;
+  }
+
+  .theme-clone.light {
+    background-color: #ffffff;
+  }
+
+  .theme-clone.dark {
+    background-color: #111111;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal-content {
+    width: 100%;
+    max-width: 700px;
+    max-height: 85vh;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-image-wrapper {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .modal-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    transform: scale(1.1);
+  }
+
+  .modal-details {
+    color: var(--color-foreground);
+    opacity: 0;
+    transform: translateY(20px);
+    padding: 1.5rem 2rem 2rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .modal-meta {
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+
+  .modal-desc {
+    color: var(--color-subtle);
+    font-size: 0.9375rem;
+    line-height: 1.8;
+    margin-top: 1rem;
+  }
+
+  .modal-link {
+    display: inline-block;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+    transition:
+      color 0.3s ease,
+      padding-left 0.3s ease;
+  }
+
+  .modal-link:hover {
+    color: var(--color-foreground);
+    padding-left: 5px;
+  }
+
+  .modal-link.hidden {
+    display: none;
+  }
+
+  .modal-overview {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .modal-overview.hidden {
+    display: none;
+  }
+
+  .overview-item {
+    margin-bottom: 1.5rem;
+  }
+
+  .overview-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .overview-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .overview-text {
+    font-size: 0.875rem;
+    color: var(--color-subtle);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+  }
+
+  .results-list li {
+    font-size: 0.875rem;
+    color: var(--color-subtle);
+    padding: 0.25rem 0;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .results-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--color-muted);
+  }
+
+  .modal-tech {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .modal-tech.hidden {
+    display: none;
+  }
+
+  .tech-label {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--color-border);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2rem;
+    height: 2rem;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #fff;
+    font-size: 1.25rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1001;
+    opacity: 0;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  @media (max-width: 768px) {
+    .modal-overlay {
+      padding: 1rem;
+    }
+
+    .modal-content {
+      max-height: 90vh;
+    }
+
+    .modal-image-wrapper {
+      height: 140px;
+    }
+
+    .modal-details {
+      padding: 1rem 1.25rem 1.5rem;
+    }
+
+    .modal-header {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+    }
+
+    .modal-link {
+      margin-top: 0.5rem;
+    }
+  }
+</style>
+
+<script>
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAnimations() {
+    const sidebar = document.querySelector(".sidebar");
+    if (sidebar) {
+      gsap.fromTo(
+        sidebar,
+        { x: -30, opacity: 0 },
+        { x: 0, opacity: 1, duration: 1.5, ease: "expo.out", delay: 0.2 }
+      );
+    }
+
+    gsap.utils.toArray(".work-item, .section").forEach((el) => {
+      gsap.fromTo(
+        el as Element,
+        { y: 30, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el as Element,
+            start: "top 90%",
+            once: true,
+          },
+        }
+      );
+    });
+
+    gsap.utils.toArray(".skill-bar-fill").forEach((bar, index) => {
+      const el = bar as HTMLElement;
+      const level = el.dataset.level || "0";
+      gsap.fromTo(
+        el,
+        { width: "0%" },
+        {
+          width: `${level}%`,
+          duration: 1,
+          ease: "power2.out",
+          delay: index * 0.05,
+          scrollTrigger: {
+            trigger: "#skills",
+            start: "top 80%",
+            once: true,
+          },
+        }
+      );
+    });
+  }
+
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (prefersReducedMotion) {
+    document.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+      const el = bar as HTMLElement;
+      el.style.width = `${el.dataset.level || 0}%`;
+    });
+  } else {
+    initAnimations();
+  }
+
+  document.addEventListener("astro:after-swap", () => {
+    ScrollTrigger.getAll().forEach((t) => t.kill());
+    if (prefersReducedMotion) {
+      document.querySelectorAll(".skill-bar-fill").forEach((bar) => {
+        const el = bar as HTMLElement;
+        el.style.width = `${el.dataset.level || 0}%`;
+      });
+    } else {
+      initAnimations();
+    }
+    initModal();
+  });
+
+  interface ProjectData {
+    image: string;
+    title: string;
+    category: string;
+    description: string;
+    link: string;
+    techStack: string[];
+    overview: {
+      problem: string;
+      solution: string;
+      results: string[];
+    } | null;
+  }
+
+  function initModal() {
+    const modal = document.getElementById("modal") as HTMLElement;
+    const modalImg = document.getElementById("modal-img") as HTMLImageElement;
+    const modalTitle = document.getElementById("modal-title") as HTMLElement;
+    const modalCategory = document.getElementById(
+      "modal-category"
+    ) as HTMLElement;
+    const modalDesc = document.getElementById("modal-desc") as HTMLElement;
+    const modalLink = document.getElementById(
+      "modal-link"
+    ) as HTMLAnchorElement;
+    const modalClose = document.getElementById("modal-close") as HTMLElement;
+    const modalDetails = document.getElementById(
+      "modal-details"
+    ) as HTMLElement;
+    const modalOverview = document.getElementById(
+      "modal-overview"
+    ) as HTMLElement;
+    const modalProblem = document.getElementById(
+      "modal-problem"
+    ) as HTMLElement;
+    const modalSolution = document.getElementById(
+      "modal-solution"
+    ) as HTMLElement;
+    const modalResults = document.getElementById(
+      "modal-results"
+    ) as HTMLElement;
+    const modalTech = document.getElementById("modal-tech") as HTMLElement;
+    const modalTechTags = document.getElementById(
+      "modal-tech-tags"
+    ) as HTMLElement;
+
+    if (!modal) return;
+
+    function openModal(button: HTMLElement) {
+      const projectData = button.dataset.project;
+      if (!projectData) return;
+
+      const project: ProjectData = JSON.parse(projectData);
+
+      modalImg.src = project.image;
+      modalImg.alt = project.title;
+      modalTitle.textContent = project.title;
+      modalCategory.textContent = project.category;
+      modalDesc.textContent = project.description;
+
+      if (project.link) {
+        modalLink.href = project.link;
+        modalLink.classList.remove("hidden");
+      } else {
+        modalLink.classList.add("hidden");
+      }
+
+      if (project.overview) {
+        modalOverview.classList.remove("hidden");
+        modalProblem.textContent = project.overview.problem;
+        modalSolution.textContent = project.overview.solution;
+        modalResults.innerHTML = project.overview.results
+          .map((r) => `<li>${r}</li>`)
+          .join("");
+      } else {
+        modalOverview.classList.add("hidden");
+      }
+
+      if (project.techStack && project.techStack.length > 0) {
+        modalTech.classList.remove("hidden");
+        modalTechTags.innerHTML = project.techStack
+          .map((t) => `<span class="tech-tag">${t}</span>`)
+          .join("");
+      } else {
+        modalTech.classList.add("hidden");
+      }
+
+      document.body.style.overflow = "hidden";
+      modal.scrollTop = 0;
+
+      gsap.set(modal, { visibility: "visible" });
+      gsap.set(modalImg, { opacity: 0, scale: 1.1 });
+      gsap.set(modalDetails, { opacity: 0, y: 20 });
+      gsap.set(modalClose, { opacity: 0 });
+
+      const tl = gsap.timeline();
+      tl.to(modal, { opacity: 1, duration: 0.3, ease: "power2.out" })
+        .to(
+          modalImg,
+          { opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" },
+          "-=0.1"
+        )
+        .to(
+          modalDetails,
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          "-=0.3"
+        )
+        .to(modalClose, { opacity: 1, duration: 0.3 }, "-=0.2");
+    }
+
+    function closeModal() {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          gsap.set(modal, { visibility: "hidden", opacity: 0 });
+          document.body.style.overflow = "";
+        },
+      });
+      tl.to(modalClose, { opacity: 0, duration: 0.2 })
+        .to(modalDetails, { opacity: 0, y: 20, duration: 0.3 }, "-=0.1")
+        .to(modalImg, { opacity: 0, scale: 1.1, duration: 0.3 }, "-=0.2")
+        .to(modal, { opacity: 0, duration: 0.3 }, "-=0.2");
+    }
+
+    document.querySelectorAll(".work-link").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        openModal(btn as HTMLElement);
+      });
+    });
+
+    modalClose.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      const isVisible = getComputedStyle(modal).visibility === "visible";
+      if (e.key === "Escape" && isVisible) {
+        closeModal();
+      }
+    });
+  }
+
+  initModal();
+
+  function initFilter() {
+    const filterDevelopment = document.getElementById(
+      "filter-development"
+    ) as HTMLInputElement;
+    const filterDesign = document.getElementById(
+      "filter-design"
+    ) as HTMLInputElement;
+    const workItems = document.querySelectorAll(".work-item");
+
+    if (!filterDevelopment || !filterDesign) return;
+
+    function applyFilter() {
+      const showDevelopment = filterDevelopment.checked;
+      const showDesign = filterDesign.checked;
+
+      workItems.forEach((item) => {
+        const el = item as HTMLElement;
+        const category = el.dataset.category;
+        const shouldShow =
+          (category === "development" && showDevelopment) ||
+          (category === "design" && showDesign);
+        const isHidden = el.classList.contains("hidden");
+
+        if (shouldShow && isHidden) {
+          el.classList.remove("hidden");
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 20 },
+            { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" }
+          );
+        } else if (!shouldShow && !isHidden) {
+          gsap.to(el, {
+            opacity: 0,
+            y: -10,
+            duration: 0.3,
+            ease: "power2.in",
+            onComplete: () => {
+              el.classList.add("hidden");
+              gsap.set(el, { opacity: 1, y: 0 });
+            },
+          });
+        }
+      });
+    }
+
+    filterDevelopment.addEventListener("change", applyFilter);
+    filterDesign.addEventListener("change", applyFilter);
+  }
+
+  initFilter();
+
+  document.addEventListener("astro:after-swap", () => {
+    initFilter();
+  });
+
+  function initThemeToggle() {
+    const themeToggle = document.getElementById(
+      "theme-toggle"
+    ) as HTMLElement | null;
+    const themeClone = document.getElementById(
+      "theme-clone"
+    ) as HTMLElement | null;
+
+    if (!themeToggle || !themeClone) {
+      return;
+    }
+
+    const toggleBtn = themeToggle;
+    const cloneEl = themeClone;
+
+    let isAnimating = false;
+
+    function getStoredTheme(): string | null {
+      return localStorage.getItem("theme");
+    }
+
+    function setTheme(theme: string) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }
+
+    function toggleTheme() {
+      if (isAnimating) return;
+      isAnimating = true;
+
+      const currentTheme =
+        document.documentElement.getAttribute("data-theme") || "dark";
+      const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+      const rect = toggleBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+
+      const closeX = -400;
+      const closeY = window.innerHeight + 400;
+
+      const maxDistanceOpen = Math.max(
+        Math.hypot(x, y),
+        Math.hypot(window.innerWidth - x, y),
+        Math.hypot(x, window.innerHeight - y),
+        Math.hypot(window.innerWidth - x, window.innerHeight - y)
+      );
+      const endRadiusOpen = Math.ceil(maxDistanceOpen) + 50;
+
+      const maxDistanceClose = Math.max(
+        Math.hypot(closeX, closeY),
+        Math.hypot(window.innerWidth - closeX, closeY),
+        Math.hypot(closeX, window.innerHeight - closeY),
+        Math.hypot(window.innerWidth - closeX, window.innerHeight - closeY)
+      );
+      const endRadiusClose = Math.ceil(maxDistanceClose) + 50;
+
+      cloneEl.style.transition = "none";
+      cloneEl.className = `theme-clone ${newTheme}`;
+      cloneEl.style.clipPath = `circle(0px at ${x}px ${y}px)`;
+
+      gsap.to(toggleBtn, {
+        scale: 0.8,
+        duration: 0.1,
+        ease: "power2.in",
+        onComplete: () => {
+          gsap.to(toggleBtn, {
+            scale: 1,
+            duration: 0.3,
+            ease: "elastic.out(1, 0.5)",
+          });
+        },
+      });
+
+      requestAnimationFrame(() => {
+        cloneEl.style.transition =
+          "clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+        requestAnimationFrame(() => {
+          cloneEl.style.clipPath = `circle(${endRadiusOpen}px at ${x}px ${y}px)`;
+        });
+      });
+
+      setTimeout(() => {
+        cloneEl.style.clipPath = `circle(${endRadiusClose}px at ${closeX}px ${closeY}px)`;
+        cloneEl.style.transition = "background-color 0.4s ease";
+        cloneEl.className = `theme-clone ${currentTheme}`;
+      }, 400);
+
+      setTimeout(() => {
+        setTheme(newTheme);
+
+        cloneEl.style.transition =
+          "clip-path 0.5s cubic-bezier(0.4, 0, 0.2, 1)";
+
+        requestAnimationFrame(() => {
+          cloneEl.style.clipPath = `circle(0px at ${closeX}px ${closeY}px)`;
+        });
+      }, 550);
+
+      setTimeout(() => {
+        cloneEl.className = "theme-clone";
+        cloneEl.style.transition = "none";
+        const btnRect = toggleBtn.getBoundingClientRect();
+        const btnX = btnRect.left + btnRect.width / 2;
+        const btnY = btnRect.top + btnRect.height / 2;
+        cloneEl.style.clipPath = `circle(0px at ${btnX}px ${btnY}px)`;
+        requestAnimationFrame(() => {
+          cloneEl.style.transition =
+            "clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+          isAnimating = false;
+        });
+      }, 1100);
+    }
+
+    const storedTheme = getStoredTheme();
+    if (storedTheme) {
+      document.documentElement.setAttribute("data-theme", storedTheme);
+    }
+
+    // Initialize clip-path position to button location (without transition)
+    function initClipPathPosition() {
+      const rect = toggleBtn.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top + rect.height / 2;
+      cloneEl.style.transition = "none";
+      cloneEl.style.clipPath = `circle(0px at ${x}px ${y}px)`;
+      requestAnimationFrame(() => {
+        cloneEl.style.transition =
+          "clip-path 0.5s cubic-bezier(0.22, 1, 0.36, 1)";
+      });
+    }
+
+    initClipPathPosition();
+
+    toggleBtn.addEventListener("click", toggleTheme);
+  }
+
+  initThemeToggle();
+
+  document.addEventListener("astro:after-swap", () => {
+    initThemeToggle();
+  });
+</script>

@@ -27,7 +27,15 @@
     "description": "Here are some of my recent projects. Each one showcases different skills across development and design.",
     "view_details": "View Details",
     "view_code": "View Code",
-    "view_live": "View Live"
+    "view_live": "View Live",
+    "backToProjects": "Back to Projects",
+    "overview": "Overview",
+    "problem": "Problem",
+    "solution": "Solution",
+    "results": "Results",
+    "techStack": "Tech Stack",
+    "development": "Development",
+    "design": "Design"
   },
   "skills": {
     "title": "My Skills",
